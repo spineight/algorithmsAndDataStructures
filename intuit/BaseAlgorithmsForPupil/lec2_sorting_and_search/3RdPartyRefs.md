@@ -1,0 +1,1 @@
+https://informatics.mccme.ru/file.php/18/bin_heap_ig-091022.pdf
