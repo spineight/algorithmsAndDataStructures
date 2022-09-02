@@ -1,0 +1,1 @@
+https://compscicenter.ru/courses/algorithms-2/nsk/2018-spring/classes/3762/

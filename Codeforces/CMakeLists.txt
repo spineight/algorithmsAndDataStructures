@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.16)
+project(Codeforces)
+
+add_executable(itmoAcademy_step1_problemA itmoAcademy/step1_problemA.cpp)
+add_executable(itmoAcademy_step1_problemB itmoAcademy/step1_problemB.cpp)
+add_executable(itmoAcademy_step1_problemC itmoAcademy/step1_problemC.cpp)
+add_executable(itmoAcademy_step1_problemD itmoAcademy/step1_problemD.cpp)
+
+add_executable(itmoAcademy_step2_problemA itmoAcademy/step2_problemA.cpp)
+add_executable(itmoAcademy_step2_problemB itmoAcademy/step2_problemB.cpp)
+add_executable(itmoAcademy_step2_problemC itmoAcademy/step2_problemC.cpp)
+
+add_executable(itmoAcademy_step3_problemA itmoAcademy/step3_problemA.cpp)
+
+add_executable(itmoAcademy_step4_problemA itmoAcademy/step4_problemA.cpp)
+
+add_executable(itmoAcademy_periodOfString itmoAcademy/periodOfString.cpp)
+
+add_executable(itmoAcademy_step4_problemB itmoAcademy/step4_problemB.cpp)
+add_executable(itmoAcademy_step4_problemC itmoAcademy/step4_problemC.cpp)
+add_executable(itmoAcademy_step4_problemD itmoAcademy/step4_problemD.cpp)
+add_executable(itmoAcademy_step4_problemE itmoAcademy/step4_problemE.cpp)
+add_executable(itmoAcademy_step4_problemF itmoAcademy/step4_problemF.cpp)
+add_executable(itmoAcademy_step4_problemG itmoAcademy/step4_problemG.cpp)
+add_executable(itmoAcademy_step4_problemH itmoAcademy/step4_problemH.cpp)
+add_executable(itmoAcademy_step4_problemI itmoAcademy/step4_problemI.cpp)

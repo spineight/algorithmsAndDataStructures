@@ -3,3 +3,7 @@ Youtube
 https://youtu.be/tb0CuZVw1ho
 http://acm.math.spbu.ru/~sk1/events/hseschool-2021s/210322.pdf
 https://www.youtube.com/playlist?list=PLM-HrPYIzCwH-R6cvUncK9aX-JdjRzuqw
+
+https://informatics.msk.ru/course/view.php?id=3733
+
+https://informatics.msk.ru/course/index.php?categoryid=81
