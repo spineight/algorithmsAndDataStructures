@@ -39,3 +39,38 @@ https://habr.com/ru/post/191454/
 
 
 https://informatics.msk.ru/course/view.php?id=1030
+
+
+
+
+https://www.linkedin.com/learning/?trk=profileSelf_d_flagship3_profile_view_base_learningFeedfdbtt004_seeRecommendations_learning
+
+
+
+#### look at these resources
+https://en.wikipedia.org/wiki/Maximum_subarray_problem  
+https://medium.com/@rsinghal757/kadanes-algorithm-dynamic-programming-how-and-why-does-it-work-3fd8849ed73d  
+https://www.interviewbit.com/blog/maximum-subarray-sum/  
+https://www.scaler.com/topics/kadanes-algorithm/  
+https://www.codingninjas.com/blog/2020/09/17/a-quick-look-at-kadanes-algorithm/  
+https://www.techiedelight.com/maximum-subarray-problem-kadanes-algorithm/  
+https://www.enjoyalgorithms.com/blog/maximum-subarray-sum   
+https://levelup.gitconnected.com/kadanes-algorithm-solving-for-maximum-subarray-in-o-n-time-and-o-1-space-776290910090?gi=48f94c7d37db  
+https://dev.to/alisabaj/kadane-s-algorithm-the-maximum-subarray-problem-c31  
+https://russianblogs.com/article/3691492731/  
+https://towardsdatascience.com/maximum-subarray-problem-and-kadanes-algorithm-4cb1ce91be72?gi=4e2fed7ccdea  
+https://takeuforward.org/data-structure/kadanes-algorithm-maximum-subarray-sum-in-an-array/  
+https://www.sanfoundry.com/data-structure-questions-answers-kadanes-algorithm/  
+https://andrewsullivan.co/articles/2021/9/3/kadanes-algorithm-maximum-subarray  
+http://www.math.umd.edu/~immortal/CMSC351/notes/maxcontiguoussum.pdf  
+https://www.educative.io/answers/the-maximum-sub-array-sum-problem  
+https://www.researchgate.net/figure/maximum-sum-obtained-from-using-the-Kadanes-algorithm-and-the-convex-shape-algorithm_fig2_220308104  
+https://www.alphacodingskills.com/algo/kadane-algorithm.php  
+https://www.codechef.com/tags/problems/kadane-algorithm  
+https://ethz.ch/content/dam/ethz/special-interest/infk/chair-program-method/pm/documents/Verify%20This/challenge2.pdf  
+https://hackernoon.com/kadanes-algorithm-explained-50316f4fd8a6  
+https://www.tutorialcup.com/interview/array/largest-sum-contiguous-subarray.htm  
+https://cs.stackexchange.com/questions/112742/is-there-a-way-to-modify-kadanes-algorithm-such-that-we-know-the-resulting-suba  
+https://www.thecrazyprogrammer.com/2021/02/kadanes-algorithm.html  
+https://cp-algorithms.com/others/maximum_average_segment.html  
+www.spoj.com/problems/GSS3/  

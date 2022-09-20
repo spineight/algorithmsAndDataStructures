@@ -101,6 +101,14 @@ In the order of difficulty:
 [countConstruct](../freeCodeCamp/DP/countConstruct.cpp)  
 [allConstruct](../freeCodeCamp/DP/allConstruct.cpp)  
 
+## Two pointers
+[pashka/algos/include/two_pointers_method](../pashka/algos/include/two_pointers_method.hpp)  
+[pashka/README](../pashka/README.md)  
+
+## Combinatorics
+### Combinations
+[Skiena_programmingChallenges_book/combinations](../Skiena_programmingChallenges_book/combinations.cpp)
+
 ## Geometry
 ### Sweep line (Scan line)
 [Rucode/scanline/README](../Rucode/scanline/README.md)  
@@ -111,8 +119,20 @@ In the order of difficulty:
 ### BFS
 [Алгоритм BFS. Очередь.] `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day2_item3.mp4`  
 ### Дейкстра
+
+#### lectures
 [Дейкстра Лектор: Сергей Копелиович] `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day2_item8.mp4`
-[Дейкстра. Реализация алгоритма. Лектор: Сергей Копелиович]`/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day2_item9.mp4`
+[Дейкстра. Реализация алгоритма. Лектор: Сергей Копелиович]`/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day2_item9.mp4`  
+
+### Floyd Warshall algorithm
+TODO: understand why it works from https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm  
+[Skiena_programmingChallenges_book/FloydWarshall](../Skiena_programmingChallenges_book/FloydWarshall.cpp)
+
+#### books
+Steven S. Skiena, Miguel A. Revilla. Programming Challenges. The Programming Contest Training Manual.pdf  
+
+#### Algorithm:
+[Skiena_programmingChallenges_book/Dijkstra](../Skiena_programmingChallenges_book/Dijkstra.cpp)  
 
 ### Беллман-Форд
 [Алгоритм Форда-Беллмана. Поиск кратчайшего пути от данной вершины в графе с отрицательными ребрами. Описание алгоритма. Циклы отрицательного веса. Лектор: Сергей Копелиович]
@@ -165,3 +185,10 @@ https://www.quora.com/What-is-the-best-open-source-C-implementation-of-a-trie
 Z algo using O(m) space in comparision to standard where O(n + m) space is used (m=p.size(), n = t.size())  
 My Implementation, based on the lecture: /run/media/oleg/TOSHIBA EXT/compscicenter/2018_part2/lec1_strings_zFunction.mp4  
 [Z algo O(m) space](../compscicenter/ASD_part2_2018/zFunction.cpp)
+
+
+# Implementation techniques
+## using array of offsets for a matrix exploration
+TODO include here leetcode problems that I solved using this technique:
+arrays/spiralMatrix.hpp    
+and one of for DFS/BFS: DFS_BFS/maxAreaOfIsland.hpp  

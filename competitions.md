@@ -31,3 +31,5 @@ https://www.codingame.com/start
 https://sp.urfu.ru/library/shv.htm
 
 https://www.rbc.ru/magazine/2019/01/5c1baef09a79470d23908f47
+
+https://www.hackerearth.com/

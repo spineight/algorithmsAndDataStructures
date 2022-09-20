@@ -1,0 +1,6 @@
+project(Skiena_programming_challenges)
+
+add_executable(Skiena_programming_challenges_Combinations combinations.cpp)
+add_executable(Skiena_programming_challenges_Elevator_optimization elevatorOptimization.cpp)
+add_executable(Skiena_programming_challenges_Dijkstra Dijkstra.cpp)
+add_executable(Skiena_programming_challenges_Floyd FloydWarshall.cpp)
