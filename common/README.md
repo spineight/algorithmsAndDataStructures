@@ -177,6 +177,16 @@ In the order of difficulty:
 [countConstruct](../freeCodeCamp/DP/countConstruct.cpp)  
 [allConstruct](../freeCodeCamp/DP/allConstruct.cpp)  
 
+### states storage
+For some problems we don't need to store all the states,  
+for ex. for these problems:  
+[leetcode/DP/Fibonacci](../leetcode/DP/Fibonacci.hpp)  
+[leetcode/DP/Tribonacci](../leetcode/DP/Tribonacci.hpp)  
+[leetcode/DP/climbingStairs](../leetcode/DP/climbingStairs.hpp)  
+[leetcode/DP/minCostClimbingStairs](../leetcode/DP/minCostClimbingStairs.hpp)  
+[leetcode/DP/house_robber](../leetcode/DP/house_robber.hpp)  
+for the current state estimation we need only to now a few previous states, so there is no need in an array to store all states
+
 ## Two pointers
 [pashka/algos/include/two_pointers_method](../pashka/algos/include/two_pointers_method.hpp)  
 [pashka/README](../pashka/README.md)  
@@ -497,6 +507,10 @@ public:
 };
 ```
 
+##### Combinations
+several methods: recursive, iterative, using number as a bit mask  
+[leetcode/combinatorics/combinations](../leetcode/combinatorics/combinations.hpp)
+
 ### BFS
 [Алгоритм BFS. Очередь.] `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day2_item3.mp4`  
 
@@ -509,166 +523,26 @@ so we don't need to store explicit distance per node
 An example of this approach:  
 [leetcode/DFS_BFS/asFarFromLandAsPossible](../leetcode/DFS_BFS/asFarFromLandAsPossible.hpp)
 
+#### Corner cases
+This might be the case that some nodes are not reachable  
+[leetcode/DFS_BFS/rottingOranges](leetcode/DFS_BFS/rottingOranges.hpp)
+
 #### optimizations
 ##### prioritizing nodes based on distance to target, queue state representation
 
 [leetcode/DFS_BFS/minimumGeneticMutation](../leetcode/DFS_BFS/minimumGeneticMutation.hpp)  
-```c++
-//! https://leetcode.com/problems/minimum-genetic-mutation/
-
-//! 10/09/2022
-/*
-    Runtime: 0 ms, faster than 100.00% of C++ online submissions for Minimum Genetic Mutation.
-    Memory Usage: 6.6 MB, less than 83.30% of C++ online submissions for Minimum Genetic Mutation.
- */
-//! Several concepts : using BFS (getting layer size before it's processing allows to distinguish layers and estimate distance to each
-//! without need for storage distance information per node)
-//! As we might have 10^8 variants at the last layer we optimizing our BFS:
-//! - we organize nodes by distance to the end node, and add to next layer only nodes with min distance to end
-//! - instead of strings we store idxs in bank
-class Solution {
-public:
-
-  static size_t distance(string_view a, const string_view b) {
-    size_t cnt{0};
-    for(int i = 0; i < a.size(); ++i) {
-      if(a[i]!=b[i])++cnt;
-    }
-    return cnt;
-  }
-
-  int minMutation(string start, string end, vector<string>& bank) {
-    if(start == end) return 0;
-
-    queue<int> q;
-    unordered_set<int> visited;
-
-    for(int i = 0; i < bank.size(); ++i) {
-      if(distance(start, bank[i]) == 1) {
-        q.push(i);
-        visited.insert(i);
-      }
-    }
-
-    int dist{0};
-    while(!q.empty()) {
-      int levelSize = q.size();
-
-      using ElemT = pair<size_t/*distance*/, int /*strIdx*/>;
-      priority_queue<ElemT, vector<ElemT>, std::greater<ElemT> > pq;
-
-      ++dist;
-
-      while(levelSize--) {
-        const auto strIdx = q.front();
-        q.pop();
-        if(bank[strIdx] == end) return dist;
-
-        for(int i = 0; i < bank.size(); ++i) {
-          if(!visited.count(i) && distance(bank[strIdx], bank[i]) == 1) {
-            pq.emplace(distance(bank[i], end), i);
-            visited.insert(i);
-          }
-        }
-      }
-
-      while(!pq.empty()) {
-        auto [curDist, strIdx] = pq.top();
-        pq.pop();
-        q.push(strIdx);
-      }
-    }
-    return -1;
-  }
-};
 
 
-//! TODO: try bidirectional BFS
-//! https://leetcode.com/problems/minimum-genetic-mutation/discuss/91559/JAVA-Bidirectional-BFS-method-same-as-Word-Ladder
-//! https://leetcode.com/problems/minimum-genetic-mutation/discuss/91604/C%2B%2B-two-end-BFS-solution-exactly-same-as-127.Word-Ladder
-```
+##### using preprocessing for faster transition between states
+[leetcode/DFS_BFS/wordLadder](../leetcode/DFS_BFS/wordLadder.hpp)  
+
+##### BiDirectional BFS
+[leetcode/DFS_BFS/wordLadder](../leetcode/DFS_BFS/wordLadder.hpp)  
+
 
 ##### state representation
 [leetcode/DFS_BFS/openTheLock](../leetcode/DFS_BFS/openTheLock.hpp)  
-```c++
-//! https://leetcode.com/problems/open-the-lock/
 
-
-//! 10/09/2022
-/*
-    Runtime: 1861 ms, faster than 5.05% of C++ online submissions for Open the Lock.
-    Memory Usage: 23.5 MB, less than 92.99% of C++ online submissions for Open the Lock.
- */
-class Solution {
-public:
-  int openLock(vector<string>& deadends, string target) {
-    using ElemT = array<char, 4>;
-
-    vector<ElemT> deadEndsInt(deadends.size());
-    ElemT targetInt;
-
-    for(int i = 0; i < deadends.size(); ++i) {
-      for(int j = 0; j < target.size(); ++j) {
-        deadEndsInt[i][j] = deadends[i][j] - '0';
-      }
-    }
-
-    for(int j = 0; j < target.size(); ++j) {
-      targetInt[j] = target[j] - '0';
-    }
-
-
-    auto isDeadEnd = [&deadEndsInt](const auto& arr) {
-      for(auto& d : deadEndsInt) {
-        if(d == arr) return true;
-      }
-      return false;
-    };
-
-
-    queue<ElemT> q;
-    set<ElemT> seen;
-    ElemT start = {0,0,0,0};
-    if(isDeadEnd(start)) return -1;
-
-    q.emplace(start);
-    seen.insert(start);
-
-    int dist{-1};
-    while(!q.empty()) {
-      int levelSize = q.size();
-      ++dist;
-      while(levelSize--) {
-        auto comb = q.front();
-        // for(auto v : comb) {
-        //   cout << (int)v << '\n';
-        // }
-        // cout << '\n';
-        q.pop();
-
-        if(comb == targetInt) return dist;
-
-        for(int i = 0; i < target.size(); ++i) {
-          auto comb1 = comb;
-          auto comb2 = comb;
-          comb1[i] = (comb1[i] + 1) % 10;
-          comb2[i] = (comb2[i] -1 + 10) % 10;
-          if(!seen.count(comb1) && !isDeadEnd(comb1)) {
-            q.push(comb1);
-            seen.insert(comb1);
-          }
-          if(!seen.count(comb2) && !isDeadEnd(comb2)) {
-            q.push(comb2);
-            seen.insert(comb2);
-          }
-        }
-      }
-    }
-
-    return -1;
-  }
-};
-```
 
 #### Some tasks solved by BFS
 [leetcode/DFS_BFS/minimumJumpsToReachHome](../leetcode/DFS_BFS/minimumJumpsToReachHome.hpp)
@@ -701,22 +575,10 @@ Steven S. Skiena, Miguel A. Revilla. Programming Challenges. The Programming Con
 ### arrays
 #### Move zeros
 [arrays/moveZeros](../leetcode/arrays/moveZeros.hpp)
-```c++
-class Solution {
-public:
-    void moveZeroes(vector<int>& nums) {
-      int pos{0};
-      for(int i = 0; i < nums.size(); ++i) {
-        if(nums[i]) {
-          nums[pos++] = nums[i];
-        }
-      }
-      while(pos < nums.size()) {
-        nums[pos++] = 0;
-      }
-    }
-};
-```
+
+### linked list
+#### reverse linked list
+[leetcode/Recursion_Backtracking/reverseLinkedList](../leetcode/Recursion_Backtracking/reverseLinkedList.hpp)
 
 ### multiset
 good example of application ransomeNote  
