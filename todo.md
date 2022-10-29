@@ -74,3 +74,7 @@ https://cs.stackexchange.com/questions/112742/is-there-a-way-to-modify-kadanes-a
 https://www.thecrazyprogrammer.com/2021/02/kadanes-algorithm.html  
 https://cp-algorithms.com/others/maximum_average_segment.html  
 www.spoj.com/problems/GSS3/  
+
+
+##### TODO!!!
+LCA - https://cp-algorithms.com/graph/lca_tarjan.html

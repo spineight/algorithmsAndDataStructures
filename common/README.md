@@ -21,6 +21,28 @@ Use pointers to store branch results on which algorithm will be performed
 see `leetcode: /twoPointers/intervalListIntersections.hpp`  
 
 # Common mistakes
+## corner cases
+### integer overflow
+when doing comparision for ex. to check if triple could form a triangle
+```a < b+c``` - sum here could overflow
+
+```c++
+#include <algorithm>
+int solution(vector<int> &A) {
+    const size_t n(A.size());
+    if(n <3) return 0;
+
+    sort(begin(A), end(A), greater<int>());
+    for(size_t i = 0; i <= n-3; ++i) {
+        if(static_cast<long long>(A[i]) < static_cast<long long>(A[i+1]) + A[i+2] ) return 1;
+    }
+    return 0;
+}
+```  
+[codility/sorting/triangle](../codility/sorting/triangle.cpp)
+
+## Accessing elements of an empty array 
+
 ## short circuit evaluation
 ```c++
 isSubIsland = isSubIsland && DFS(grid1, grid2, nr, nc); //! This is mistake!!! DFS will not be called if isSubIsland is false!!!
@@ -42,6 +64,34 @@ isSubIsland = isSubIsland && DFS(grid1, grid2, nr, nc); //! This is mistake!!! D
     
     return isSubIsland;
   }
+```
+
+# Optimizations
+## using integers instead of double
+As operations on integers are faster for case when we only need relative comparision we could replace division.
+For ex. when comparing avg of 2 and 3 elements sequences we could instead of multiply by LCM (least common multiply)
+```c++
+avg2 = (a[i] + a[i+1]) / 2;
+avg3 = (a[i] + a[i+1] + a[i+2]) / 3;
+int min = min(avg2, avg3);
+```
+
+```c++
+avg2 = (a[i] + a[i+1]) * 3; // * 6
+avg3 = (a[i] + a[i+1] + a[i+2]) * 2; // *6
+int min = min(avg2, avg3);
+```
+
+example:  
+[codility/prefixSum/minAvgTwoSlice](../codility/prefixSum/minAvgTwoSlice.cpp)
+
+## given 2 arrays process the smaller one
+[leetcode/arrays/intersectionOfTwoArrays2](../leetcode/arrays/intersectionOfTwoArrays2.hpp)
+```c++
+  vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+    if(nums1.size() > nums2.size()) return intersect(nums2, nums1);
+    ...
+}
 ```
 
 # Algorithms
@@ -85,54 +135,9 @@ Based on Andrei Stankevich lecture:`/run/media/oleg/TOSHIBA EXT/ITMO/BaseAlgsFor
 * `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item2.mp4`   
 * `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item3.mp4`    
 
-##### Non standard binary search (different from Andrei Stankevich, all ends are included)
-/home/oleg/github/leetcode/binary_search/searchInRotatedSortedArray.hpp  
-
-##### Binary search in sorted rotated array
-[leetcode/binary_search/searchInRotatedSortedArray](leetcode/binary_search/searchInRotatedSortedArray.hpp)   
-```c++
-//! Idea: use binary search, l & r - denote ends of the array,
-//! every step we cut search area on half, by observing values at arr[l], arr[r] and arr[m]
-//! We could tell whether the part under consideration is rotated or not, if not we use ordinary binary search
-//! otherwise we detect in which part of the array (high/low) is element under consideration
-//! and there is helpful this checks:
-//! nums[l] <= target && target <= nums[m]
-//! nums[m] <= target && target <= nums[r]
-class Solution {
-public:
-
-  // 1 3 5
-  // 5 1 3
-  // 8 2 4 6
-  // 7 8 9 11 1 3 5
-  int search(vector<int>& nums, int target) {
-    const int n = nums.size();
-    int l{0}, r{n-1};
-    while(r-l>1) {
-      const int m = l + (r-l) / 2;
-      if(nums[l] < nums[r]) {
-        if(nums[m] >= target) r=m;
-        else l = m;
-      }
-      else {
-        if(nums[l] <= nums[m]) {// large part
-          if(nums[l] <= target && target <= nums[m]) r = m;
-          else l =m;
-        }
-        else { // smallest part
-          if(nums[m] <= target && target <= nums[r]) l = m;
-          else r = m;
-        }
-      }
-    }
-    if(nums[l] == target) return l;
-    if(nums[r] == target) return r;
-    return -1;
-  }
-};
-```
-
-[leetcode/arrays/findMinimumInRotatedSortedArray](leetcode/arrays/findMinimumInRotatedSortedArray.hpp)  
+##### Rotated sorted array (different from Andrei Stankevich, all ends are included)
+[leetcode/binary_search/searchInRotatedSortedArray](leetcode/binary_search/searchInRotatedSortedArray.hpp)     
+[leetcode/arrays/findMinimumInRotatedSortedArray](leetcode/arrays/findMinimumInRotatedSortedArray.hpp)   
 
 ##### Some problems with Binary search application
 [leetcode/binary_search/TheKWeekestRowsInAMatrix](../leetcode/binary_search/TheKWeekestRowsInAMatrix.hpp)
@@ -230,7 +235,9 @@ public:
 ### Sweep line (Scan line)
 [Rucode/scanline/README](../Rucode/scanline/README.md)  
 `/run/media/oleg/TOSHIBA EXT/RUCODE/ScanLineNevstruev.mp4`     
-[HSE/LKSH_2018/8_Metod_skaniruyuschei_774_pryamoi_774](../HSE/LKSH_2018/8_Metod_skaniruyuschei_774_pryamoi_774.pdf)
+[HSE/LKSH_2018/8_Metod_skaniruyuschei_774_pryamoi_774](../HSE/LKSH_2018/8_Metod_skaniruyuschei_774_pryamoi_774.pdf)  
+
+[codility/sorting/numberOfDiscIntersections](../codility/sorting/numberOfDiscIntersections.cpp)
 
 ## Graphs
 ### state representation by setting bits in number
@@ -242,149 +249,10 @@ public:
 #### Important problems
 ##### Shortest Paths with alternating color
 [leetcode/DFS_BFS/shortestPathWithAlternatingColors](../leetcode/DFS_BFS/shortestPathWithAlternatingColors.hpp)
-```c++
-//! https://leetcode.com/problems/shortest-path-with-alternating-colors/
-
-//! 10/06/2022
-//! Idea use BFS (as graph is unweighted and we need shortest dist)
-//! As graph might have cycles - we need visited array,
-//! To be able to traverse only valid vertexes (color alternating condition is obeyed) we introduce for each vertex
-//! information about what color edge we took to get to this vertex
-//! we trick here to allow the same vertex to be visited from edges of different colors (1), that is why:
-//!  set<pair<int,Color/*color of edge we took*/>> visited;
-//!
-//! Because of (1) trick we could visit vertex 2 times, so it is important not to overwrite min distance calculated for it,
-//! that is why:
-//!         if(distance[v] == -1)
-//!          distance[v] = curDist;
-//!        else
-//!          distance[v] = min(distance[v], curDist);
-//!
-//! For BFS - we use trick with getting layer size before processing it and populating a new layer
-//! this allows to estimate distance to each layer without need to store this information per node
-
-/*
-    Runtime: 25 ms, faster than 82.14% of C++ online submissions for Shortest Path with Alternating Colors.
-    Memory Usage: 15.5 MB, less than 39.94% of C++ online submissions for Shortest Path with Alternating Colors.
- */
-class Solution {
-public:
-  enum Color{NOCOLOR, RED, BLUE};
-  vector<int> shortestAlternatingPaths(int n, vector<vector<int>>& redEdges, vector<vector<int>>& blueEdges) {
-
-    unordered_map<int, vector<int>> redGraph, blueGraph;
-    for(auto& edge : redEdges) {
-      redGraph[edge[0]].push_back(edge[1]);
-    }
-    for(auto& edge : blueEdges) {
-      blueGraph[edge[0]].push_back(edge[1]);
-    }
-
-    vector<int> distance(n, -1);
-
-    queue<pair<int, Color>> q;
-    set<pair<int,Color/*color of edge we took*/>> visited;
-    visited.emplace(0, RED);
-    visited.emplace(0, BLUE);
-    q.emplace(0, NOCOLOR);
-
-    int curDist{-1};
-    while(!q.empty()) {
-      int levelSize = q.size();
-      ++curDist;
-      while(levelSize--) {
-        auto [v, color] = q.front();
-        q.pop();
-        if(distance[v] == -1)
-          distance[v] = curDist;
-        else
-          distance[v] = min(distance[v], curDist);
-
-        if(color == NOCOLOR) {
-          for(auto u : redGraph[v]) {
-            if(!visited.count({u, RED})) {
-              q.emplace(u, RED);
-              visited.emplace(u,RED);
-            }
-          }
-          for(auto u : blueGraph[v]) {
-            if(!visited.count({u, BLUE})) {
-              q.emplace(u, BLUE);
-              visited.emplace(u,BLUE);
-            }
-          }
-        } else if (color == RED) {
-          for(auto u : blueGraph[v]) {
-            if(!visited.count({u, BLUE})) {
-              q.emplace(u, BLUE);
-              visited.emplace(u, BLUE);
-            }
-          }
-        } else {
-          for(auto u : redGraph[v]) {
-            if(!visited.count({u,RED})) {
-              q.emplace(u, RED);
-              visited.emplace(u, RED);
-            }
-          }
-        }
-      }
-    }
-    return distance;
-  }
-};
-``` 
 
 
 #### WHITE/GRAY/BLACK DFS
 [leetcode/DFS_BFS/findEventualSafeStates](../leetcode/DFS_BFS/findEventualSafeStates.hpp)
-```c++
-//! https://leetcode.com/problems/find-eventual-safe-states/
-
-//! 10/06/2022
-//! The idea to use WHITE/GRAY/BLACK DFS for a cycle detection
-//! Once a cycle is detected we exit from it and pass return value indicating what it was found to callers
-//! If return value is false for any children of the current vertex - we don't mark it BLACK(Done)
-//! So if there is a cycle all nodes on the path from starting vertex to the cycle itself will be not completed
-//! But as they are visited they will be GRAY
-//! After running DFS - nodes marked BLACK are safe
-/*
-  Runtime: 413 ms, faster than 24.19% of C++ online submissions for Find Eventual Safe States.
-  Memory Usage: 54 MB, less than 40.47% of C++ online submissions for Find Eventual Safe States.
- */
-class Solution {
-public:
-  enum Color{WHITE, GRAY, BLACK};
-  unordered_map<int,Color> color; // By default color[v] == 0 (WHITE)
-
-  bool DFS(vector<vector<int>>& graph, int v) {
-    if(color[v] == GRAY) return false; // we have not completed the vertex due to it was in cycle or leaded to cycle
-
-    // we have completed vertex and the same for it's children it is safe
-    // might be the case in the main loop (1)
-    if(color[v] == BLACK) return true;
-
-    color[v] = GRAY;
-    for(auto u : graph[v]) {
-      if(color[u] == GRAY) return false;
-      if(color[u] == WHITE)
-        if(!DFS(graph, u)) return false; // will not reach (0) and v will not be marked as finished (BLACK)
-    }
-    color[v] = BLACK; // (0)
-    return true;
-  }
-
-  vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-    vector<int> res;
-    for(int v = 0; v < graph.size(); ++v) { // (1)
-      if(DFS(graph, v))
-        res.push_back(v);
-    }
-
-    return res;
-  }
-};
-```
 
 #### for DAG no need in visited array
 Very important that it is Directed Graph, for Undirected graph we need visited array!!!
@@ -393,54 +261,16 @@ see: [leetcode/DFS_BFS/reoderRoutesToMakeAllPathsLeadToTheCityZero](../leetcode/
 
 [leetcode/DFS_BFS/timeNeedToInformAllEmployees](../leetcode/DFS_BFS/timeNeedToInformAllEmployees.hpp)  
 Because there are no cycles we will not encounter the same node multiple times so we don't need visited information
-```c++
-class Solution {
-public:
 
-  int DFS(int id, unordered_map<int, vector<int> >& graph, vector<int>& informTime) {
-    int maxSubordTime{0};
-    for(auto subordinateId : graph[id]) {
-      maxSubordTime = max(maxSubordTime, DFS(subordinateId, graph, informTime));
-    }
-    return informTime[id] + maxSubordTime;
-  }
-  int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
-    unordered_map<int, vector<int>> graph;
-    for(int i = 0; i < n; ++i) {
-      graph[manager[i]].push_back(i);
-    }
-    return DFS(headID, graph, informTime);
-  }
-};
-```
+#### for undirected graph with no cycles
+We need parent array, in order to avoid visiting parent vertex from child  
+(as graph is undirected it can be seen as graph where each edge is represented by 2 directed edges,  
+in that sense there are cycles between parent & child, to avoid these cycles during traversal - we use parent array)  
+[leetcode/graphs/graphValidTree](../leetcode/graphs/graphValidTree.hpp)  
 
 #### Find All Paths from source to target on DAG  
 [leetcode/DFS_BFS/allPathsFromSourceToTarget](../leetcode/DFS_BFS/allPathsFromSourceToTarget.hpp)  
-```c++
-//! 18/05/2022
-/*
- Runtime: 29 ms, faster than 39.20% of C++ online submissions for All Paths From Source to Target.
- Memory Usage: 11.9 MB, less than 62.97% of C++ online submissions for All Paths From Source to Target.
- */
-class Solution {
-  void dfs(vector<vector<int>>& graph, int v) {
-    _path.push_back(v);
-    if(v == graph.size()-1) _result.push_back(_path);
-    for(auto u : graph[v]) {
-      dfs(graph, u);
-    }
-    _path.pop_back(); // when done with the v (have visited all it's children), backtrack
-  }
-  vector<int> _path;
-  vector<vector<int>> _result;
-public:
-  vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
-    dfs(graph, 0);
-    return _result;
-  }
-};
 
-```
 #### backtracking
 Arises when we use procedural recursion(no return value) (we store some state in the internal variables)  
 When we have functional recursion(with a return value) there is no need in backtracking, compare 2 implementations
@@ -573,8 +403,40 @@ Steven S. Skiena, Miguel A. Revilla. Programming Challenges. The Programming Con
 
 # Data structures
 ### arrays
+
+#### Kadane's algorithm (max subarray)
+https://en.wikipedia.org/wiki/Maximum_subarray_problem  
+https://www.interviewbit.com/blog/maximum-subarray-sum/  
+[leetcode/buySellStock/bestTimeToBuySellStock](../leetcode/buySellStock/bestTimeToBuySellStock.hpp)  
+[codility/maximumSlice/maxSliceSum](../codility/maximumSlice/maxSliceSum.cpp)  
+####  Bidirectional Kadane's algorithm
+[codility/maximumSlice/maxDoubleSliceSum](../codility/maximumSlice/maxDoubleSliceSum.cpp)   
+
+#### prefix sum
+[codility/prefixSum/passingCars](../codility/prefixSum/passingCars.cpp)  
+[codility/prefixSum/genomicRangeQuery](../codility/prefixSum/genomicRangeQuery.cpp)
+
 #### Move zeros
 [arrays/moveZeros](../leetcode/arrays/moveZeros.hpp)
+
+#### in array of duplicate elements and only one distinct find distinct element
+[codility/oddOccurienciesInArray](../codility/arrays/oddOccurienciesInArray.cpp)
+
+#### in an array all elements are from 1..n, one element is missing, find it
+[codility/timeComplexity/permMissingElem](../codility/timeComplexity/permMissingElem.cpp)  
+
+#### Leader
+[codility/leader/6-Leader](../codility/leader/6-Leader.pdf)
+[codility/leader/dominator](../codility/leader/dominator.cpp)
+
+### Stack
+[codility/stacks&Queues/fish](../codility/stacks&Queues/fish.cpp)
+#### Brackets validation
+for multiple types - we use stack:  
+[codility/stacks&Queues/brackets](../codility/stacks&Queues/brackets.cpp)  
+if there is only one type of brackets - simple counter (balance) is sufficient:    
+[codility/stacks&Queues/nesting](../codility/stacks&Queues/nesting.cpp)    
+
 
 ### linked list
 #### reverse linked list
@@ -690,6 +552,14 @@ public:
 https://www.quora.com/What-is-the-best-open-source-C-implementation-of-a-trie
 
 
+### Disjoint set
+usage:  
+The primary use of disjoint sets is to address the connectivity between the components of a network.   
+The “network“ here can be a computer network or a social network.  
+For instance, we can use a disjoint set to determine if two people share a common ancestor.
+
+[leetcode/graphs/graphValidTree](../leetcode/graphs/graphValidTree.hpp)
+
 ## Strings
 ### Main facts about characters
 26 letters in english alphabet    
@@ -745,3 +615,18 @@ here: https://stackoverflow.com/questions/60165922/stdbitsetncount-vs-builtin-po
 is mentioned that `__builtin_popcount` is an gcc extension, so it is not portable in comparision to `std::bitset`,  
 which is defined in standard, and mentioned that on godBolt their code is generated by the same instructions  
 Also there is `std::popcount` since C++20 (https://en.cppreference.com/w/cpp/numeric/popcount)  
+
+# Math
+## divisors
+### count divisors
+[codility/primeAndCompositeNumbers/countFactors](../codility/primeAndCompositeNumbers/countFactors.cpp)
+
+### find divisors
+`/run/media/oleg/TOSHIBA EXT/ITMO/pashka/Паша_и_алгосы/Быстрое_нахождение_делителей_пилотный_выпуск.mp4`
+## factorization
+
+## Euclidean algorithm (gcd)
+[codility/euclideanAlgorithm/chocolatesByNumbers](../codility/euclideanAlgorithm/chocolatesByNumbers.cpp)
+
+## Modulo operations
+[codility/fibonacciNumbers/ladders](../codility/fibonacciNumbers/ladders.cpp)
