@@ -450,6 +450,8 @@ if there is only one type of brackets - simple counter (balance) is sufficient:
 ### linked list
 #### reverse linked list
 [leetcode/Recursion_Backtracking/reverseLinkedList](../leetcode/Recursion_Backtracking/reverseLinkedList.hpp)
+#### dummy node technique
+[leetcode/lists/removeDuplicatesFromSortedList2](../leetcode/lists/removeDuplicatesFromSortedList2.hpp)
 
 ### multiset
 good example of application ransomeNote  
