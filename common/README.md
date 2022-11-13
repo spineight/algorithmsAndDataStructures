@@ -404,6 +404,15 @@ Steven S. Skiena, Miguel A. Revilla. Programming Challenges. The Programming Con
 # Data structures
 ### arrays
 
+### matrix
+#### Spiral traversal (idea with an array of offsets for moves)
+[leetcode/arrays/spiralMatrix](../leetcode/arrays/spiralMatrix.hpp)  
+[leetcode/arrays/spiralMatrix2](../leetcode/arrays/spiralMatrix2.hpp)
+
+#### boyer-moore voting algorithm
+https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm  
+
+
 #### Kadane's algorithm (max subarray)
 https://en.wikipedia.org/wiki/Maximum_subarray_problem  
 https://www.interviewbit.com/blog/maximum-subarray-sum/  
@@ -630,3 +639,7 @@ Also there is `std::popcount` since C++20 (https://en.cppreference.com/w/cpp/num
 
 ## Modulo operations
 [codility/fibonacciNumbers/ladders](../codility/fibonacciNumbers/ladders.cpp)
+
+# Long arithmetics
+[leetcode/strings/addStrings](../leetcode/strings/addStrings.hpp)  
+[leetcode/strings/multiplyString](../leetcode/strings/multiplyStrings.hpp)  
