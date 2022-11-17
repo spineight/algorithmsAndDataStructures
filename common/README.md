@@ -20,6 +20,12 @@
 Use pointers to store branch results on which algorithm will be performed  
 see `leetcode: /twoPointers/intervalListIntersections.hpp`  
 
+## Introduce methods for aux operations
+This will allow to simplify code,
+easy to test overall functionality by testing separate methods
+An example when intro of aux methods made code simpler for comprehension and testing:  
+[leetcode/lists/reverseNodesInKGroup](../leetcode/lists/reverseNodesInKGroup.hpp)
+
 # Common mistakes
 ## corner cases
 ### integer overflow
@@ -451,7 +457,10 @@ if there is only one type of brackets - simple counter (balance) is sufficient:
 #### reverse linked list
 [leetcode/Recursion_Backtracking/reverseLinkedList](../leetcode/Recursion_Backtracking/reverseLinkedList.hpp)
 #### dummy node technique
-[leetcode/lists/removeDuplicatesFromSortedList2](../leetcode/lists/removeDuplicatesFromSortedList2.hpp)
+[leetcode/lists/removeDuplicatesFromSortedList2](../leetcode/lists/removeDuplicatesFromSortedList2.hpp)  
+[leetcode/lists/swapNodesInPairs](../leetcode/lists/swapNodesInPairs.hpp)  
+[leetcode/lists/designLinkedList](../leetcode/lists/designLinkedList.hpp)
+[leetcode/lists/reverseNodesInKGroup](../leetcode/lists/reverseNodesInKGroup.hpp)
 
 ### multiset
 good example of application ransomeNote  
@@ -469,6 +478,9 @@ public:
 ```
 
 ### trees
+#### Construction
+[leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal](../leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal.hpp)  
+[leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal](../leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal.odt)
 #### traversal
 [leetcode/tree/n-aryTreePreorderTraversal](../leetcode/graphs/tree/n-aryTreePreorderTraversal.hpp)  
 
@@ -551,6 +563,10 @@ public:
 ```
 
 [leetcode/tree/n-aryTreePostOrderTraversal](../leetcode/graphs/tree/n-aryTreePostOrderTraversal.hpp)
+
+##### Level order traversal
+[Using queue or using stack](../leetcode/graphs/tree/binaryTreeZigZagLevelOrderTraversal.odt)  
+[Different implementations](../leetcode/graphs/tree/binaryTreeRightSideView.odt)
 
 #### BST
 ##### Find successor
