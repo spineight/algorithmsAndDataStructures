@@ -166,6 +166,7 @@ Problem types:
 ### Backtracking:  
 [sudoku Solver](../cs106b/sudokuSolver.cpp)  
 [queens8](../cs106b/queens8.cpp)
+[leetcode/graphs/tree/pathSum2](../leetcode/graphs/tree/pathSum2.hpp)
 
 ### Tail recursion
 Is mentioned as a solution to this problem: [leetcode/graphs/tree/maximumDepthOfBinaryTree](../leetcode/graphs/tree/maximumDepthOfBinaryTree.hpp)  
@@ -481,6 +482,7 @@ public:
 #### Construction
 [leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal](../leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal.hpp)  
 [leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal](../leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal.odt)
+
 #### traversal
 [leetcode/tree/n-aryTreePreorderTraversal](../leetcode/graphs/tree/n-aryTreePreorderTraversal.hpp)  
 
@@ -569,8 +571,17 @@ public:
 [Different implementations](../leetcode/graphs/tree/binaryTreeRightSideView.odt)
 
 #### BST
+https://cse.taylor.edu/~jdenning/classes/cos265/slides/09_BinarySearchTrees.html  
+
 ##### Find successor
 [companies/Citadel/inorderSuccessorInBST](../leetcode/companies/Citadel/inorderSuccessorInBST.cpp)
+
+##### deletion
+Hibbard deletion:  
+https://joshhug.gitbooks.io/hug61b/content/chap10/chap102.html  
+https://algs4.cs.princeton.edu/32bst/  
+[leetcode/graphs/tree/deleteNodeInABST](../leetcode/graphs/tree/deleteNodeInABST.hpp)  
+[leetcode/graphs/tree/deleteNodeInABST.odt](../leetcode/graphs/tree/deleteNodeInABST.odt)  
 
 ### Fenwick tree (Binary Indexed Tree)
 [Fenwick Tree or Binary Indexed Tree](../freeCodeCamp/DataStructures/BIT.cpp)  
