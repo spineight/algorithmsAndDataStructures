@@ -154,7 +154,11 @@ Also the same implementation is presented in
 [Лекция 4. Сортировка подсчетом и применение встроенных сортировок](../shujkova/lectures/lec4.pdf)  
 [nth_element](../intuit/BaseAlgorithmsForPupil/lec2_sorting_and_search/include/nth_element.hpp)   
 [Pestov lecture LKSH b prime 2008 Разбор задачи Kth ("K-ый минимум") из контеста первого дня: модификация алгоритма быстрой сортировки для нахождения k-й порядковой статистики.]
-`/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item5.mp4`
+`/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item5.mp4`  
+[leetcode/arrays/kLargestElementInAnArray](../leetcode/arrays/kLargestElementInAnArray.hpp)  
+
+Different partiton schemes: Stankevich & Shujkova, Lomuto`s
+[leetcode/arrays/topKFrequentElements](../leetcode/arrays/topKFrequentElements.hpp)
 
 ## Recursion
 Great explanation at Stanford CS 106B (2008) by Julie Zelenski: `/run/media/oleg/TOSHIBA EXT/cs106b_2008_ProgrammingAbstractionsStanford`    
@@ -483,6 +487,8 @@ public:
 [leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal](../leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal.hpp)  
 [leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal](../leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal.odt)
 
+[graphs/tree/serializeAndDeserializeBinaryTree](../graphs/tree/serializeAndDeserializeBinaryTree.hpp)  
+
 #### traversal
 [leetcode/tree/n-aryTreePreorderTraversal](../leetcode/graphs/tree/n-aryTreePreorderTraversal.hpp)  
 
@@ -573,8 +579,16 @@ public:
 #### BST
 https://cse.taylor.edu/~jdenning/classes/cos265/slides/09_BinarySearchTrees.html  
 
+##### Find k-th element
+[leetcode/graphs/tree/kthSmallestElementInABST](../leetcode/graphs/tree/kthSmallestElementInABST.hpp)  
+[leetcode/graphs/tree/kthSmallestElementInABST.odt](../leetcode/graphs/tree/kthSmallestElementInABST.odt)  
+
 ##### Find successor
 [companies/Citadel/inorderSuccessorInBST](../leetcode/companies/Citadel/inorderSuccessorInBST.cpp)
+
+##### Iterator
+[leetcode/graphs/tree/binarySearchTreeIterator](../leetcode/graphs/tree/binarySearchTreeIterator.hpp)  
+[leetcode/graphs/tree/binarySearchTreeIterator.odt](../leetcode/graphs/tree/binarySearchTreeIterator.odt)  
 
 ##### deletion
 Hibbard deletion:  
