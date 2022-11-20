@@ -99,6 +99,13 @@ example:
     ...
 }
 ```
+## Sorting idxs of elements (if they are heavy) instead of elements
+We are going to sort `vector<MyType> elements`  
+We assign idxs to elements we are going to sort: 0,1,2,3,4,5,6,7
+This vector of idxs we pass to sorting routine, which get`s information of comparision of elements for ex. from unordered_map by index
+As a resulting vector we get a permutation of idxs: res,
+where `res[i] = j, means at i-th position should be elements[j] element `
+[leetcode/arrays/kClosestPointsToOrigin](../leetcode/arrays/kClosestPointsToOrigin.hpp)
 
 # Algorithms
 ## sorting & search
@@ -158,7 +165,9 @@ Also the same implementation is presented in
 [leetcode/arrays/kLargestElementInAnArray](../leetcode/arrays/kLargestElementInAnArray.hpp)  
 
 Different partiton schemes: Stankevich & Shujkova, Lomuto`s
-[leetcode/arrays/topKFrequentElements](../leetcode/arrays/topKFrequentElements.hpp)
+[leetcode/arrays/topKFrequentElements](../leetcode/arrays/topKFrequentElements.hpp)  
+One more exemple of quick select:  
+[leetcode/arrays/kClosestPointsToOrigin](../leetcode/arrays/kClosestPointsToOrigin.hpp)
 
 ## Recursion
 Great explanation at Stanford CS 106B (2008) by Julie Zelenski: `/run/media/oleg/TOSHIBA EXT/cs106b_2008_ProgrammingAbstractionsStanford`    
