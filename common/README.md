@@ -443,7 +443,10 @@ https://www.interviewbit.com/blog/maximum-subarray-sum/
 
 #### prefix sum
 [codility/prefixSum/passingCars](../codility/prefixSum/passingCars.cpp)  
-[codility/prefixSum/genomicRangeQuery](../codility/prefixSum/genomicRangeQuery.cpp)
+[codility/prefixSum/genomicRangeQuery](../codility/prefixSum/genomicRangeQuery.cpp)  
+
+Sometimes you don't have to store prefixSum explicitly:  
+[leetcode/arrays/maximumSizeSubarraySumEqualsK](../leetcode/arrays/maximumSizeSubarraySumEqualsK.hpp)
 
 #### Move zeros
 [arrays/moveZeros](../leetcode/arrays/moveZeros.hpp)
