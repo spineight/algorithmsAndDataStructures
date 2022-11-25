@@ -1,0 +1,1 @@
+http://algolist.ru/maths/geom/intersect/convex_intersect.php

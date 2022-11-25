@@ -4,6 +4,11 @@
 
 
 # Tasks solving approaches
+
+## Solving with a pen and paper
+After solving smaller task, I got an idea:  
+[leetcode/strings/repeatedDNAsequences](leetcode/strings/repeatedDNAsequences.hpp)  
+
 ## Getting Time limit exceeded - solved using smarter algorithm
 1. Берем разные входные данные и на них вручную решаем задачу  
 После нескольких таких решений может появиться догадка и формуле/закономерности  
@@ -99,6 +104,12 @@ example:
     ...
 }
 ```
+
+## space optimization
+Reusing initial array for storage of some information during processing  
+(in case if there are only positive values in the array):  
+[leetcode/arrays/findAllNumbersDisappearedInAnArray](leetcode/arrays/findAllNumbersDisappearedInAnArray.hpp)
+
 ## Sorting idxs of elements (if they are heavy) instead of elements
 We are going to sort `vector<MyType> elements`  
 We assign idxs to elements we are going to sort: 0,1,2,3,4,5,6,7
@@ -184,6 +195,9 @@ Problem types:
 ### Tail recursion
 Is mentioned as a solution to this problem: [leetcode/graphs/tree/maximumDepthOfBinaryTree](../leetcode/graphs/tree/maximumDepthOfBinaryTree.hpp)  
  the idea is explained here: [leetcode/graphs/tree/maximumDepthOfBinaryTree](../leetcode/graphs/tree/maximumDepthOfBinaryTree.odt)  
+
+## greedy
+[leetcode/arrays/minimumNumberOfArrorsToBurstBaloons](../leetcode/arrays/minimumNumberOfArrorsToBurstBaloons.hpp)
 
 ## DP
 Good explanation of base types in Andrei Stankevich lecture:`/run/media/oleg/TOSHIBA EXT/ITMO/BaseAlgsForSchoolStudents/lec3_dynamic_programming`    
@@ -424,6 +438,10 @@ Steven S. Skiena, Miguel A. Revilla. Programming Challenges. The Programming Con
 # Data structures
 ### arrays
 
+### shift (rotate an array)
+[leetcode/arrays/rotateArray](../leetcode/arrays/rotateArray.hpp)  
+[leetcode/arrays/performStringShifts](../leetcode/arrays/performStringShifts.hpp)
+
 ### matrix
 #### Spiral traversal (idea with an array of offsets for moves)
 [leetcode/arrays/spiralMatrix](../leetcode/arrays/spiralMatrix.hpp)  
@@ -447,6 +465,9 @@ https://www.interviewbit.com/blog/maximum-subarray-sum/
 
 Sometimes you don't have to store prefixSum explicitly:  
 [leetcode/arrays/maximumSizeSubarraySumEqualsK](../leetcode/arrays/maximumSizeSubarraySumEqualsK.hpp)
+
+#### Sliding window
+[leetcode/arrays/minimumSwapsToGroupAllOnceTogether](../leetcode/arrays/minimumSwapsToGroupAllOnceTogether.hpp)
 
 #### Move zeros
 [arrays/moveZeros](../leetcode/arrays/moveZeros.hpp)
