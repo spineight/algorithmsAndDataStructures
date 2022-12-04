@@ -1,6 +1,7 @@
 # Learning algorithms & data structures
-Нужно в ручную(ручка + бумага) прогонять алгоритм на разных данных, подобранных так, чтобы показать особенности алгоритмов
-(Я пытался разобраться в работе KMP и подобранные входные данные позволили мне найти и исправить ошибку)  
+Нужно в ручную (ручка + бумага) прогонять алгоритм на разных данных, подобранных так, чтобы показать особенности алгоритмов
+(Я пытался разобраться в работе KMP и подобранные входные данные позволили мне найти и исправить ошибку)   
+Learn algo by running it with a pen and on paper
 
 
 # Tasks solving approaches
@@ -653,6 +654,29 @@ For instance, we can use a disjoint set to determine if two people share a commo
 switching case for the given letter upper/lower is about toggling one bit in the char - 32 (2^5)  
 ### Main definitions
 [main definitions]`/run/media/oleg/TOSHIBA EXT/codeforces/itmoAcademy/stringsMainDefinitions.mp4`
+
+### match
+#### Rabin-Karp
+Main ideas: use sliding window for efficient computation of hash,
+called rolling hash.
+As computed hash might be very large, o computations by modulo to make sure that results fits within computer words  
+
+Running time: when number of matches is small or we are interested only in a first match - `O(m + n-m)`  
+Worst case: large number of matches (e.g. `t = "aaaaaaaaaaaaaaaaaa...", p = "aaaaaaaaaaa" `) - `O( (n-m)*m)`  
+Spurious hits - when different strings hav the same hash value, hence in case of equal hash - eqaulity check is obligatory  
+Also for modulo - it is adviced to choose prime, larger then p size;
+[MIT/CLRS/ch32/rabin-karp](../MIT/CLRS/ch32/rabin-karp.cpp)   
+[/run/media/oleg/TOSHIBA EXT/MIT/CS6-006_fall2011/Lec9_table_doubling_Karp-Rabin.mp4](/run/media/oleg/TOSHIBA EXT/MIT/CS6-006_fall2011/Lec9_table_doubling_Karp-Rabin.mp4)
+
+#### KMP (Knuth Morris Prat)
+Idea: use previous information about matches, for this compare pattern with itself.  
+Concept of prefix function `pi(x)` - length of prefix that is also a suffix for prefix of pattern of length x  
+Two stages: construct prefix function and use it for search  
+[MIT/CLRS/ch32/KMP](../MIT/CLRS/ch32/KMP.cpp)  
+
+
+
+
 ### Prefix function
 [Применения prefix function Лектор: Олег Пестов] `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day12_item3.mp4`  
 [Поиск подстроки в строке с использованием префикс функции](../LKSH/2008/src/prefixFunctionUsages.cpp)  
@@ -681,6 +705,9 @@ Z algo using O(m) space in comparision to standard where O(n + m) space is used 
 My Implementation, based on the lecture: /run/media/oleg/TOSHIBA EXT/compscicenter/2018_part2/lec1_strings_zFunction.mp4  
 [Z algo O(m) space](../compscicenter/ASD_part2_2018/zFunction.cpp)
 
+### Pattern matching
+#### Using DP
+[leetcode/strings/wildcardMatching](../leetcode/strings/wildcardMatching.hpp)
 
 # Implementation techniques
 ## using array of offsets for a matrix exploration
