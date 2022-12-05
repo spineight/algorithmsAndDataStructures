@@ -494,12 +494,16 @@ if there is only one type of brackets - simple counter (balance) is sufficient:
 
 ### linked list
 #### reverse linked list
-[leetcode/Recursion_Backtracking/reverseLinkedList](../leetcode/Recursion_Backtracking/reverseLinkedList.hpp)
+Reverse using 2 pointers (prev, cur)  
+[leetcode/Recursion_Backtracking/reverseLinkedList](../leetcode/Recursion_Backtracking/reverseLinkedList.hpp)  
+[leetcode/lists/plusOneLinkedList](../leetcode/lists/plusOneLinkedList.hpp)  
+
 #### dummy node technique
 [leetcode/lists/removeDuplicatesFromSortedList2](../leetcode/lists/removeDuplicatesFromSortedList2.hpp)  
 [leetcode/lists/swapNodesInPairs](../leetcode/lists/swapNodesInPairs.hpp)  
 [leetcode/lists/designLinkedList](../leetcode/lists/designLinkedList.hpp)
-[leetcode/lists/reverseNodesInKGroup](../leetcode/lists/reverseNodesInKGroup.hpp)
+[leetcode/lists/reverseNodesInKGroup](../leetcode/lists/reverseNodesInKGroup.hpp)  
+[leetcode/lists/addTwoPolynomialsRepresentedAsLinkedLists](../leetcode/lists/addTwoPolynomialsRepresentedAsLinkedLists.hpp)  
 
 ### multiset
 good example of application ransomeNote  
