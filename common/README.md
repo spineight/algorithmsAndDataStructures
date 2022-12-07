@@ -504,6 +504,11 @@ Reverse using 2 pointers (prev, cur)
 [leetcode/lists/designLinkedList](../leetcode/lists/designLinkedList.hpp)
 [leetcode/lists/reverseNodesInKGroup](../leetcode/lists/reverseNodesInKGroup.hpp)  
 [leetcode/lists/addTwoPolynomialsRepresentedAsLinkedLists](../leetcode/lists/addTwoPolynomialsRepresentedAsLinkedLists.hpp)  
+[leetcode/lists/sortList](../leetcode/lists/sortList.hpp)   
+[leetcode/lists/copyListWithRandomPointer](../leetcode/lists/copyListWithRandomPointer.hpp)
+
+#### partition linked list
+[leetcode/lists/sortList](../leetcode/lists/sortList.hpp)  
 
 ### multiset
 good example of application ransomeNote  
