@@ -21,6 +21,18 @@ After solving smaller task, I got an idea:
 ## Getting Time limit exceeded - solved using precomputations
 [CodeForces step2. B - Z-функция строки Грея ](../Codeforces/itmoAcademy/step2_problemB.cpp)  
 
+# Debugging
+## pen & paper
+
+Helpful:
+- invariant (a condition that is true within certain scope): loop invariant, function call invariant helps a lot  
+- call stack representation  
+- call frame representation  
+- proof of corectness by dividing input on classes (cases) and showing that all of them were covered  
+
+I spent a lot of time debugging this task:  
+[leetcode/lists/flattenMultilevelDoublyLinkedList](../leetcode/lists/flattenMultilevelDoublyLinkedList.hpp)  
+
 # Implementation approaches
 ## Simplify by avoiding code duplicate
 Use pointers to store branch results on which algorithm will be performed  
