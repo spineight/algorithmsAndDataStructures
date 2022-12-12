@@ -503,6 +503,8 @@ for multiple types - we use stack:
 if there is only one type of brackets - simple counter (balance) is sufficient:    
 [codility/stacks&Queues/nesting](../codility/stacks&Queues/nesting.cpp)    
 
+#### Monotonic stack
+[data_structures/stack/dailyTemperatures](../data_structures/stack/dailyTemperatures.hpp)
 
 ### linked list
 #### reverse linked list
