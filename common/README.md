@@ -675,7 +675,8 @@ For instance, we can use a disjoint set to determine if two people share a commo
 [Codeforces/edu/segmentTree/segmentTreeMin](../Codeforces/edu/segmentTree/segmentTreeMin.cpp)   
 [Codeforces/edu/segmentTree/segmentTreeSum](..Codeforces/edu/segmentTree/segmentTreeSum.cpp)  
 [Codeforces/edu/segmentTree/segmentTreeMinCount](../Codeforces/edu/segmentTree/segmentTreeMinCount.cpp)  
-[Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum](../Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum.cpp)
+[Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum](../Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum.cpp)  
+[Codeforces/edu/segmentTree/segmentTreeKthOne](../Codeforces/edu/segmentTree/segmentTreeKthOne.cpp)
 great lectures from Pavel Mavrin (Pashka):
 `/run/media/oleg/TOSHIBA EXT/codeforces/segmentTree`
 
