@@ -242,6 +242,7 @@ for the current state estimation we need only to now a few previous states, so t
 ## Two pointers
 [pashka/algos/include/two_pointers_method](../pashka/algos/include/two_pointers_method.hpp)  
 [pashka/README](../pashka/README.md)  
+[leetcode/twoPointers/trappingRainWater](../leetcode/twoPointers/trappingRainWater.hpp)
 
 ### common tasks
 longest-substring-without-repeating-characters   
@@ -668,6 +669,16 @@ The “network“ here can be a computer network or a social network.
 For instance, we can use a disjoint set to determine if two people share a common ancestor.
 
 [leetcode/graphs/graphValidTree](../leetcode/graphs/graphValidTree.hpp)
+
+
+### Segment tree
+[Codeforces/edu/segmentTree/segmentTreeMin](../Codeforces/edu/segmentTree/segmentTreeMin.cpp)   
+[Codeforces/edu/segmentTree/segmentTreeSum](..Codeforces/edu/segmentTree/segmentTreeSum.cpp)  
+[Codeforces/edu/segmentTree/segmentTreeMinCount](../Codeforces/edu/segmentTree/segmentTreeMinCount.cpp)  
+[Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum](../Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum.cpp)
+great lectures from Pavel Mavrin (Pashka):
+`/run/media/oleg/TOSHIBA EXT/codeforces/segmentTree`
+
 
 ## Strings
 ### Main facts about characters

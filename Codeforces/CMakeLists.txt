@@ -24,3 +24,11 @@ add_executable(itmoAcademy_step4_problemF itmoAcademy/step4_problemF.cpp)
 add_executable(itmoAcademy_step4_problemG itmoAcademy/step4_problemG.cpp)
 add_executable(itmoAcademy_step4_problemH itmoAcademy/step4_problemH.cpp)
 add_executable(itmoAcademy_step4_problemI itmoAcademy/step4_problemI.cpp)
+
+add_executable(segmentTreeSum edu/segmentTree/segmentTreeSum.cpp)
+add_executable(segmentTreeMin edu/segmentTree/segmentTreeMin.cpp)
+add_executable(segmentTreeMinCount edu/segmentTree/segmentTreeMinCount.cpp)
+add_executable(segmentTreeMaxSegmentSum edu/segmentTree/segmentTreeMaxSegmentSum.cpp)
+
+
+add_executable(competiton edu/segmentTree/competiton.cpp)
