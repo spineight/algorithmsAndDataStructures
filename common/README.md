@@ -672,11 +672,45 @@ For instance, we can use a disjoint set to determine if two people share a commo
 
 
 ### Segment tree
+#### Baseic types that can be used as a core for problem solving
 [Codeforces/edu/segmentTree/segmentTreeMin](../Codeforces/edu/segmentTree/segmentTreeMin.cpp)   
 [Codeforces/edu/segmentTree/segmentTreeSum](..Codeforces/edu/segmentTree/segmentTreeSum.cpp)  
 [Codeforces/edu/segmentTree/segmentTreeMinCount](../Codeforces/edu/segmentTree/segmentTreeMinCount.cpp)  
 [Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum](../Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum.cpp)  
-[Codeforces/edu/segmentTree/segmentTreeKthOne](../Codeforces/edu/segmentTree/segmentTreeKthOne.cpp)
+[Codeforces/edu/segmentTree/segmentTreeKthOne](../Codeforces/edu/segmentTree/segmentTreeKthOne.cpp)  
+[Codeforces/edu/segmentTree/segmentTreeFirstAbove](../Codeforces/edu/segmentTree/segmentTreeFirstAbove.cpp)  
+
+#### Application of basic types to problem solving
+##### Find inversions for the given permutation
+Use SegmentTreeSum of zeros and once, go from left to right in `arr` and mark values of visited elements,
+when you are at i-th position you have information in the segment tree by counting number of onces from `arr[i]` to `maxElem`
+this will be the number of elements seen previously whith value > `arr[i]`  
+[Codeforces/edu/segmentTree/segmentTreeAndInversions](../Codeforces/edu/segmentTree/segmentTreeAndInversions.cpp)
+
+##### By given inversions restore the permutation
+Use SegmentTreeSum + getKthEleme  
+You visit the `arr` from right to left, `arr[i] = v` - number of remaining elements greater then it, so element has to be at `n-v` position  
+after you figured out i-th element you remove it from the remaining by using the Segment tree operation`set(i,0)`  
+[Codeforces/edu/segmentTree/usingSegmentTreeToRestorePermutationByInversions](../Codeforces/edu/segmentTree/usingSegmentTreeToRestorePermutationByInversions.cpp)  
+
+##### Count number of nested segments
+nested segment - segment which start and end is contained within another segment  
+example: x y y x -> y is nested within x segment  
+for each segment x, we need to find number of nested segments  
+Idea:  use SegmentTreeSum with 0,1 elements and unordered_map  
+lets visit the `arr` from left to right and store the position of left border of segments that have started already (using unordered_map)  
+once we encounter the right boarder of a segment we use SegmentTree `set(posOfLeftBoarder,1)` and for the closed segment we estimate  
+number of nested segments by `getSum(posOfLeftBoarder, posOfRightBoarder)`  
+[Codeforces/edu/segmentTree/usingSegmentTreeForNestedSegments](../Codeforces/edu/segmentTree/usingSegmentTreeForNestedSegments.cpp)  
+
+##### Count number of intersecting segments
+Similar idea as in `Count number of nested segments`  
+[Codeforces/edu/segmentTree/usingSegmentTreeForIntersectingSegments](../Codeforces/edu/segmentTree/usingSegmentTreeForIntersectingSegments.cpp)  
+
+##### Addition of a number to a segment
+
+[Codeforces/edu/segmentTree/usingSegmentTreeForAdditionToSegment](../Codeforces/edu/segmentTree/usingSegmentTreeForAdditionToSegment.cpp)
+
 great lectures from Pavel Mavrin (Pashka):
 `/run/media/oleg/TOSHIBA EXT/codeforces/segmentTree`
 

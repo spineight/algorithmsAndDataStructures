@@ -30,6 +30,9 @@ add_executable(segmentTreeMin edu/segmentTree/segmentTreeMin.cpp)
 add_executable(segmentTreeMinCount edu/segmentTree/segmentTreeMinCount.cpp)
 add_executable(segmentTreeMaxSegmentSum edu/segmentTree/segmentTreeMaxSegmentSum.cpp)
 add_executable(segmentTreeKthOne edu/segmentTree/segmentTreeKthOne.cpp)
+add_executable(segmentTreeFirstAbove edu/segmentTree/segmentTreeFirstAbove.cpp)
+
+target_compile_features(segmentTreeFirstAbove PUBLIC cxx_std_17)
 
 
-add_executable(competiton edu/segmentTree/competiton.cpp)
+# add_executable(competiton edu/segmentTree/competiton.cpp)
