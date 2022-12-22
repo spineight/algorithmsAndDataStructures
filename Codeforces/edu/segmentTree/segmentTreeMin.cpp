@@ -64,6 +64,8 @@ const long long SegmentTreeMin::INF = numeric_limits<long long>::max();
 
 
 int main() {
+    
+    
     int n,m;
     cin >> n >> m;
 

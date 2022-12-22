@@ -15,3 +15,6 @@ https://vk.com/@olymp_inform-materialy-po-prodvinutym-algoritmam-i-strukturam-da
 https://vk.com/@olymp_inform-kluchevye-algoritmicheskie-paradigmy-s-primerami-na-c  
 
 https://vk.com/olymp_inform
+
+#### USACO
+https://usaco.guide/

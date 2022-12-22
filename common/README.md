@@ -714,6 +714,13 @@ Similar idea as in `Count number of nested segments`
 great lectures from Pavel Mavrin (Pashka):
 `/run/media/oleg/TOSHIBA EXT/codeforces/segmentTree`
 
+##### signAlternation
+[Codeforces/edu/segmentTree/signAlternation.cpp](../Codeforces/edu/segmentTree/signAlternation.cpp)  
+##### cryptography
+[Codeforces/edu/segmentTree/cryptography](../Codeforces/edu/segmentTree/cryptography.cpp)
+##### numberOfInversionsOnSegment
+[Codeforces/edu/segmentTree/numberOfInversionsOnSegment](../Codeforces/edu/segmentTree/numberOfInversionsOnSegment.cpp)
+
 
 ## Strings
 ### Main facts about characters
