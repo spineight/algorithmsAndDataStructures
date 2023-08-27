@@ -10,11 +10,9 @@ namespace lec1::practice {
 *
 */
   void bubble_sort(vector<int> &a) {
-    const int n = a.size();
-    for(int i = 0; i < n - 1; ++i) {
-      for(int j = 0; j + 1 < n; ++j) {
-        if(a[j] > a[j+1])
-          swap(a[j],a[j+1]);
+    for(size_t i = 0; i < size(a); ++i) {
+      for(size_t j = 0; j < size(a) - 1; ++j) {
+        if(a[j] >a[j+1]) swap(a[j],a[j+1]);
       }
     }
   }
@@ -25,12 +23,15 @@ namespace lec1::practice {
 *  @see bubble_sort
 */
   void bubble_sort_ver2(vector<int> &a) {
-    const int n = a.size();
-    for(int i = 0; i < n - 1; ++i) {
-      for(int j = 0; j+1 < n - i; ++j) {
-        if(a[j] > a[j+1])
+    for(size_t i = 0; i < size(a); ++i) {
+      bool isSorted{true};
+      for(size_t j = 0; j < size(a) - 1; ++j) {
+        if(a[j] >a[j+1]) {
           swap(a[j],a[j+1]);
+          isSorted = false;
+        }
       }
+      if(isSorted) break;
     }
   }
 }

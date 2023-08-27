@@ -18,3 +18,8 @@ https://vk.com/olymp_inform
 
 #### USACO
 https://usaco.guide/
+
+#### Stankevich
+http://neerc.ifmo.ru/school/information/index.html
+https://etu.ru/ru/universitet/izdatelstvo/zhupnal-kompyutepnye-instpumenty-v-obpazovanii
+https://itmo.ru/ru/viewperson/289/stankevich_andrey_sergeevich.htm

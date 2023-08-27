@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace my {
+namespace lec1::practice {
 
   //
 
@@ -17,40 +17,37 @@ namespace my {
  *  Индексы выдаем использую переменную free
  *  Память(выданные индексы) при удалении элементов из списка не высвобождаем
  */
-  struct StaticSingleLinkedList {
-    StaticSingleLinkedList() :
-    free(1), /**< Указывает на первый доступный id для присвоения элементу списка. */
-    head(0), /**< При инициализации в списке есть один элемент - фиктивная голова. Голова-> Хвост -> 0 (не используемый индекс). */
-    tail(0)  // fictive head
-    {
-      memset(next, 0, sizeof(next));
-      memset(val, 0, sizeof(val));
-    }
-    static const int MAX_N = 10;
-    int next[MAX_N]; /**< Зависимости(связи) между элементами списка. */
-    int val[MAX_N]; /**< По id элемента - получаем его значение. */
-    int free; // id of next available element, free < MAX_N
-    int head;
-    int tail;
+template<size_t sz>
+struct StaticSingleLinkedList {
+
+  //! sz + 1 - as one of elements is a dummy head with no data
+  //! to make effective sz we add 1
+  int data[sz+1]{0};
+  int next[sz+1]{-1};
+  int freeId{1}; // 0 - we use for dummy head ID
+  StaticSingleLinkedList()
+  {
+
+  }
 
 /**
 *  Добавление элемента со значением x за элементом с id = i.
 */
     void add_after(int i, int x) {
-      next[free] = next[i];
-      next[i] = free;
-      val[free] = x;
-
-      if(tail == i)
-        tail = free;
-
-      ++free;
+      data[freeId] = x;
+      auto tmp = next[i];
+      next[i] = freeId;
+      next[freeId] = tmp;
+    ++freeId;
     }
     void add_front(int x) {
-      add_after(head,x);
+      add_after(next[0], x);
     }
     void add_back(int x) {
-      add_after(tail,x);
+      int id = 0;
+      while(next[id] != -1)
+        id = next[id];
+      add_after(id,x);
     }
 
     //
@@ -65,11 +62,12 @@ namespace my {
     }
   };
 
-  ostream& operator<<(ostream& out, const my::StaticSingleLinkedList& l) {
-    int i = l.next[l.head];
-    while(i != 0) {
-      out << l.val[i];
-      i = l.next[i];
+template<size_t sz>
+  ostream& operator<<(ostream& out, const StaticSingleLinkedList<sz>& l) {
+    int id = 0;
+    while(l.next[id]) {
+      id = l.next[id];
+      out << "id:" << id << ", val:" << l.data[id] << '\n';
     }
     return out;
   }
@@ -81,41 +79,21 @@ namespace my {
  *  каждого элемента - prev, ее храним в массиве
  */
   struct StaticDoubleLinkedList {
-    StaticDoubleLinkedList() :
-            free(1),
-            head(0), // fictive head
-            tail(0)  // fictive head
+    StaticDoubleLinkedList()
+
     {
-      memset(next, 0, sizeof(next));
-      memset(prev, 0, sizeof(prev));
-      memset(val, 0, sizeof(val));
+
     }
-    static const int MAX_N = 10;
-    int next[MAX_N];
-    int prev[MAX_N];
-    int val[MAX_N];
-    int free;
-    int head;
-    int tail;
+
 
     void add_after(int i, int x) {
-      next[free] = next[i];
-      next[i] = free;
-      prev[free] = i;
-      if(next[free] != 0)
-        prev[next[free]] = free;
-      val[free] = x;
 
-      if(tail == i)
-        tail = free;
-
-      ++free;
     }
     void add_front(int x) {
-      add_after(head,x);
+
     }
     void add_last(int x) {
-      add_after(tail,x);
+
     }
 
     //
@@ -124,8 +102,7 @@ namespace my {
 *  Поэтому i - это id элемента, который нужно удалить
 */
     void remove(int i) {
-      next[prev[i]] = next[i];
-      prev[next[i]] = prev[i];
+
     }
   };
 

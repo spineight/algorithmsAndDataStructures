@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 project(lec1_complexity_of_algorithms)
 
-
 set(SOURCES
     src/main.cpp
 )
@@ -18,8 +17,6 @@ target_include_directories(lec1_complexity_of_algorithms_lib
     INTERFACE
         ${CMAKE_CURRENT_SOURCE_DIR}/
 )
-
-
 
 add_library(lec1_complexity_of_algorithms_practice INTERFACE)
 add_library(INTUIT::baseAlgorithmsForPupil::lec1_complexity_of_algorithms::practice

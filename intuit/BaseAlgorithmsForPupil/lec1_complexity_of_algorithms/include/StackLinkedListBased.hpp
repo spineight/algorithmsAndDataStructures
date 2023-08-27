@@ -21,18 +21,12 @@ namespace lec1 {
 */
   template<size_t MAX_N>
   struct StackLinkedListBased {
-    StackLinkedListBased()
-    : sp(0), free(1)
-    {
-      memset(next,0,sizeof(next));
-      memset(val,0,sizeof(val));
-    }
-    int sp;
-    int free;
-    int next[MAX_N+1];
-    int val[MAX_N+1];
+    int sp{-1}; //! [27/08/2023] id of top element of the stack
+    int free{0}; //! [27/08/2023] - выдача индексов (все используются, нет фиктивной головы)
+    int next[MAX_N];
+    int val[MAX_N];
 
-    bool empty() const { return sp == 0;}
+    bool empty() const { return -1 == sp;}
     int back() const {
       assert(!empty());
       return val[sp];
@@ -44,11 +38,8 @@ namespace lec1 {
       sp = free;
       ++free;
     }
-    int pop() {
-      assert(!empty());
-      int res = val[sp];
+    void pop() {
       sp = next[sp];
-      return res;
     }
   };
 

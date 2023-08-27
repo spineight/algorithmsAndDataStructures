@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 
 #ifdef PRACTICE
-#include <practice/StackLinkedListBased.hpp>
+#include <practice/my_static_list.hpp>
 using namespace lec1::practice;
 #else
 #include <include/StackLinkedListBased.hpp>

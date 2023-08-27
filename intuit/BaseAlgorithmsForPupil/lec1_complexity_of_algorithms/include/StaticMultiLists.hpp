@@ -11,6 +11,9 @@ namespace lec1 {
  *
  *  Внимание: так как мы здесь не высвобождаем индексы удаленных элементов, то
  *  MAX_N - должно быть не менее количества операций добавления
+ *  (Если мы добавим MAX_N элементов, затем их все удалим, то больше не сможем добавить ни одного элемента
+ *  так как, free - который мы используем для присвоения id, и доступа к элементам массивов по этим id выйдет за пределы массивов
+ *  решение: научиться переиспользовать индексы удаленных элементов)
 */
   template<size_t MAX_N_OF_STACKS, size_t MAX_N>
   struct MultiLists {
@@ -19,9 +22,6 @@ namespace lec1 {
       for (size_t i = 0; i < MAX_N_OF_STACKS; ++i) {
         head[i] = tail[i] = free++;
       }
-      memset(next, 0, sizeof(next));
-      memset(prev, 0, sizeof(prev));
-      memset(val, 0, sizeof(val));
     }
 
     int head[MAX_N_OF_STACKS]; // верхушки стэка

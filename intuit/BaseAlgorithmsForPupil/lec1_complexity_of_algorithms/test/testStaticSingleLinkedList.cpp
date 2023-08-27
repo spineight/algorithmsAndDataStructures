@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 
 #ifdef PRACTICE
-#include <practice/StaticSingleLinkedList.hpp>
+#include <practice/my_static_list.hpp>
 using namespace lec1::practice;
 #else
 #include <include/StaticSingleLinkedList.hpp>
@@ -19,14 +19,12 @@ TEST(StaticSingleLinkedList, sameListIfAddedFrontBack) {
   list0.add_front(100);
   list1.add_back(100);
 
-  EXPECT_EQ(list0.head, list1.head);
-  EXPECT_EQ(list0.tail, list1.tail);
-  EXPECT_EQ(list0.free, list1.free);
-
-  for(size_t i = 0; i < sizeof(list0.val) / sizeof(list0.val[0]); ++i) {
-    EXPECT_EQ(list0.val[i], list1.val[i]);
-    EXPECT_EQ(list0.next[i], list1.next[i]);
+  while(!list0.empty()) {
+    EXPECT_EQ(list0.front(), list1.front());
+    list0.pop_front();
+    list1.pop_front();
   }
+  EXPECT_TRUE(list1.empty());
 }
 
 TEST(StaticSingleLinkedList, addBackTillFull) {
@@ -38,11 +36,10 @@ TEST(StaticSingleLinkedList, addBackTillFull) {
   for(auto v : a)
     list.add_back(v);
 
-  int i = list.next[list.head];
-  int j = 0;
-  while(i != 0) {
-    EXPECT_EQ(list.val[i], a[j++]);
-    i = list.next[i];
+  int idx{0};
+  while(!list.empty()) {
+    EXPECT_EQ(list.front(), idx++);
+    list.pop_front();
   }
 }
 
@@ -50,16 +47,17 @@ TEST(StaticSingleLinkedList, addFrontTillFull) {
   constexpr int MAX_N = 10;
   StaticSingleLinkedList<MAX_N> list;
 
-  vector<int> a(MAX_N,-1);
+  vector<int> a(MAX_N);
   iota(begin(a), end(a),0);
   for(auto v : a)
     list.add_front(v);
 
-  int i = list.next[list.head];
-  int j = MAX_N-1;
-  while(i != 0) {
-    EXPECT_EQ(list.val[i], a[j--]);
-    i = list.next[i];
+
+  int idx{0};
+  while(!list.empty()) {
+    EXPECT_EQ(list.front(), MAX_N-1-idx);
+    ++idx;
+    list.pop_front();
   }
 }
 
@@ -70,12 +68,12 @@ TEST(StaticSingleLinkedList, empty) {
 
   list.add_front(1);
   EXPECT_TRUE(!list.empty());
-  list.remove_after(list.head);
+  list.pop_front();
   EXPECT_TRUE(list.empty());
 
   list.add_back(1);
   EXPECT_TRUE(!list.empty());
-  list.remove_after(list.head);
+  list.pop_front();
   EXPECT_TRUE(list.empty());
 }
 
@@ -93,32 +91,14 @@ TEST(StaticSingleLinkedList, removeAfter) {
   for(auto v : a)
     list.add_back(v*2);
 
-  int i = list.next[list.head];
-  int j = 0;
-  while(i != 0) {
-    EXPECT_EQ(list.val[i], a[j]*2);
-    ++j;
-    i = list.next[i];
+  int idx{0};
+  while(!list.empty()) {
+    EXPECT_EQ(list.front(), a[idx] * 2);
+    ++idx;
+    list.pop_front();
   }
 }
 
-TEST(StaticSingleLinkedList, addAfter) {
-  int a[] = {1, 2, 3, 4, 5};
-  constexpr int MAX_N = size(a) * 2;
-  StaticSingleLinkedList<MAX_N> list;
-  list.add_back(1);
-  list.add_after(list.next[list.head],4);
-  list.add_back(5);
-  list.add_after(list.next[list.head],3);
-  list.add_after(list.next[list.head],2);
-  int i = list.next[list.head];
-  int j = 0;
-  while(i != 0) {
-    EXPECT_EQ(list.val[i], a[j]);
-    ++j;
-    i = list.next[i];
-  }
-}
 
 TEST(StaticSingleLinkedList, addFrontAddBackInterleaved) {
   int a[] = {1,2,3,4,5,6,7,8,9};
@@ -132,12 +112,11 @@ TEST(StaticSingleLinkedList, addFrontAddBackInterleaved) {
   }
 
 
-  int i = list.next[list.head];
-  int j = 0;
   int expected[] = {9,7,5,3,1,2,4,6,8};
-  while(i != 0) {
-    EXPECT_EQ(list.val[i], expected[j]);
-    i = list.next[i];
-    ++j;
+  int idx{0};
+  while(!list.empty()) {
+    EXPECT_EQ(list.front(), expected[idx]);
+    ++idx;
+    list.pop_front();
   }
 }

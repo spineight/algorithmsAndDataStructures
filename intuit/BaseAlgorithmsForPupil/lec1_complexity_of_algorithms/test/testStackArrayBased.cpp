@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 
 #ifdef PRACTICE
-#include <practice/StackArrayBased.hpp>
+#include <practice/my_stack.hpp>
 using namespace lec1::practice;
 #else
 #include <include/StackArrayBased.hpp>

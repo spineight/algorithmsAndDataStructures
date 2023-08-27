@@ -14,9 +14,12 @@ add_subdirectory(lec8_geometry)
 add_subdirectory(lec9_long_arithmetic)
 #add_subdirectory(lec10_combinatorics)
 
-if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-        include(CTest)
-        add_subdirectory(extern/googletest)
-        include(GoogleTest)
-endif()
+
+## [27/08/2023] - I replaced this block with fetch content
+#if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+#        include(CTest)
+#        add_subdirectory(extern/googletest)
+#        include(GoogleTest)
+#endif()
+
 add_subdirectory(docs)

@@ -4,3 +4,10 @@ https://www.lektorium.tv/speaker/24386
 
 Google:
 https://github.com/williamfiset?tab=repositories
+
+
+http://old.istu.ru/news/uso/2777/
+
+
+#### Авторы курса на Интуит "Базовые алгоритмы для школьников"
+Константин Абакумов, Марина Мухачева, Андрей Станкевич

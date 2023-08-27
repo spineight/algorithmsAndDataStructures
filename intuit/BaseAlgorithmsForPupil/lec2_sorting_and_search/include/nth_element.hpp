@@ -22,9 +22,15 @@ int kth(vector<int>& a, int l, int r, int k) {
     }
   }
 
+  //! У нас три варианта k-th элемент попадает в одну из 3-х групп:
+  //! 0 - [l, cr]
+  //! 1 - [cl,r ]
+  //! Порядок элементов в этих группах может измениться, но места (позиции в итоговом отсортированном массиве) которые занимают эти группы нет
+  //! Мы выбираем группу где находится интересующая нас позиция
   if(l <= k && k <= cr) return kth(a,l,cr,k); // [l, cr] -> elements <= pivot (0)
   if(cl <= k && k <= r) return kth(a,cl,r,k); // [cl,r ] -> elements >= pivot (1)
   // if k is not within any of intervals (0) or (1) then k is on its place
+  //! Такое возможно когда cl,cr - встретятся на pivot element (пример: 1 1 3 4 4 pivot=3)
   return a[k];
 }
 

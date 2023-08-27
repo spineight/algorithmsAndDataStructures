@@ -11,12 +11,15 @@ namespace lec1 {
   template<size_t MAX_N_OF_STACKS, size_t MAX_N>
   struct MultiStack {
     MultiStack() : free(0) {
-      // Для каждого из списков создаем фиктивную голову
+      //! [27/08/2023][0] - Для стеков фиктивная голова не нужна (об этом же говорится и в лекции)
+//      // Для каждого из списков создаем фиктивную голову
+//      for (int i = 0; i < MAX_N_OF_STACKS; ++i) {
+//        sp[i] = free++;
+//      }
+
       for (int i = 0; i < MAX_N_OF_STACKS; ++i) {
-        sp[i] = free++;
+        sp[i] = -1;
       }
-      memset(next, 0, sizeof(next));
-      memset(value, 0, sizeof(value));
     }
 
     int sp[MAX_N_OF_STACKS]; // верхушки стэка
@@ -36,10 +39,14 @@ namespace lec1 {
       ++free;
     }
 
-    int pop(int i) {
-      int res = value[sp[i]];
+    void pop(int i) {
       sp[i] = next[sp[i]];
-      return res;
+    }
+    int top(int i) {
+      return value[sp[i]];
+    }
+    bool empty(int i) {
+      return -1 == sp[i];
     }
   };
 
@@ -53,11 +60,17 @@ namespace lec1 {
 */
   template<size_t MAX_N_OF_STACKS, size_t MAX_N>
   struct MultiStackMemoryMgmt {
-    MultiStackMemoryMgmt() : free(1) { // id начинаем выдавать начиная с 1-ого, так как 0 используется как служебное значение
+    MultiStackMemoryMgmt()
+//    free(1)
+    {
+      // id начинаем выдавать начиная с 1-ого, так как 0 используется как служебное значение
+      //! [27/08/2023][0]
+      //! Не нужно нам никакое служебное значение, так как в стеке не нужна фиктивная голова,
+      //! поэтому можем раздавать id начиная с 0
+
       static_assert(MAX_N_OF_STACKS > 1, "At least 2 stacks are required, one is aux that is used for memory mgmt");
-      memset(sp, 0, sizeof(sp));
-      memset(next, 0, sizeof(next));
-      memset(val, 0, sizeof(val));
+      for(size_t i = 0; i < MAX_N_OF_STACKS; ++i)
+        sp[i] = -1;
     }
 
     // 0-ой стэк содержит высвобожденные индексы
@@ -65,9 +78,10 @@ namespace lec1 {
 
     int sp[MAX_N_OF_STACKS]; // верхушки стэков
     // MAX_N+1 - мы не использеум элемент с индексом 0
-    int next[MAX_N+1];
-    int val[MAX_N+1];
-    int free;
+    //! [27/08/2023][1] - используем, см [27/08/2023][0]
+    int next[MAX_N];
+    int val[MAX_N];
+    int free{0}; //! [27/08/2023][2]
 
     // Каждый стек хранится в виде списка:
     // Пример как выглядит k-ый стек
@@ -75,6 +89,8 @@ namespace lec1 {
     // #|0| <-- |1| <-- |2|
     // #####################
     // sp[k] = 2
+    //! [27/08/2023]
+    //! sp[k] = 2 - означает, что в k-ом стеке на верхушке находится элемент с id = 2
 
     // Пололжить в i-ый стек число x
     void push(size_t i, int x) {
@@ -86,7 +102,7 @@ namespace lec1 {
       else {
         ++free;
       }
-      assert(cell_id < MAX_N+1);
+      assert(cell_id < MAX_N);
       next[cell_id] = sp[i];
       sp[i] = cell_id;
       val[cell_id] = x;
@@ -109,17 +125,17 @@ namespace lec1 {
       sp[ID_OF_STACK_WITH_AVAILABLE_CELLS] = idx;
     }
     int getIdxForReuse() {
-      assert(sp[ID_OF_STACK_WITH_AVAILABLE_CELLS] != 0);
+      assert(sp[ID_OF_STACK_WITH_AVAILABLE_CELLS] != -1);
       int idx = sp[ID_OF_STACK_WITH_AVAILABLE_CELLS];
       sp[ID_OF_STACK_WITH_AVAILABLE_CELLS] = next[sp[ID_OF_STACK_WITH_AVAILABLE_CELLS]];
       return idx;
     }
     bool isIdxForReuse() {
-      return sp[ID_OF_STACK_WITH_AVAILABLE_CELLS] != 0;
+      return sp[ID_OF_STACK_WITH_AVAILABLE_CELLS] != -1;
     }
 
     bool empty(int i) const{
-      return sp[i] == 0;
+      return sp[i] == -1;
     }
   };
 }

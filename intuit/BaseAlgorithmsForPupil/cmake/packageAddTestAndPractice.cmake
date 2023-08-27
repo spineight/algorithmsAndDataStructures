@@ -19,6 +19,7 @@
 
 function(packageAddTestAndPractice lib_under_test lib_for_practice TESTNAME)
     # create an exectuable in which the tests will be stored
+    # https://cmake.org/cmake/help/latest/command/function.html
     add_executable(${TESTNAME} ${ARGN}) # for test
     add_executable(${TESTNAME}_practice ${ARGN}) # for practice
 
@@ -70,4 +71,9 @@ function(packageAddTestAndPractice lib_under_test lib_for_practice TESTNAME)
     #            WORKING_DIRECTORY ${PROJECT_DIR}
     #            PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_DIR}"
     #            )
+    ### enable CMake’s test runner to discover the tests included in the binary, using the GoogleTest CMake module.
+    ### https://cmake.org/cmake/help/git-stage/module/GoogleTest.html
+    include(GoogleTest)
+    gtest_discover_tests(${TESTNAME})
+    gtest_discover_tests(${TESTNAME}_practice)
 endfunction()

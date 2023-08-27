@@ -31,8 +31,8 @@ namespace lec1 {
 
     void clear() { sp = -1; }
 
-    int pop() {
-      return s[sp--];
+    void pop() {
+      sp--;
     }
 
     size_t size() { return sp + 1; }

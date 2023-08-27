@@ -18,20 +18,20 @@ namespace lec1::practice {
 */
   template<size_t MAX_SIZE /**< вместимость стэка */>
   struct StackArrayBased {
-    StackArrayBased() : sp(-1) {}
-    int sp; /**< указывает на последний элемент в стеке. Если стэк пуст == -1*/
-    int s[MAX_SIZE];
-    bool empty() const { return sp == -1;}
+    int a[MAX_SIZE]{0};
+    int sp{-1};
+    StackArrayBased()  {}
+
+    bool empty() const { return -1 == sp; }
     void push(int x) {
-      ++sp;
-      s[sp] = x;
+     a[++sp] = x;
     }
     int back() const {
-      return s[sp];
+      return a[sp];
     }
     void clear() {sp = -1;}
-    int pop() {
-      return s[sp--];
+    void pop() {
+      --sp;
     }
     size_t size() { return sp+1; }
   };
@@ -41,55 +41,34 @@ namespace lec1::practice {
 *
 *  Так как мы всегда добавляем элемент в конец, то в отличие от статического списка фиктивная голова не нужна
 */
+template<size_t sz>
   struct StackLinkedListBased {
+    int data[sz]{0};
+    int next[sz]{-1};
+    int id{0};
     StackLinkedListBased()
-    : head(0), free(1)
     {
-      memset(next,0,sizeof(next));
-      memset(val,0,sizeof(val));
-    }
-    int head;
-    int free;
-    static const int MAX_N = 10;
-    int next[MAX_N];
-    int val[MAX_N];
 
+    }
     // добавляем в голову
     void push(int x) {
-      val[free] = x;
-      next[free] = head;
-      head = free;
-      ++free;
+
     }
     int pop() {
-      int res = val[head];
-      head = next[head];
-      return res;
+
     }
   };
 
   struct MultiStack {
-    MultiStack() : free(0) {
-      memset(sp,0,sizeof(sp));
-      memset(next,0,sizeof(next));
-      memset(val,0,sizeof(val));
+    MultiStack()  {
+
     }
-    static const int MAX_N_OF_STACKS = 10;
-    static const int MAX_N = 100;
-    int sp[MAX_N_OF_STACKS]; // верхушки стэка
-    int next[MAX_N];
-    int val[MAX_N];
-    int free;
+
     void push(int i, int x) {
-      next[free] = sp[i];
-      sp[i] = free;
-      val[free] = x;
-      ++free;
+
     }
     int pop(int i) {
-      int res = sp[i];
-      sp[i] = next[sp[i]];
-      return res;
+
     }
   };
 
@@ -102,39 +81,18 @@ namespace lec1::practice {
 *
 */
   struct StackMemoryMgmt {
-    StackMemoryMgmt() : free(0) {
-      memset(sp,0,sizeof(sp));
-      memset(next,0,sizeof(next));
-      memset(val,0,sizeof(val));
+    StackMemoryMgmt()  {
+
     }
-    static const int MAX_N_OF_STACKS = 10;
-    static const int MAX_N = 100;
-    static const int ID_OF_STACK_WITH_AVAILABLE_CELLS = 0;
-    // 0-ой стэк содержит высвобожденные индексы
-    int sp[MAX_N_OF_STACKS+1]; // верхушки стэка
-    int next[MAX_N];
-    int val[MAX_N];
-    int free;
+
     void push(int i, int x) {
-      int cell_id = free;
-      if(i != ID_OF_STACK_WITH_AVAILABLE_CELLS && !isEmpty(sp[ID_OF_STACK_WITH_AVAILABLE_CELLS])) {
-        cell_id = pop(ID_OF_STACK_WITH_AVAILABLE_CELLS);
-      } else {
-        ++free;
-      }
-      next[cell_id] = sp[i];
-      sp[i] = cell_id;
-      val[cell_id] = x;
+
     }
     int pop(int i) {
-      int res = sp[i];
-      if(i != ID_OF_STACK_WITH_AVAILABLE_CELLS)
-        push(ID_OF_STACK_WITH_AVAILABLE_CELLS, sp[i]); // recollect freed cell for later reusage
-      sp[i] = next[sp[i]];
-      return res;
+
     }
     bool isEmpty(int i) {
-      return sp[i] == 0;
+
     }
   };
 
@@ -204,7 +162,7 @@ namespace lec1::practice {
 
 namespace informatics {
   void solve_simple_stack() {
-    my::StackArrayBased s;
+    lec1::practice::StackArrayBased<32> s;
     while(1) {
       string cmd;
       cin >> cmd;
@@ -215,7 +173,8 @@ namespace informatics {
         cout << "ok\n";
       }
       else if (cmd == "pop") {
-        cout << s.pop() << '\n';
+        cout << s.back()  << '\n';
+        s.pop();
       }
       else if (cmd == "back") {
         cout << s.back() << '\n';
