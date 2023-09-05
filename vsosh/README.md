@@ -1,0 +1,1 @@
+http://aliay-parus.ucoz.ru/documents/2022/vsosh/solutions.pdf

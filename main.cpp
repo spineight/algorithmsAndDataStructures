@@ -1,32 +1,61 @@
 #include <bits/stdc++.h>
-using namespace std;
+//using namespace std;
 
 
-int solution(vector<int> &A, int M) {
-  map<int ,size_t> freq;
-  for(auto v : A) ++freq[v];
+template<typename KeyT, typename ValT>
+class LRU_cache {
+  const size_t sz{0};
+  std::list< std::pair<KeyT, ValT> > list;
+  std::unordered_map<KeyT, typename decltype(list)::iterator> keyToListIterator;
 
-  int best{0};
-  while(!freq.empty()) {
-    auto it = begin(freq);
-    int soFar{0};
-    cout << "it->first: " << it->first << '\n';
+public:
+  LRU_cache(size_t sz) : sz(sz) {}
 
-    while(it != end(freq)) {
-      soFar += it->second;
-      auto nextIt = freq.find(it->first + M);
-      freq.erase(it);
-      it = nextIt;
+
+  void Add(KeyT key, ValT val) {
+    list.emplace_back(key, val);;
+    auto addedElemIt = std::prev(list.end());
+    keyToListIterator[key] = addedElemIt;
+
+    if(list.size() > sz) {
+      const auto [evictElemKey, _] = list.front();
+      Remove(evictElemKey);
     }
-    cout << "soFar: " << soFar << '\n';
-    best = max(best, soFar);
   }
 
-  return best;
-}
+  std::optional<ValT> Get(KeyT key) {
+    if(list.back().first == key)
+      return list.back().second;
+
+    auto it = keyToListIterator.find(key);
+    if(it!= end(keyToListIterator)) {
+      auto [key_, val_] = *(*it).second;
+      //! Make LRU
+      Remove(key_);
+      Add(key_,val_);
+      return std::optional(val_);
+    }
+    return std::nullopt;
+  }
+
+private:
+  void Remove(KeyT key) {
+    auto it = keyToListIterator.find(key);
+    keyToListIterator.erase(it);
+    list.erase(it->second);
+  }
+};
 
 int main() {
-  vector<int> a = {-3, -2, 1, 0, 8, 7, 1};
-  cout << solution(a,3);
+  LRU_cache<int,int> lru(4);
+
+  for(size_t i = 0; i < 10; ++i)
+    lru.Add(i,i);
+
+  for(size_t i = 0; i < 10; ++i) {
+    auto tmp = lru.Get(i);
+    if (tmp) std::cout << *tmp << '\n';
+  }
+
   return 0;
 }

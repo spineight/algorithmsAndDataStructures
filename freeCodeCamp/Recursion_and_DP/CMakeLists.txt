@@ -1,0 +1,7 @@
+add_executable(gridTraveller gridTraveller.cpp)
+add_executable(canSum canSum.cpp)
+add_executable(howSum howSum.cpp)
+add_executable(bestSum bestSum.cpp)
+add_executable(canConstruct canConstruct.cpp)
+add_executable(countConstruct countConstruct.cpp)
+add_executable(allConstruct allConstruct.cpp)

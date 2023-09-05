@@ -1,0 +1,3 @@
+add_executable(Stepanov_grashopper grashopper.cpp)
+add_executable(Stepanov_grasshopper2D grasshopper2D.cpp)
+add_executable(Stepanov_maxCommonSubsequence maxCommonSubsequence.cpp)

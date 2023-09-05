@@ -7,3 +7,8 @@ https://www.youtube.com/playlist?list=PLM-HrPYIzCwH-R6cvUncK9aX-JdjRzuqw
 https://informatics.msk.ru/course/view.php?id=3733
 
 https://informatics.msk.ru/course/index.php?categoryid=81
+
+
+### 
+
+https://cdkrot.me/teaching/2020f-algo3/questions-exam1.pdf

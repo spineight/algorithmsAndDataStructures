@@ -23,11 +23,17 @@ FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(intuit/BaseAlgorithmsForPupil)
 
-#add_executable(algorithmsAndDataStructures main.cpp)
+add_subdirectory(e-maxx)
+
+add_executable(algorithmsAndDataStructures main.cpp)
+
+add_subdirectory(freeCodeCamp)
+
+add_subdirectory(FPMI/Stepanov)
 #
 #add_subdirectory(intuit/baseAndAdvancedAlgsForPupil)
 #add_subdirectory(LKSH)
-#add_subdirectory(e-maxx)
+
 #add_subdirectory(Codeforces)
 #add_subdirectory(compscicenter)
 #add_subdirectory(Rucode)
