@@ -1,0 +1,1 @@
+git@github.com:polis-vk/2021-ads.git

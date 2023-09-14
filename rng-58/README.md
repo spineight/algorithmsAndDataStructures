@@ -1,0 +1,1 @@
+https://rng-58.blogspot.com/2017/02/hashing-and-probability-of-collision.html

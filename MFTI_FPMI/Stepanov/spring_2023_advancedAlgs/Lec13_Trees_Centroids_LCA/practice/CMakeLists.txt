@@ -1,0 +1,3 @@
+add_executable(Stepanov_treeDiameter treeDiameter.cpp)
+add_executable(Stepanov_treeIsomorphism treeIsomorphism.cpp)
+add_executable(Stepanov_LCA LCA.cpp)

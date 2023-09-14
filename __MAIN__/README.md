@@ -267,6 +267,8 @@ One more exemple of quick select:
 [leetcode/arrays/kClosestPointsToOrigin](../leetcode/arrays/kClosestPointsToOrigin.hpp)
 
 ## Recursion
+### General ideas
+With recursion we go depth first and once reach a base case start unwinding
 ### understanding
 Great explanation at Stanford CS 106B (2008) by Julie Zelenski: `/run/media/oleg/TOSHIBA EXT/cs106b_2008_ProgrammingAbstractionsStanford`    
 Every recursion problem can be mapped to one of the following types:
@@ -278,9 +280,14 @@ Every recursion problem can be mapped to one of the following types:
 [leetcode/data_structures/stack/valid-parentheses](../leetcode/data_structures/stack/valid-parentheses.hpp)
 
 recursion progression problems (show different types and how to gradually transition from one type of a problem to another)
+Exit earlier once there is a suitable combination without considering others
 [reeCodeCamp/Recursion_and_DP/canSum](../freeCodeCamp/Recursion_and_DP/canSum.cpp)
+
 [reeCodeCamp/Recursion_and_DP/howSum](../freeCodeCamp/Recursion_and_DP/howSum.cpp)
+
+We need to consider all combinations to choose the best once
 [reeCodeCamp/Recursion_and_DP/bestSum](../freeCodeCamp/Recursion_and_DP/bestSum.cpp)
+
 [freeCodeCamp/Recursion_and_DP/canConstruct](../freeCodeCamp/Recursion_and_DP/canConstruct.cpp)
 [freeCodeCamp/Recursion_and_DP/countConstruct](../freeCodeCamp/Recursion_and_DP/countConstruct.cpp)
 [freeCodeCamp/Recursion_and_DP/allConstruct](../freeCodeCamp/Recursion_and_DP/allConstruct.cpp)
@@ -294,10 +301,19 @@ recursion progression problems (show different types and how to gradually transi
 Is mentioned as a solution to this problem: [leetcode/graphs/tree/maximumDepthOfBinaryTree](../leetcode/graphs/tree/maximumDepthOfBinaryTree.hpp)  
  the idea is explained here: [leetcode/graphs/tree/maximumDepthOfBinaryTree](../leetcode/graphs/tree/maximumDepthOfBinaryTree.odt)  
 
+### Hard tasks
+Shows recursion design: 
+problem reduction, delegation of similar subproblem of smaller size, combining solution to subproblems.
+It seemed hard to me to solve, as initially was hard to define subproblem and what to delegate
+[leetcode/data_structures/stack/decodeString](../leetcode/data_structures/stack/decodeString.hpp)
+
 ## greedy
 [leetcode/arrays/minimumNumberOfArrorsToBurstBaloons](../leetcode/arrays/minimumNumberOfArrorsToBurstBaloons.hpp)
 
 ## DP
+### General idea
+Visualize problem as a tree structure and observe how it would be solved with recursion
+(with recursion we go depth first and once reach a base case start unwinding)
 ### Stankevich
 Good explanation of base types in Andrei Stankevich lecture:`/run/media/oleg/TOSHIBA EXT/ITMO/BaseAlgsForSchoolStudents/lec3_dynamic_programming`
 For backward DP: good idea for the current state to reason from which previous states we could come here
@@ -325,12 +341,16 @@ Idea is to have in mind a graph of transitions when solving recursively, this he
 and order in which subproblems are solved for iterative dp.
 In the order of difficulty:  
 [gridTraveller](../freeCodeCamp/DP/gridTraveller.cpp) - according to Stankevich lecture on DP (this can be solved using combinatorics formula)  
-[canSum](../freeCodeCamp/DP/canSum.cpp)  
-[howSum](../freeCodeCamp/DP/howSum.cpp)  
-[bestSum](../freeCodeCamp/DP/bestSum.cpp)  
-[canConstruct](../freeCodeCamp/DP/canConstruct.cpp)    
-[countConstruct](../freeCodeCamp/DP/countConstruct.cpp)  
-[allConstruct](../freeCodeCamp/DP/allConstruct.cpp)  
+
+[canSum](../freeCodeCamp/Recursion_and_DP/canSum.cpp)  
+
+Using parent array to reconstruct the answer
+[howSum](../freeCodeCamp/Recursion_and_DP/howSum.cpp)
+
+[bestSum](../freeCodeCamp/Recursion_and_DP/bestSum.cpp)  
+[canConstruct](../freeCodeCamp/Recursion_and_DP/canConstruct.cpp)    
+[countConstruct](../freeCodeCamp/Recursion_and_DP/countConstruct.cpp)  
+[allConstruct](../freeCodeCamp/Recursion_and_DP/allConstruct.cpp)  
 
 ### states storage
 For some problems we don't need to store all the states,  
@@ -641,7 +661,7 @@ Sometimes you don't have to store prefixSum explicitly:
 [codility/leader/6-Leader](../codility/leader/6-Leader.pdf)
 [codility/leader/dominator](../codility/leader/dominator.cpp)
 
-## Heap
+## Binary Heap
 [Heap](../intuit/BaseAlgorithmsForPupil/lec2_sorting_and_search/include/heap.hpp)
 Heap by Stankevich
 ```c++
@@ -735,6 +755,19 @@ struct MinHeapStankevich {
 };
 }
 ```
+Based on Stankevich`s Heap + some C++ techniques + DecreaseKey
+[MFTI_FPMI/Stepanov/autumn_2021/binary_heap](../MFTI_FPMI/Stepanov/autumn_2021/binary_heap.cpp)
+
+Theory:
+[](../informatics_mccme/heap/bin_heap_ig-091022.pdf)
+
+Задачи:
+https://informatics.msk.ru/mod/statements/view.php?id=3205#1
+
+https://informatics.msk.ru/mod/statements/view.php?id=1234#1
+Задачи с этого листочка:
+()[../informatics_mccme/heap/bin_heap_ig-091022.pdf]
+
 
 ### Build in linear time
 [heapify](../intuit/BaseAlgorithmsForPupil/lec2_sorting_and_search/include/heapify.hpp)
@@ -1089,6 +1122,16 @@ great lectures from Pavel Mavrin (Pashka):
 ##### numberOfInversionsOnSegment
 [Codeforces/edu/segmentTree/numberOfInversionsOnSegment](../Codeforces/edu/segmentTree/numberOfInversionsOnSegment.cpp)
 
+## linked lists
+### Find element in linked list in O(1), keep elements sorted
+[leetcode/lists/design-a-leaderboard](../leetcode/lists/design-a-leaderboard.hpp)
+
+## deque
+This solution might be not optimal, due to removal from deuque might be expensive (size of batch???) 
+[leetcode/data_structures/deque/design-most-recently-used-queue](../leetcode/data_structures/deque/design-most-recently-used-queue.hpp)
+TODO: one more time look how deque is implemented wrt to removal and O(1) access by idx
+For me looks like: when removing an element we must shift all elements from the batch
+(the same complexity as remove element from vector)
 
 ## Strings
 ### Main facts about characters
@@ -1163,6 +1206,63 @@ https://habr.com/ru/articles/653617/
 ### Pattern matching
 #### Using DP
 [leetcode/strings/wildcardMatching](../leetcode/strings/wildcardMatching.hpp)
+
+## Graphs
+
+### Trees
+#### Trees characters
+##### Diameter
+[MFTI_FPMI/Stepanov/spring_2023_advancedAlgs/Lec13_Trees_Centroids_LCA/practice/treeDiameter](../MFTI_FPMI/Stepanov/spring_2023_advancedAlgs/Lec13_Trees_Centroids_LCA/practice/treeDiameter.cpp)
+##### Center
+##### Centroid
+
+#### Isomorphism
+##### For rooted trees
+Особенность решения из лекции МФТИ - это то, что они не считают hash для массива детей вершины,
+а хранят его так std::map.
+[MFTI_FPMI/Stepanov/spring_2023_advancedAlgs/Lec13_Trees_Centroids_LCA/practice/treeIsomorphism](/../MFTI_FPMI/Stepanov/spring_2023_advancedAlgs/Lec13_Trees_Centroids_LCA/practice/treeIsomorphism.cpp)
+
+Возможные варианты оптимизации рассматривает Сергея Копелиович в сборнике
+«Зимняя школа по программированию 2013», страница 264
+/home/oleg/github/algorithmsAndDataStructures/WinterSchool/lectures/WPS2013.pdf
+Так же см видео на диске Kotyamba, там он про это рассказывает
+(По состоянию на 09/12/2023 - мне показалось сложным для понимания)
+
+##### For non rooted
+Solved via rooted by rooting at centroid/ center
+
+#### LCA
+##### Решение через бинарные подъемы (предпроцессинг O(n*logn), ответ на запрос O(n))
+Идея:
+Запустить DFS из корня дерева:
+    - записать время входа и выхода для ответа на запрос `isAncestor(u,v)` за `O(1)`
+    - Заполнить табличку `ancestor[k][u]` через динамическое программирование
+      где `ancestor[k][u]` - `2^k` предок вершины `u`
+      База `ancestor[0][u] = parent[u]`
+      Переход: `ancestor[k][u] = ancestor[k-1][ancestor[k-1][u]]`
+Заполнения таблички для одного узла - `log(n)`, так как их всего `n` то предпроцессинг за `O(nlogn)`
+
+Для ответа на запрос `lca(u,v)`:
+Проверка, что одна из вершин не является родителем другой.
+Далее ищем самый дальнюю вершину от `u` которая не является предком вершины `v`
+Для этого используем технику двоичных подъемов (пробуем максимальное, на каждом шаге прыжок сокращаем в два раза)  
+Что-то похоже на запись числа в виде суммы степеней двойки (в двоичной системе)
+
+Код я реализовал по описанию: (e-maxx/graphs/LCA/LCA_binaryLifts)[../e-maxx/graphs/LCA/LCA_binaryLifts.pdf]   
+Хорошее объяснение, по которому все понятно в лекции MFTI_FPMI/Stepanov/spring_2023_advancedAlgs
+[Алгоритмы и структуры данных 13. Центры и центроиды.mp4](..%2F..%2F..%2F..%2F..%2Frun%2Fmedia%2Foleg%2FKotyamba2%2FFPMI%2Ffirst_course_spring_2023%2FAlgsDataStructures_StepanovID_1course_spring2023%2F%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D1%8B%20%D0%B8%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%2013.%20%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D1%8B%20%D0%B8%20%D1%86%D0%B5%D0%BD%D1%82%D1%80%D0%BE%D0%B8%D0%B4%D1%8B.mp4)
+
+Задачи для практики:
+https://kuvaev.me/%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8/lca/
+
+//! https://informatics.msk.ru/mod/statements/view.php?id=26138#1
+//! https://www.eolymp.com/ru/problems/2318
+
+[e-maxx/graphs/LCA/LCA](../e-maxx/graphs/LCA/LCA.cpp)
+
+Применение LCA
+https://algocode.ru/files/course_bp2021/contest-25749-ru.pdf
+
 
 # Implementation techniques
 ## using array of offsets for a matrix exploration

@@ -1,0 +1,1 @@
+http://acm.math.spbu.ru/~sk1/mm/lections/zksh2016-centroid/conspect.pdf

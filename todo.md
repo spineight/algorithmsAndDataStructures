@@ -78,3 +78,5 @@ www.spoj.com/problems/GSS3/
 
 ##### TODO!!!
 LCA - https://cp-algorithms.com/graph/lca_tarjan.html
+
+Google: "Михаил Тихомиров вероятностные алгоритмы"

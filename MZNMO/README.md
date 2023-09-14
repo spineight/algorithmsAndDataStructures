@@ -1,0 +1,1 @@
+https://www.problems.ru/view_problem_details_new.php?id=30813

@@ -29,10 +29,15 @@ add_executable(algorithmsAndDataStructures main.cpp)
 
 add_subdirectory(freeCodeCamp)
 
-add_subdirectory(FPMI/Stepanov)
+add_subdirectory(MFTI_FPMI)
+
+add_subdirectory(LKSH)
+
+add_subdirectory(informatics_mccme)
+
 #
 #add_subdirectory(intuit/baseAndAdvancedAlgsForPupil)
-#add_subdirectory(LKSH)
+
 
 #add_subdirectory(Codeforces)
 #add_subdirectory(compscicenter)

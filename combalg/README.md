@@ -1,0 +1,1 @@
+https://combalg.ru/wp-content/uploads/2015/08/minimum-2015.pdf

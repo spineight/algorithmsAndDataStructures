@@ -33,3 +33,26 @@ https://sp.urfu.ru/library/shv.htm
 https://www.rbc.ru/magazine/2019/01/5c1baef09a79470d23908f47
 
 https://www.hackerearth.com/
+
+https://dmoj.ca/problem/tle16c4p4
+
+https://ioinformatics.org/page/ioi-2013/39
+
+
+https://cses.fi/problemset/task/1700/
+spineight
+Olegradost4964
+
+
+https://open.kattis.com/problems/twochartsbecomeone
+
+
+https://www.eolymp.com/ru/problems/2318
+spineight
+Olegradost4964
+
+
+https://oj.uz/problem/view/APIO21_jumps
+
+https://vjudge.net/problem/EOlymp-2318
+

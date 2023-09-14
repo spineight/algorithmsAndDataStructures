@@ -1,0 +1,1 @@
+add_executable(informatics_heap_tasks heap_tasks.cpp)

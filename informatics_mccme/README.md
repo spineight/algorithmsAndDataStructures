@@ -13,3 +13,9 @@ spineight
 #### courses
 https://informatics.msk.ru/course/view.php?id=1030#useful1
 https://informatics.msk.ru/course/view.php?id=1030
+
+https://informatics.msk.ru/course/index.php?categoryid=74
+https://informatics.msk.ru/course/index.php?categoryid=79
+
+
+https://informatics.msk.ru/course/view.php?id=18

@@ -1,0 +1,3 @@
+add_subdirectory(Stepanov/spring_2023_advancedAlgs/Lec13_Trees_Centroids_LCA/practice)
+
+add_subdirectory(Stepanov/autumn_2021)
