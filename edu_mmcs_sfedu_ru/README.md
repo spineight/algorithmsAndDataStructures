@@ -1,0 +1,1 @@
+https://edu.mmcs.sfedu.ru/pluginfile.php/55103/mod_resource/content/1/

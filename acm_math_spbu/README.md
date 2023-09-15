@@ -4,3 +4,9 @@ TODO!!!
 http://acm.math.spbu.ru/~sk1/mm/lections/
 
 http://acm.math.spbu.ru/~sk1/
+
+
+
+http://acm.math.spbu.ru/~sk1/mm/au-download/conspect/conspect.pdf
+
+http://acm.math.spbu.ru/~sk1/mm/

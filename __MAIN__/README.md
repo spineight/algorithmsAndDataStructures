@@ -766,7 +766,25 @@ https://informatics.msk.ru/mod/statements/view.php?id=3205#1
 
 https://informatics.msk.ru/mod/statements/view.php?id=1234#1
 Задачи с этого листочка:
-()[../informatics_mccme/heap/bin_heap_ig-091022.pdf]
+(informatics_mccme/heap/bin_heap_ig-091022.pdf)[../informatics_mccme/heap/bin_heap_ig-091022.pdf]
+[informatics_mccme/heap/heap_tasks](../informatics_mccme/heap/heap_tasks.cpp)
+
+Важные моменты при реализации (выявлены при решении задач):
+1. При удалении последнего элемента из кучи не нужно делать swap + siftDown
+2. При удалении элемента по индексу (похоже на изменение элемента по индексу, мы заменяем удаляемый элемент на последний,
+если значение последнего больше/меньше - мы понимаем, что вызывать siftUp/Down)
+Пример (удаление `[3]` и замена его на 5, здесь для восстановления требуется всплытие вверх):
+```c++
+/*
+          9
+      /        \
+     4          8
+    /  \       /    \
+   [3]  2      7     6
+ / \   / \     /\   / \
+1  0  1   0   6  5  5  5
+  */
+```
 
 
 ### Build in linear time

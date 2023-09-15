@@ -1,0 +1,1 @@
+https://lk.truetechchamp.ru/profile/training
