@@ -1,0 +1,1 @@
+https://compscicenter.ru/courses/math-for-it/distance_2019/2019-autumn/

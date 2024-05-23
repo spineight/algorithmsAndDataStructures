@@ -36,3 +36,10 @@ target_compile_features(segmentTreeFirstAbove PUBLIC cxx_std_17)
 
 
 # add_executable(competiton edu/segmentTree/competiton.cpp)
+
+add_executable(CodeForces_SparseTable RMQ/SparseTable.cpp)
+
+### prefix sum
+add_executable(CodeForcesEdu_step1_a_prefixSum edu/prefixSum/step1_a_prefixSum.cpp)
+add_executable(CodeForcesEdu_step2_a_sumOnSegment edu/prefixSum/step2_a_sumOnSegment.cpp)
+add_executable(CodeForcesEdu_step2_b_xorOnSegment edu/prefixSum/step2_b_xorOnSegment.cpp)

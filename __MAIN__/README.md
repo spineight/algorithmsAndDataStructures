@@ -22,6 +22,26 @@ After solving smaller task, I got an idea:
 [CodeForces step2. B - Z-функция строки Грея ](../Codeforces/itmoAcademy/step2_problemB.cpp)  
 
 # Debugging
+## pretty print variables
+```c++
+#define show_vars(args...) { \
+  string names = #args; \
+  replace(begin(names), end(names), ',' , ' ');\
+  stringstream ss(names); \
+  istream_iterator<string> it(ss);\
+  _show_vars(it, args);\
+}
+
+void _show_vars(istream_iterator<string>& it) {
+  cout << "!\n";
+}
+
+template<typename T, typename ... TArgs>
+void _show_vars(istream_iterator<string>& it, const T& val, TArgs ... args) {
+  cout << *it++ << ":" << val << '\n';
+  _show_vars(it, args...);
+}
+```
 ## pen & paper
 
 Helpful:
@@ -67,6 +87,23 @@ int solution(vector<int> &A) {
 ```  
 [codility/sorting/triangle](../codility/sorting/triangle.cpp)
 
+
+```c++
+int solution(int N) {
+  int res{0};
+  size_t i = 1;
+  //! i*i might overflow, that is why size_t is needed
+  while(i*i < (size_t)N) {
+    if( (N % i) == 0) res += 2;
+    ++i;
+  }
+  if(i*i == (size_t)N)
+    ++res;
+  return res;
+}
+```
+[codility/primeAndCompositeNumbers/countFactors](../codility/primeAndCompositeNumbers/countFactors.cpp)
+
 ## Accessing elements of an empty array 
 
 ## short circuit evaluation
@@ -91,6 +128,30 @@ isSubIsland = isSubIsland && DFS(grid1, grid2, nr, nc); //! This is mistake!!! D
     return isSubIsland;
   }
 ```
+## Forgetting to check remaining elements
+```c++
+include <stack>
+#include <unordered_map>
+int solution(string &S) {
+  stack<char> s;
+  unordered_map<char, char> closedMatch {
+          {'(', ')'},
+          {'{', '}'},
+          {'[', ']'} };
+  for(auto ch : S) {
+    if(ch == '(' || ch == '{' || ch == '[')
+      s.push(ch);
+    else {
+      if(s.empty() || closedMatch[s.top()] != ch)
+        return 0;
+      s.pop();
+    }
+  }
+  return s.empty(); //! NB!!!
+}
+```
+[codility/stacks&Queues/brackets](../codility/stacks&Queues/brackets.cpp)
+
 
 # Optimizations
 ## using integers instead of double
@@ -134,7 +195,64 @@ where `res[i] = j, means at i-th position should be elements[j] element `
 [leetcode/arrays/kClosestPointsToOrigin](../leetcode/arrays/kClosestPointsToOrigin.hpp)
 
 # Algorithms
+## Collection of implemented algos
+[peltorator_ru/cp_book](../peltorator_ru/cp_book.pdf)  
+https://github.com/Peltorator/peltorator-cp-book  
+
+https://github.com/spineight/cp-algorithms  
+## Complexity analysis
+### types of measurements
+ITMO. Pashka semester 1 АиСД S01E01. Алгоритмы. Оценка времени. Сортировка слиянием.
+[ITMO/pashka/algos_2019_semester1](../ITMO/pashka/algos_2019_semester1/README.md)
+RAM model
+Asymptotic measure
+`O(n) - worst, Omega(n) - best,Theta(n) -avg`
+Good example of algo for analysis - insertion sort
+[ITMO/pashka/lectures/Semestr1/src/insertionSort](../ITMO/pashka/lectures/Semestr1/src/insertionSort.cpp)
+Insertion sort:
+    `1 2 3 4 5 6 7` - best, `Omega(n)`
+    ` 7 6 5 4 3 2 1` - worst, `O(n^2)`
+### some examples
+```c++
+//!! O(n^2)
+ for(int i = 0; i < n; ++i)
+   for(int j = 0; j < n; ++j)
+     
+ //! O(n^2)
+ for(int i = 0; i < n; ++i)
+   for(int j = i+1; j < n; ++j)
+     
+ //! O(sqrt(n))
+while(i*i < n)
+  
+//! O(logn)
+for(int i = 0; i < n; i*=2)
+```
+
+### Analysis of recursive algos
+on example of merge sort
+[ITMO/pashka/lectures/Semestr1/src/mergeSort](../ITMO/pashka/lectures/Semestr1/src/mergeSort.cpp)
+Visual proof by drawing recursion tree
+Divide & Conquer method & Master theorem  - TODO
+TODO: refresh/review properties of logarithms
+
+## Proof of correctness
+### Induction
+### Copy paste method ???
+I recall it was on Stepik on Olympiad programming
+
 ## sorting & search
+### Нижняя оценка для сортировок основанных только на сравнениях
+`Omega(nlogn)`
+Хорошее доказательство:
+[Введение в программирование 3. Сортировки. MergeSort, недетерминированный QuickSort](/run/media/oleg/Kotyamba2/FPMI/first_course_autmn2021/intro_to_programming_StepanovDI_1course_autum2021/Введение в программирование 3. Сортировки. MergeSort, недетерминированный QuickSort.mp4)
+
+### stable sort
+Stable sort guarantee that order of equal elements wrt to the comparison function stays the same
+[MFTI_FPMI/Stepanov/autumn_2021/stableCountingSort](../MFTI_FPMI/Stepanov/autumn_2021/stableCountingSort.cpp)
+Stable sorts are used as a helper routines for several algos: convexHull,
+[intuit/baseAndAdvancedAlgsForPupil/lec2/radixSort](../intuit/baseAndAdvancedAlgsForPupil/lec2/radixSort.cpp)
+uses [MFTI_FPMI/Stepanov/autumn_2021/stableCountingSort](../MFTI_FPMI/Stepanov/autumn_2021/stableCountingSort.cpp)
 
 ### bubble sort
 [bubble sort](../intuit/BaseAlgorithmsForPupil/lec1_complexity_of_algorithms/include/bubble_sort.hpp)
@@ -220,6 +338,17 @@ void quick_sort(std::vector<int> &a, int l, int r) {
 [Pestov lecture LKSH b prime 2008] `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item4.mp4`    
 [Лекция 4. Сортировка подсчетом и применение встроенных сортировок](../shujkova/lectures/lec4.pdf)  
 
+Пример некорректной реализации предложенной Пашей:
+(Не будет работать, когда есть одинаковые элементы
+Так как когда все элементы подмассива с которым мы работаем >= X, то у нас задача разбивается на два массива:
+пустой и такой же, поэтом мы зацикливаемся
+)
+[ITMO/pashka/lectures/Semestr1/src/quickSort_incorrect](../ITMO/pashka/lectures/Semestr1/src/quickSort_incorrect.cpp)
+
+TODO: реализовать дитерминированный quick sort (алгоритм Блюма Флойда Пратта Ривеста и Тарьяна)
+Общая идея рассказана: "АиСД S01E03. Быстрая сортировка. К-я порядковая статистика"
+[ITMO/pashka/algos_2019_semester1](../ITMO/pashka/algos_2019_semester1/README.md)
+
 ### heapsort
 Stankevich heap sort
 [heap_sort](../intuit/BaseAlgorithmsForPupil/lec2_sorting_and_search/include/heapSort.hpp)
@@ -228,9 +357,21 @@ Stankevich heap sort
 I wrote code based on the lecture: `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item7.mp4`  
 [LKSH 2008 b` merge sort](LKSH/2008/src/mergeSort.cpp)
 [Лекция 4. Сортировка подсчетом и применение встроенных сортировок](../shujkova/lectures/lec4.pdf)  
+
+В этой лекции хорошая идея нерекурсивной реализации + я ее оптимизировал (`std::span`):
+[Введение в программирование 3. Сортировки. MergeSort, недетерминированный QuickSort](/run/media/oleg/Kotyamba2/FPMI/first_course_autmn2021/intro_to_programming_StepanovDI_1course_autum2021/Введение в программирование 3. Сортировки. MergeSort, недетерминированный QuickSort.mp4)  
+[MFTI_FPMI/Stepanov/autumn_2021/mergeSort](../MFTI_FPMI/Stepanov/autumn_2021/mergeSort.cpp)  
+
+Моя оптимизация рекурсивной версии: использование вспомогательного массива для слияния, который передается как параметр функции
+(нам не нужно каждый раз его создавать):
+[MFTI_FPMI/Stepanov/autumn_2021/mergeSort](../MFTI_FPMI/Stepanov/autumn_2021/mergeSort.cpp)
+
 #### Merge sort. Number of inversions
 [Применение сортировки слиянием: количество инверсий.] `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item8.mp4`  
 [Merge sort. Number of inversinos](../LKSH/2008/src/mergeSort.cpp)
+Хорошо рассказано в лекции: 
+[Введение в программирование 3. Сортировки. MergeSort, недетерминированный QuickSort](/run/media/oleg/Kotyamba2/FPMI/first_course_autmn2021/intro_to_programming_StepanovDI_1course_autum2021/Введение в программирование 3. Сортировки. MergeSort, недетерминированный QuickSort.mp4)
+[MFTI_FPMI/Stepanov/autumn_2021/mergeSort](../MFTI_FPMI/Stepanov/autumn_2021/mergeSort.cpp)
 
 ### Binary search. Binary search by answer. Real numbers binary search.
 Main source:
@@ -291,6 +432,9 @@ We need to consider all combinations to choose the best once
 [freeCodeCamp/Recursion_and_DP/canConstruct](../freeCodeCamp/Recursion_and_DP/canConstruct.cpp)
 [freeCodeCamp/Recursion_and_DP/countConstruct](../freeCodeCamp/Recursion_and_DP/countConstruct.cpp)
 [freeCodeCamp/Recursion_and_DP/allConstruct](../freeCodeCamp/Recursion_and_DP/allConstruct.cpp)
+
+### memoization
+[codility/sieveOfEratosthenes/countNonDivisible](../codility/sieveOfEratosthenes/countNonDivisible.cpp)
 
 ### Backtracking:  
 [sudoku Solver](../cs106b/sudokuSolver.cpp)  
@@ -587,7 +731,9 @@ Steven S. Skiena, Miguel A. Revilla. Programming Challenges. The Programming Con
 
 # Data structures
 ## arrays
-
+### processing
+Make sure that you handle unprocessed array`s suffix after iteration is done:
+[leetcode/strings/string-compression](leetcode/strings/string-compression.hpp)
 ### shift (rotate an array)
 [leetcode/arrays/rotateArray](../leetcode/arrays/rotateArray.hpp)  
 [leetcode/arrays/performStringShifts](../leetcode/arrays/performStringShifts.hpp)
@@ -640,7 +786,32 @@ https://www.interviewbit.com/blog/maximum-subarray-sum/
 
 ### prefix sum
 [codility/prefixSum/passingCars](../codility/prefixSum/passingCars.cpp)  
-[codility/prefixSum/genomicRangeQuery](../codility/prefixSum/genomicRangeQuery.cpp)  
+[codility/prefixSum/genomicRangeQuery](../codility/prefixSum/genomicRangeQuery.cpp)
+[codility/maximumSlice/maxDoubleSliceSum](../codility/maximumSlice/maxDoubleSliceSum.cpp)
+[codility/primeAndCompositeNumbers](../codility/primeAndCompositeNumbers/peaks.cpp)
+
+#### Theory
+Две реализации prefixSum:
+1. На полуинтервалах(`[0,r)`):  `b[i]` - сумма первых `i` элементов,
+   здесь нам нужен доп массив `b` размера `n+1` где мы суммируем значения из массива `a`
+   `b[0]=0; b[i+1] = b[i] + a[i]`
+2. На отрезках(`[0,r]`): `a[i]` - сумма i+1 первых элементов,
+   доп массив не нужен, мы можем хранить в `a`, так как
+   `a[0]` - первый элемент исходного массива
+   `a[i] = a[i-1] + a[i]`
+
+https://codeforces.com/edu/course/3/lesson/10
+##### Step 1
+[Codeforces/edu/prefixSum/step1_Префиксные_суммы_и_разностные_массивы_Codeforces](../Codeforces/edu/prefixSum/step1_Префиксные_суммы_и_разностные_массивы_Codeforces.pdf)
+/run/media/oleg/Kotyamba2/codeforces/edu/prefixSumsStep1.mp4
+https://codeforces.com/edu/course/3/lesson/10/1/practice
+/home/oleg/github/algorithmsAndDataStructures/Codeforces/edu/prefixSum/step1_a_prefixSum.cpp
+
+##### Step 2
+[Codeforces/edu/prefixSum/step2_Префиксные_суммы_и_разностные_массивы_Codeforces](../Codeforces/edu/prefixSum/step2_Префиксные_суммы_и_разностные_массивы_Codeforces.pdf)
+/run/media/oleg/Kotyamba2/codeforces/edu/prefixSumsStep2.mp4
+https://codeforces.com/edu/course/3/lesson/10/2/practice
+
 
 Sometimes you don't have to store prefixSum explicitly:  
 [leetcode/arrays/maximumSizeSubarraySumEqualsK](../leetcode/arrays/maximumSizeSubarraySumEqualsK.hpp)
@@ -761,6 +932,14 @@ Based on Stankevich`s Heap + some C++ techniques + DecreaseKey
 Theory:
 [](../informatics_mccme/heap/bin_heap_ig-091022.pdf)
 
+Возможны несколько вариантов реализации в зависимости от индексации в массиве
+0-idx:
+В лекции Pashka "АиСД S01E02. Структуры данных. Куча. Сортировка кучей"
+[ITMO/pashka/algos_2019_semester1](../ITMO/pashka/algos_2019_semester1/README.md)
+Implementation on 0-idx array + as global functions on array
+(siftUp, siftDown, Heapify O(n), HeapSort)
+[](../ITMO/pashka/lectures/Semestr1/src/binaryHeap.cpp)
+
 Задачи:
 https://informatics.msk.ru/mod/statements/view.php?id=3205#1
 
@@ -785,11 +964,22 @@ https://informatics.msk.ru/mod/statements/view.php?id=1234#1
 1  0  1   0   6  5  5  5
   */
 ```
-
+### Сортировка кучей
+В лекции Pashka "АиСД S01E02. Структуры данных. Куча. Сортировка кучей"
+[ITMO/pashka/algos_2019_semester1](../ITMO/pashka/algos_2019_semester1/README.md)
+Наблюдение как делать сортировку без использования доп памяти:
+Заметим, что когда мы убираем элемент из кучи, освобождается место в конце массива:
+`|vvvvvvvvvv| |`
+Поэтому мы хотели бы из кучи элемент добавлять в конец, тогда там должен быть max элемент,
+поэтому мы строим кучу на максимум
 
 ### Build in linear time
 [heapify](../intuit/BaseAlgorithmsForPupil/lec2_sorting_and_search/include/heapify.hpp)
 Heapify - to get linear time go from the end (leaves are ignored, as they can't sink further) and sink
+Так же рассуждения, почему выгодно делать просеивание вниз (так как на нижних уровнях у нас больше элементов),
+чтобы минимизировать кол-во операций и оценка в лекции Pashka АиСД 2019 семестр 1
+АиСД S01E02. Структуры данных. Куча. Сортировка кучей
+[ITMO/pashka/algos_2019_semester1](../ITMO/pashka/algos_2019_semester1/README.md)
 ```c++
 #pragma once
 #include <bits/stdc++.h>
@@ -911,6 +1101,10 @@ for multiple types - we use stack:
 
 if there is only one type of brackets - simple counter (balance) is sufficient:    
 [codility/stacks&Queues/nesting](../codility/stacks&Queues/nesting.cpp)    
+
+#### tasks
+[codility/stacks&Queues/fish](../codility/stacks&Queues/fish.cpp)  
+[codility/stacks&Queues/stoneWall](../codility/stacks&Queues/stoneWall.cpp)
 
 #### Monotonic stack
 [data_structures/stack/dailyTemperatures](../data_structures/stack/dailyTemperatures.hpp)
@@ -1091,6 +1285,8 @@ For instance, we can use a disjoint set to determine if two people share a commo
 
 
 ### Segment tree
+https://cp-algorithms.com/data_structures/segment_tree.html
+
 #### Baseic types that can be used as a core for problem solving
 [Codeforces/edu/segmentTree/segmentTreeMin](../Codeforces/edu/segmentTree/segmentTreeMin.cpp)   
 [Codeforces/edu/segmentTree/segmentTreeSum](..Codeforces/edu/segmentTree/segmentTreeSum.cpp)  
@@ -1160,6 +1356,10 @@ switching case for the given letter upper/lower is about toggling one bit in the
 ### Main definitions
 [main definitions]`/run/media/oleg/TOSHIBA EXT/codeforces/itmoAcademy/stringsMainDefinitions.mp4`
 
+### cpp
+string_view usage example, remove redundant whitespaces, reverse words in a string:
+[reverse-words-in-a-string](../leetcode/strings/reverse-words-in-a-string.hpp)
+
 ### match
 #### Rabin-Karp
 Main ideas: use sliding window for efficient computation of hash,
@@ -1224,6 +1424,38 @@ https://habr.com/ru/articles/653617/
 ### Pattern matching
 #### Using DP
 [leetcode/strings/wildcardMatching](../leetcode/strings/wildcardMatching.hpp)
+
+## RMQ (Range Minimum/ Maximum Query)
+### Sparse Table
+#### Problems for practice
+https://informatics.msk.ru/mod/statements/view.php?id=32990&chapterid=1663#1  
+https://codeforces.com/blog/entry/70418
+[SPOJ/RMQ/RMQSQ](../SPOJ/RMQ/RMQSQ.cpp)  
+[SPOJ/RMQ/CatapultThatBall](../SPOJ/RMQ/CatapultThatBall.cpp)
+
+Passes only with rewritten min function (so the for loop can be vectorized)
+Plus the array is allocated only once
+[SPOJ/RMQ/NegativeScore](../SPOJ/RMQ/NegativeScore.cpp)
+
+### Disjoint Sparse Table
+https://www.youtube.com/@peltorator
+https://codeforces.com/blog/entry/87940
+https://youtu.be/NbAtm1j5gVA?si=4jyJnMJWfcoeJX5H
+
+
+
+#### Implementation:
+https://codeforces.com/blog/entry/101083
+#### Optimizations:
+В лекции Степанова `Введение в программирование 7. Амортизационный анализ метод монет, потенциалов. Sparse table`
+предлагается идея с предподсчетом logn,
+но у него реализация с ошибкой (не проверяется выход за пределы массива),
+в этом блоге Слотина, говорится, что встроенный `__lg()` работает быстрее, чем вариант с предподсчетом:
+https://codeforces.com/blog/entry/75611
+
+### O(1)
+TODO
+https://codeforces.com/blog/entry/78931
 
 ## Graphs
 
@@ -1311,8 +1543,29 @@ Also there is `std::popcount` since C++20 (https://en.cppreference.com/w/cpp/num
 ### count divisors
 [codility/primeAndCompositeNumbers/countFactors](../codility/primeAndCompositeNumbers/countFactors.cpp)
 
+### count non divisors
+[codility/sieveOfEratosthenes/countNonDivisible](../codility/sieveOfEratosthenes/countNonDivisible.cpp)
+
 ### find divisors
 `/run/media/oleg/TOSHIBA EXT/ITMO/pashka/Паша_и_алгосы/Быстрое_нахождение_делителей_пилотный_выпуск.mp4`
+Как искать делители числа, а также как раскладывать его на простые множители
+0:00 - small n, naive approach
+0:59 - n is big (n <= 10^10)
+1:10 - трюк (ищем числа <= sqrt(n)
+2:05 - проблема делители выводятся не в порядке возрастания
+2:10 - решение добавить в вектор и отсортировать
+3:01 - объединение двух циклов в один
+3:20 - разложение на простые множетели
+3:30 - факт: если A min делитель числа n - то A обязательно простое
+3:50 - алгоритм разложения на простые множители
+```text
+n = p1 * p2 * p3 * ... * pk
+p1 - min делитель числа n, тогда p2 * p3 * ... * pk - разложение n / p1
+```
+4:50 - задача разложения числа на простые множители, но с большими ограничениями (n<=10^10)
+Перебираем делители не больше `sqrt(n)`, если есть простой делитель который больше корня из n, то он может быть только 1
+Выведем его в конце
+5:50 - пример задачи (задача про бобра и камни)
 ## factorization
 
 ## Euclidean algorithm (gcd)

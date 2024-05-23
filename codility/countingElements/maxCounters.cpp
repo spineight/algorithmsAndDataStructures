@@ -74,3 +74,29 @@ vector<int> solution(int N, vector<int> &A) {
   for(auto& v : counters) v = max(v, activeMax);
   return counters;
 }
+
+//! 11/11/2023
+//! idea: when max val should be set we don't assign it to all elements (performance consideration)
+//!     instead we set this as offset
+//!     later one when some element is touched - we update it(+1) taking into account the offset
+//!     at the end of iterarions some elements maybe untouched - for them we set their value to offset
+vector<int> solution(int N, vector<int> &A) {
+  int maxVal{0};
+  int offset{0};
+  vector<int> res(N,0);
+
+  for(auto v : A) {
+    // set max counter
+    if(v > N) {
+      offset = maxVal;
+    } else {
+      res[v-1] = max(res[v-1], offset);
+      ++res[v-1];
+      maxVal = max(maxVal, res[v-1]);
+    }
+  }
+  for(auto& v : res) {
+    v = max(v, offset);
+  }
+  return res;
+}

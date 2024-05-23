@@ -52,3 +52,24 @@ int solution(int N) {
   }
   return bestLen;
 }
+
+//! 11/11/2023
+int solution(int N) {
+  bitset<32> bs(N);
+  int l = 0;
+  int r = 31;
+
+  while(l < r && bs[l] == 0) ++l;
+  while(l < r && bs[r] == 0) --r;
+  int best{0};
+  while(l < r) {
+    int soFar{0};
+    while(l < r && bs[l] == 0) {
+      ++soFar;
+      ++l;
+    }
+    best = max(best, soFar);
+    ++l;
+  }
+  return best;
+}

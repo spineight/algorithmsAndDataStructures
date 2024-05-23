@@ -41,3 +41,9 @@ TEST(quick_sort, handPicked) {
     quick_sort(a, 0, a.size() - 1);
     EXPECT_TRUE(is_sorted(begin(a), end(a)));
 }
+
+TEST(quick_sort, allElementsAreEqual) {
+  vector<int> a = {5,5,5,5,5,5};
+  quick_sort(a, 0, a.size() - 1);
+  EXPECT_TRUE(is_sorted(begin(a), end(a)));
+}

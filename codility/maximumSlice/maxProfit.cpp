@@ -46,3 +46,16 @@ int solution(vector<int> &A) {
   }
   return best;
 }
+
+//! 14/11/2023
+int solution(vector<int> &A) {
+  int best{0};
+  int soFar{0};
+  const int n = A.size();
+  for(int i = 1; i < n; ++i) {
+    soFar += A[i] - A[i-1];
+    soFar = max(0, soFar);
+    best = max(best, soFar);
+  }
+  return best;
+}

@@ -60,3 +60,33 @@ int solution(vector<int> &A) {
     return lastIdx;
   return -1;
 }
+
+//! 14/11/2023
+int solution(vector<int> &A) {
+  int dominator{-1};
+  int stackSz{0};
+  int stackTop(0);
+
+  for(auto v : A) {
+    if(stackSz == 0) {
+      stackTop = v;
+      ++stackSz;
+    } else {
+      if(stackTop != v) --stackSz;
+      else ++stackSz;
+    }
+  }
+  if(stackSz == 0) return -1;
+  int candidate = stackTop;
+  int candidateCnt{0};
+  int candidateIdx{-1};
+  for(int i = 0; i < A.size(); ++i)  {
+    if (A[i] == candidate) {
+      ++candidateCnt;
+      candidateIdx = i;
+    }
+  }
+  if(candidateCnt > A.size() / 2)
+    dominator = candidateIdx;
+  return dominator;
+}

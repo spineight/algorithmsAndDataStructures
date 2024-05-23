@@ -51,3 +51,21 @@ int solution(vector<int> &A) {
   const size_t n{A.size()};
   return max(A[0]*A[1]*A[n-1], A[n-1] * A[n-2] * A[n-3]);
 }
+
+//! 14/11/2023
+int solution(vector<int> &A) {
+  //! Non working solution:
+  //! (for example: -2 -1 0 1 2)
+  // const int n = A.size();
+  // int best {A[0] * A[1] * A[2]};
+  // sort(begin(A), end(A));
+  // for(int i = 0; i + 2 < n; ++i) {
+  //     const int soFar = A[i] * A[i+1] * A[i+2];
+  //     best = max(best, soFar);
+  // }
+  // return best;
+  sort(begin(A), end(A));
+  const int n = A.size();
+  return max({A[0] * A[1] * A[2], A[0] * A[1] * A.back(),
+              A[0] * A[n-1] * A[n-2], A[n-1] * A[n-2] * A[n-3]});
+}

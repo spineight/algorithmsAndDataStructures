@@ -82,3 +82,38 @@ vector<int> solution(string &S, vector<int> &P, vector<int> &Q) {
   }
   return res;
 }
+
+//! 13/11/2023
+#include <vector>
+#include <unordered_map>
+
+vector<int> solution(string &S, vector<int> &P, vector<int> &Q) {
+  //! prefixSum[1][i] - number of 1 in the S for elems with idx [0,i]
+  //! prefixSum[2][i] - number of 2 in the S for elems with idx [0,i]
+  //! in general prefixSum[k][i] - number of k in the S for elems with idx [0,i]
+  //! As we have a limited number of possible values we can utilize this approach
+  //! This also can be solved by SegmentTree
+  //!
+  //! Summarized idea: use prefix sum per number
+  const int n = S.size();
+  unordered_map<char, int> charToNum= { {'A',0}, {'C',1}, {'G',2}, {'T',3}};
+  //! prefix sum on intervals (rather than on segments)
+  vector<vector<int>> prefixSum(4, vector<int>(n+1,0));
+  for(int i = 1; i <= n; ++i) {
+    for(int j = 0; j < 4; ++j) { // save memory (instead 1..4)
+      prefixSum[j][i] += prefixSum[j][i-1];
+    }
+    prefixSum[charToNum[S[i-1]]][i] = prefixSum[charToNum[S[i-1]]][i-1] + 1;
+  }
+  vector<int> answ(P.size());
+  for(size_t i = 0; i < P.size(); ++i) {
+    for(int j = 0; j < 4; ++j) {
+      const int cnt = prefixSum[j][Q[i]+1] - prefixSum[j][P[i]];
+      if(cnt > 0) {
+        answ[i] = j + 1;
+        break;
+      }
+    }
+  }
+  return answ;
+}

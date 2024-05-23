@@ -59,3 +59,15 @@ vector<int> solution(vector<int> &A, int K) {
     res[K+i] = A[i];
   return res;
 }
+
+//! 11/11/2023
+vector<int> solution(vector<int> &A, int K) {
+  const int n = A.size();
+  K %= n; //! NB!!! n might be zero, check for empty array is required!!!
+
+  reverse(begin(A), end(A));
+  reverse(begin(A),begin(A) + K);
+  reverse(begin(A)+K,end(A));
+
+  return A;
+}

@@ -56,3 +56,22 @@ int solution(int X, vector<int> &A) {
   }
   return -1;
 }
+
+//! 11/11/2023
+#include <unordered_set>
+//! here in comparision to prev solution I take into account that leafes might fall after given pos
+//! idea: use set and limit elem val you put there by max element,
+//!     once set size == max_elem - that means all elements are present
+int solution(int X, vector<int> &A) {
+  // Implement your solution here
+  const int n = A.size();
+  unordered_set<int> leafes;
+  for(int i = 0; i < n; ++i) {
+    if(A[i] <= X) {
+      leafes.insert(A[i]);
+      if(leafes.size() == X)
+        return i;
+    }
+  }
+  return -1;
+}

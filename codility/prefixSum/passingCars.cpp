@@ -61,3 +61,19 @@ int solution(vector<int> &A) {
   }
   return cnt;
 }
+
+//! 13/11/2023
+int solution(vector<int> &A) {
+  const int n = A.size();
+  vector<int> prefixSum(n+1,0);
+  for(int i = 1; i <= n; ++i)
+    prefixSum[i] = prefixSum[i-1] + A[i-1];
+
+  int res{0};
+  for(int i = 0; i < n; ++i) {
+    if(A[i] == 0)
+      res += (prefixSum.back() - prefixSum[i+1]);
+    if(res > 1'000'000'000) return -1;
+  }
+  return res;
+}

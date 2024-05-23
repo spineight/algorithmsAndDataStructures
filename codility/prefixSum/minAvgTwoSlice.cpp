@@ -72,50 +72,79 @@ Write an efficient algorithm for the following assumptions:
 //!         Then, similar with the previous case, all these 2-element sub-slices have the global minimal average.
 //! And in the construction in step b, we have already proven the statement (2).
 //!
-//! UPDATE 03-13-2014: We are NOT proving that, 4-or-more-element slices cannot have the global minimal average. We just proved that, there MUST be some 2-element and/or 3-element slices, having the global minimal average. In other words, we are NOT SURE whether there are some 4-or-more-element slices holding global minimal average. But we are ONE HUNDRED PERCENT SURE about the 2-element and/or 3-element slices.
+//! UPDATE 03-13-2014: We are NOT proving that, 4-or-more-element slices cannot have the global minimal average.
+//! We just proved that, there MUST be some 2-element and/or 3-element slices, having the global minimal average.
+//! In other words, we are NOT SURE whether there are some 4-or-more-element slices holding global minimal average.
+//! But we are ONE HUNDRED PERCENT SURE about the 2-element and/or 3-element slices.
 //
-//UPDATE 03-02-2015: There is another excellent discussion in the comments by Kim. Thanks!
+//! UPDATE 03-02-2015: There is another excellent discussion in the comments by Kim. Thanks!
 //
-//UPDATE 03-14-2016: If you had any question about the statement “If the sub-slices have different averages, some of them will have smaller average than MA”, please read this comment and this comment. Thanks!
+//! UPDATE 03-14-2016: If you had any question about the statement
+// “If the sub-slices have different averages, some of them will have smaller average than MA”,
+// please read this comment and this comment. Thanks!
 
 //! Good explanation
 /*
-  Despite all the effort, I failed to solve this problem. Only after I saw the article, I could finally realize that this was not a coding problem, but a mathematical one. I was deeply sad about this, but did not want to stop the challenge. So below is my own interpretation of the problem (or excuse for the failure I have made.)
-So basically the problem is to prove next statement.
-Let len(s) be the length of a slice s, sum(s) the sum of the all elements of the slice s, and ave(s) the average of the slice s. Then for an arbitrary array, every slice s having len(s) > 3 contains a sub-slice s’ such that ave(s) >= ave(s’).
-Proof.
-Suppose that s is a slice having len(s) > 3 and does NOT contain a sub-slice s’ such that ave(s) >= ave(s’). Since len(s) > 3, s can be divided into sub-slices t and u.
-Then,
-ave(t) = sum(t) / len(t), and ave(u) = sum(u) / len(u).
-ave(s) = sum(s) / len(s)
-= [sum(t) + sum(u)] / [len(t) + len(u)]
-= [len(t) * ave(t) + len(u) * ave(u)] / [len(t) + len(u)].
-If ave(u) >= ave(t) then let s’ be t
-ave(s) = [len(t) * ave(t) + len(u) * ave(u)] / [len(t) + len(u)]
->= [[len(t) + len(u)] * ave(t)] / [len(t) + len(u)]
-= ave(t)
-= ave(s’).
-Otherwise, if ave(t) >= ave(u) then let s’ be u
-ave(s) = [len(t) * ave(t) + len(u) * ave(u)] / [len(t) + len(u)]
->= [[len(t) + len(u)] * ave(u)] / [len(t) + len(u)]
-= ave(u)
-= ave(s’).
+  Despite all the effort, I failed to solve this problem.
+  Only after I saw the article, I could finally realize that this was not a coding problem, but a mathematical one.
+  I was deeply sad about this, but did not want to stop the challenge.
+  So below is my own interpretation of the problem (or excuse for the failure I have made.)
+
+  So basically the problem is to prove next statement.
+  Let len(s) be the length of a slice s, sum(s) the sum of the all elements of the slice s,
+  and ave(s) the average of the slice s.
+  Then for an arbitrary array, every slice s having len(s) > 3 contains a sub-slice s’ such that ave(s) >= ave(s’).
+
+ Proof.
+  Suppose that s is a slice having len(s) > 3 and does NOT contain a sub-slice s’ such that ave(s) >= ave(s’).
+  Since len(s) > 3, s can be divided into sub-slices t and u.
+ Then,
+  ave(t) = sum(t) / len(t), and ave(u) = sum(u) / len(u).
+  ave(s) = sum(s) / len(s)
+  = [sum(t) + sum(u)] / [len(t) + len(u)]
+  = [len(t) * ave(t) + len(u) * ave(u)] / [len(t) + len(u)].
+  If ave(u) >= ave(t) then let s’ be t
+  ave(s) = [len(t) * ave(t) + len(u) * ave(u)] / [len(t) + len(u)]
+  >= [[len(t) + len(u)] * ave(t)] / [len(t) + len(u)]
+  = ave(t)
+  = ave(s’).
+  Otherwise, if ave(t) >= ave(u) then let s’ be u
+  ave(s) = [len(t) * ave(t) + len(u) * ave(u)] / [len(t) + len(u)]
+  >= [[len(t) + len(u)] * ave(u)] / [len(t) + len(u)]
+  = ave(u)
+  = ave(s’).
 This leads a contradiction, and completes the proof.
-ps. After writing this note, I saw a counter example [8, 0, 0, 8] as Hunter2 indicated. A workaround of this is to permit a slice having length of one, although the problem description defines a slice to contain at least two elements. I guess that doing this does not harm the soundness of the proof. The point is to ignore all slices having the length of 4 or more, not to consider the slice having length of one. For example, you may argue that [0, 8, 1, 1] can be splitted into [0] and [8, 1, 1], but we can simply ignore [0] and take [1, 1] instead.
+ps. After writing this note, I saw a counter example [8, 0, 0, 8] as Hunter2 indicated.
+ A workaround of this is to permit a slice having length of one,
+ although the problem description defines a slice to contain at least two elements.
+ I guess that doing this does not harm the soundness of the proof.
+ The point is to ignore all slices having the length of 4 or more, not to consider the slice having length of one.
+ For example, you may argue that [0, 8, 1, 1] can be splitted into [0] and [8, 1, 1],
+ but we can simply ignore [0] and take [1, 1] instead.
  */
 
 /*
  Updated:
-Uncomfortable with the postscript I wrote, I thought a little more on the proof, and figured out that the postscript above was absolutely NOT necessary. As a matter of fact, at first time I was confused with [8, 0, 0, 8] as Hunter2 indicated and introduced a slice having length of one. But the real point was in a different place.
-In the example slice [8, 0, 0, 8] what we want to claim IS that the average of [8, 0, 0, 8], which is 4, is greater than or equals the average of [8, 0] or [0, 8], which is also 4. Hence [8, 0, 0, 8] can be divided into sub-slices having the same or lower average value. It is important that we do NOT claim that the minimal average slice is [8, 0] or [0, 8]. Finding the minimal average slice is another job to do later and that job is to examine slices of size 2 or 3.
+Uncomfortable with the postscript I wrote,
+ I thought a little more on the proof, and figured out that the postscript above was absolutely NOT necessary.
+ As a matter of fact, at first time I was confused with [8, 0, 0, 8] as Hunter2 indicated
+ and introduced a slice having length of one. But the real point was in a different place.
+In the example slice [8, 0, 0, 8] what we want to claim IS that the average of [8, 0, 0, 8], which is 4,
+ is greater than or equals the average of [8, 0] or [0, 8], which is also 4.
+ Hence [8, 0, 0, 8] can be divided into sub-slices having the same or lower average value.
+ It is important that we do NOT claim that the minimal average slice is [8, 0] or [0, 8].
+ Finding the minimal average slice is another job to do later and that job is to examine slices of size 2 or 3.
 Finally thanks to Sheng for the insight. I could never imagine the idea behind the solution without his comment.
  */
 
 /*
   One more thing.
-When I saw the claim that examining 2-3 slices is enough, what struck immediately in my mind was the mathematical induction. Probably most of us have the experience of proving next statement, that is;
+When I saw the claim that examining 2-3 slices is enough, what struck immediately in my mind was the mathematical induction.
+ Probably most of us have the experience of proving next statement, that is;
 every integer greater than 3 can be expressed as a linear combination of 2 and/or 3.
-Then I realized that the same principal can be applied to this problem. How stupid I am! Rest of the problem was not so hard. In fact, I did not even try to code, because sometimes if once a solution is found, it is not much meaningful to code it.
+Then I realized that the same principal can be applied to this problem.
+ How stupid I am! Rest of the problem was not so hard.
+ In fact, I did not even try to code, because sometimes if once a solution is found, it is not much meaningful to code it.
 However I feel that I’m fortunate since I still have the textbook of discrete mathematics. I should revisit it once more.
 Lastly, I guess that I talked too much alone at this time. Sorry for your inconvenience. Enjoy happy coding!
  */
@@ -146,4 +175,34 @@ int solution(vector<int> &A) {
   if(best > twoElemSlice)
     bestPos = n-2;
   return bestPos;
+}
+
+//! 13/11/2023
+//! Looked up the previous solution
+int solution(vector<int> &A) {
+  const int n = A.size();
+  //vector<int> prefixSum(n+1,0);
+  //   for(int i = 1; i <=n; ++i) {
+  //     prefixSum[i] = prefixSum[i-1] + A[i-1];
+  //}
+  int idx{0};
+  double best{ (A[0] + A[1]) / 2.};
+
+  for(int i = 0; i < n; ++i) {
+    if(i + 1 < n) {
+      double soFar = (A[i] + A[i+1]) / 2.;
+      if(best > soFar) {
+        best = soFar;
+        idx = i;
+      }
+    }
+    if(i + 2 < n) {
+      double soFar = (A[i] + A[i+1] + A[i+2]) / 3.;
+      if(best > soFar) {
+        best = soFar;
+        idx = i;
+      }
+    }
+  }
+  return idx;
 }

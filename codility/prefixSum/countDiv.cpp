@@ -44,3 +44,12 @@ int solution(int A, int B, int K) {
 
   return 0;
 }
+
+//! 13/11/2023
+//! inspired by previous solution
+int solution(int A, int B, int K) {
+  if(A % K == 0) return (B-A) / K + 1;
+  const int firstDiv = ceil((double)A / K) * K;
+  if(firstDiv <= B) return (B-firstDiv) / K + 1;
+  return 0;
+}

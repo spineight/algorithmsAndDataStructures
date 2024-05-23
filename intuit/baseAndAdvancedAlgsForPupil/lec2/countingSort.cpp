@@ -42,8 +42,8 @@ void countingSort(const vector<uint32_t>& keys, const vector<T>& data, vector<ui
   //! and if we traverse elements in reverse order - we will get resulting sequence preserving of order for elements within one class
   //! Hence this sorting will be stable, this important property that allows to use it for Radix sort
   for(int i = (int)keys.size()-1; i >=0 ; --i) {
-    permutation[cnt[keys[i]]-1] = i;
-    --cnt[keys[i]];
+    //! --cnt - it is number of elements and we need position in 0 indexed array
+    permutation[--cnt[keys[i]]] = i;
   }
 }
 

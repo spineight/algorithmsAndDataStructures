@@ -1,0 +1,6 @@
+Test_number: 32
+Error_locations:
+10 12 15 26 27
+Error_values:
+6 15 24 19 17
+

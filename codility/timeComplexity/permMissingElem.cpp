@@ -36,3 +36,14 @@ int solution(vector<int> &A) {
   const auto curSum = std::accumulate(begin(A), end(A), 0);
   return allSum - curSum;
 }
+
+//! 11/11/2023
+//! Got overflow!!! size_t instead of long long should be used!!!
+int solution(vector<int> &A) {
+  const int n = A.size();
+
+  //! sum of the first n+1 elements
+  long long allSum = (n+1) * (n+2) / 2;
+  long long curSum = accumulate(begin(A), end(A),0);
+  return allSum - curSum;
+}

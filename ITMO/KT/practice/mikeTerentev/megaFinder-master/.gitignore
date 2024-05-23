@@ -1,0 +1,4 @@
+.idea
+*.autosave
+cmake-build-debug
+_config.yml

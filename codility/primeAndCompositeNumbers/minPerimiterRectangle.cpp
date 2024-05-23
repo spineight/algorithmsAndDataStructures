@@ -42,3 +42,16 @@ int solution(int N) {
   }
   return minPerimiter;
 }
+
+//! 16/11/2023
+int solution(int N) {
+  size_t best = N*4;
+  int i = 1;
+  while(i*i <= N) {
+    if((N % i) == 0) {
+      best = min(best, (i + (size_t)N / i)*2 );
+    }
+    ++i;
+  }
+  return best;
+}

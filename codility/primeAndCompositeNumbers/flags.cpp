@@ -21,3 +21,28 @@ int solution(vector<int> &A) {
   }
   return best;
 }
+
+//! 21/11/2023
+//! looked up
+int solution(vector<int> &A) {
+  const int n = A.size();
+  vector<int> peaks;
+  for(int i = 1; i + 1 < n; ++i) {
+    if(A[i-1] < A[i] && A[i+1] < A[i])
+      peaks.push_back(i);
+  }
+  int best{0};
+  for(int k = peaks.size(); k >= 1; --k) {
+    auto it = begin(peaks);
+    int soFar{0};
+    while(it != end(peaks) && soFar < k) {
+      ++soFar;
+      it = lower_bound(begin(peaks), end(peaks), *it + k);
+    }
+    if(soFar == k) {
+      best = soFar;
+      break;
+    }
+  }
+  return best;
+}

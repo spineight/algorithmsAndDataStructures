@@ -39,3 +39,19 @@ int solution(vector<int> &A) {
   }
   return best;
 }
+
+//! 14/11/2023
+int solution(vector<int> &A) {
+  int best{A.front()};
+  int soFar{A.front()};
+  const int n = A.size();
+
+  for(int i = 1; i < n; ++i) {
+    //! choose what is better:
+    //!     1. continue existing sequence soFar+A[i]
+    //!     2. start a new one A[i]
+    soFar = max(soFar+A[i], A[i]);
+    best = max(best, soFar);
+  }
+  return best;
+}

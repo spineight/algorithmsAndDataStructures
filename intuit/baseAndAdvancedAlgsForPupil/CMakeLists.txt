@@ -3,5 +3,5 @@ project(baseAndAdvancedAlgsForPupil)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(countingSort lec2/countingSort.cpp)
-add_executable(radixSort lec2/radixSort.cpp)
+add_executable(BaseAndAdvancedAlgsIntuit_countingSort lec2/countingSort.cpp)
+add_executable(BaseAndAdvancedAlgsIntuit_radixSort lec2/radixSort.cpp)

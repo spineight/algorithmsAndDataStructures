@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Handling pushback in code reviews | eng-practices</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Handling pushback in code reviews" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Google’s Engineering Practices documentation" />
+<meta property="og:description" content="Google’s Engineering Practices documentation" />
+<link rel="canonical" href="pushback.html" />
+<meta property="og:url" content="https://google.github.io/eng-practices/review/reviewer/pushback.html" />
+<meta property="og:site_name" content="eng-practices" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Handling pushback in code reviews" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Google’s Engineering Practices documentation","headline":"Handling pushback in code reviews","url":"https://google.github.io/eng-practices/review/reviewer/pushback.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="../../assets/css/style.css%3Fv=f59560f820aca4d6621858b0ea7d405bf9be4514.css">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/eng-practices/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="../../index.html">eng-practices</a></h1>
+      
+
+      <h1 id="handling-pushback-in-code-reviews">Handling pushback in code reviews</h1>
+
+<p>Sometimes a developer will push back on a code review. Either they will disagree
+with your suggestion or they will complain that you are being too strict in
+general.</p>
+
+<h2 id="who_is_right">Who is right?</h2>
+
+<p>When a developer disagrees with your suggestion, first take a moment to consider
+if they are correct. Often, they are closer to the code than you are, and so
+they might really have a better insight about certain aspects of it. Does their
+argument make sense? Does it make sense from a code health perspective? If so,
+let them know that they are right and let the issue drop.</p>
+
+<p>However, developers are not always right. In this case the reviewer should
+further explain why they believe that their suggestion is correct. A good
+explanation demonstrates both an understanding of the developer’s reply, and
+additional information about why the change is being requested.</p>
+
+<p>In particular, when the reviewer believes their suggestion will improve code
+health, they should continue to advocate for the change, if they believe the
+resulting code quality improvement justifies the additional work requested.
+<strong>Improving code health tends to happen in small steps.</strong></p>
+
+<p>Sometimes it takes a few rounds of explaining a suggestion before it really
+sinks in. Just make sure to always stay <a href="comments.html#courtesy">polite</a> and let
+the developer know that you <em>hear</em> what they’re saying, you just don’t <em>agree</em>.</p>
+
+<h2 id="upsetting_developers">Upsetting Developers</h2>
+
+<p>Reviewers sometimes believe that the developer will be upset if the reviewer
+insists on an improvement. Sometimes developers do become upset, but it is
+usually brief and they become very thankful later that you helped them improve
+the quality of their code. Usually, if you are <a href="comments.html#courtesy">polite</a> in
+your comments, developers actually don’t become upset at all, and the worry is
+just in the reviewer’s mind. Upsets are usually more about
+<a href="comments.html#courtesy">the way comments are written</a> than about the reviewer’s
+insistence on code quality.</p>
+
+<h2 id="later">Cleaning It Up Later</h2>
+
+<p>A common source of push back is that developers (understandably) want to get
+things done. They don’t want to go through another round of review just to get
+this CL in. So they say they will clean something up in a later CL, and thus you
+should LGTM <em>this</em> CL now. Some developers are very good about this, and will
+immediately write a follow-up CL that fixes the issue. However, experience shows
+that as more time passes after a developer writes the original CL, the less
+likely this clean up is to happen. In fact, usually unless the developer does
+the clean up <em>immediately</em> after the present CL, it never happens. This isn’t
+because developers are irresponsible, but because they have a lot of work to do
+and the cleanup gets lost or forgotten in the press of other work. Thus, it is
+usually best to insist that the developer clean up their CL <em>now</em>, before the
+code is in the codebase and “done.” Letting people “clean things up later” is a
+common way for codebases to degenerate.</p>
+
+<p>If a CL introduces new complexity, it must be cleaned up before submission
+unless it is an <a href="../emergencies.html">emergency</a>. If the CL exposes surrounding
+problems and they can’t be addressed right now, the developer should file a bug
+for the cleanup and assign it to themselves so that it doesn’t get lost. They
+can optionally also write a TODO comment in the code that references the filed
+bug.</p>
+
+<h2 id="strictness">General Complaints About Strictness</h2>
+
+<p>If you previously had fairly lax code reviews and you switch to having strict
+reviews, some developers will complain very loudly. Improving the
+<a href="speed.html">speed</a> of your code reviews usually causes these complaints to fade
+away.</p>
+
+<p>Sometimes it can take months for these complaints to fade away, but eventually
+developers tend to see the value of strict code reviews as they see what great
+code they help generate. Sometimes the loudest protesters even become your
+strongest supporters once something happens that causes them to really see the
+value you’re adding by being strict.</p>
+
+<h2 id="conflicts">Resolving Conflicts</h2>
+
+<p>If you are following all of the above but you still encounter a conflict between
+yourself and a developer that can’t be resolved, see
+<a href="standard.html">The Standard of Code Review</a> for guidelines and principles that
+can help resolve the conflict.</p>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/google/eng-practices/edit/master/review/reviewer/pushback.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

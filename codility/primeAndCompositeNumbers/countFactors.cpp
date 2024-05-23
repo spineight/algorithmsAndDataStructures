@@ -32,3 +32,16 @@ int solution(int N) {
   if( i * i == static_cast<size_t>(N) ) ++cnt;
   return cnt;
 }
+
+//! 16/11/2023
+int solution(int N) {
+  int res{0};
+  size_t i = 1;
+  while(i*i < (size_t)N) {
+    if( (N % i) == 0) res += 2;
+    ++i;
+  }
+  if(i*i == (size_t)N)
+    ++res;
+  return res;
+}

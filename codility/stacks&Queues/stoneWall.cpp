@@ -14,3 +14,18 @@ int solution(vector<int> &H) {
   }
   return cnt;
 }
+
+//! 14/11/2023
+#include <stack>
+int solution(vector<int> &H) {
+  stack<int> s;
+  int cnt{0};
+  for(auto h : H) {
+    while(!s.empty() && s.top() > h) s.pop();
+    if(s.empty() || s.top() != h) {
+      ++cnt;
+      s.push(h);
+    }
+  }
+  return cnt;
+}

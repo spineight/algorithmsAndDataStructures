@@ -1,0 +1,172 @@
+\subsection{\texorpdfstring{Вывод типа}{Type deduction}}
+\epigraph{Помните, что в $\lambda$-исчислении нет смысла? Здесь смысл отрицательный, скорее.}{Д.Г.}
+
+В $\lambda$-исчислении выделяют 3 задачи:
+\begin{enumerate}[label=(\asbuk*)]
+    \item Проверка типа: верно ли $\Gamma \vdash M : \sigma$?
+    \item Вывод типа: существуют ли такие $\Gamma$ и $\sigma$, что $\Gamma \vdash M : \sigma$?
+    \item Обитаемость типа: существуют ли такие $\Gamma$ и $M$, что $\Gamma \vdash M : \sigma$?
+\end{enumerate}%
+Первые две задачи возникают в контексте дизайна языков программирования.
+Понятно, что задача проверки типа сводится к задаче вывода типа.
+
+Из изоморфизма Карри-Ховарда ясно, что задача обитаемости типа эквивалентна задаче проверки выражения ИИВ на корректность.
+
+В этом разделе мы будем рассматривать задачу вывода типа.
+
+\begin{definition}[алгебраический терм]
+    \begin{bnf}
+    \[
+        A ::= x | f\left(A, \ldots, A\right)
+    \]
+    \end{bnf}%
+    Где $x \in X$, $f$ "--- функциональная связка.
+\end{definition}
+
+Уравнение в алгебраических термах: $A = A$.
+
+\begin{definition}[$S$-подстановка]
+    \[
+        S : A \rightarrow A
+    \]
+    Причём $S$ "--- id почти везде (везде кроме конечного количества).
+\end{definition}
+
+\begin{definition}[естественное обобщение]
+    Естественное обобщение "--- такая подстановка $S : A \rightarrow A$, получаемая из $S : X \rightarrow A$, что
+    $S\left(f\left(A_1 \dots A_n\right)\right) = f\left(S(f_1) \ldots S(f_n)\right)$
+\end{definition}
+
+\begin{definition}[унификатор] \label{unificator}
+    $S$ "--- унификатор (решение уравнения) $P=Q$, если $S(P)=S(Q)$.
+\end{definition}
+\begin{example}
+    Пусть
+    \[
+        \sigma = \beta\rightarrow\alpha\rightarrow\beta \qquad \tau = (\gamma\rightarrow\gamma)\rightarrow\delta
+    \]
+    Их унификатор это
+    \[
+        S = [\beta \coloneqq \gamma\rightarrow\gamma, \delta \coloneqq \alpha\rightarrow\gamma\rightarrow\gamma]
+        \qquad S(\sigma) \equiv S(\tau) = (\gamma\rightarrow\gamma)\rightarrow\alpha\rightarrow\gamma\rightarrow\gamma
+    \]
+\end{example}
+Задача решения уравнение в алгебраических термах "--- унификация.
+
+\begin{definition}[композиция]
+    $(S \circ T)(A) = S(T(A))$
+\end{definition}
+
+\begin{definition}[частный случай]
+    $T$ "--- частный случай $U$, если существует такое $S$, что $T = S \circ U$.
+\end{definition}
+
+\begin{definition}[наибольший общий унификатор]
+    Наибольший общий унификатор $U$ для уравнения $A=B$ "--- такой унификатор, что:
+    \begin{enumerate}
+        \item $U(A)=U(B)$.
+        \item Любой другой унификатор "--- частный случай $U$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[несовместная система]
+    Назовём систему несовместной, если выполнено одно из условий:
+    \begin{enumerate}
+        \item В ней есть уравнение вида $f(\ldots)=g(\ldots)$.
+        \item В ней есть уравнение вида $x = f(\ldots~x~\ldots)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[эквивалентные системы]
+    Назовём две системы эквивалентными, если они имеют одинаковые решения.
+\end{definition}
+
+\begin{statement}
+    Для любой системы
+    \[
+        \begin{cases}
+            A_1 = B_1 \\
+            \phantom{A_1} \mathrel{\makebox[\widthof{=}]{\vdots}} \\
+            A_n = B_n
+        \end{cases}
+    \]
+    найдётся эквивалентная ей система из одного уравнения:
+    \[
+        f(A_1 \ldots A_n) = f(B_1 \ldots B_n)\text{,}
+    \]
+    где $f$ "--- новый символ.
+\end{statement}
+
+\begin{definition}[разрешённая система]
+    Назовём систему разрешённой, если:
+    \begin{enumerate}
+        \item Все уравнения имеют вид $x = A$.
+        \item Все переменные в левой части встречаются однократно.
+    \end{enumerate}
+\end{definition}
+
+По системе в разрешённой форме мы можем построить решение $S$, определив $S(x_i) = A_i$ для каждого $i$.
+
+\begin{statement}
+    Построенный по системе в разрешённой форме унификатор $S$ "--- наибольший общий унификатор.
+\end{statement}
+
+\begin{statement}
+    Несовместная система не имеет решений.
+\end{statement}
+
+Рассотрим следующие преобразования, которые не меняют свойства системы:
+\begin{center}
+\begin{tabular}{l l l} \toprule
+    Выражения                         & Условия             & Новые выражения \\ \midrule
+    $T=x$, $T$ не переменная          &                     & $x=T$ \\ \midrule
+    $T=T$                             &                     & убрать это уравнение \\ \midrule
+    \multirow{2}{*}[-\aboverulesep]{$f(A_1, \ldots A_n) = g(B_1, \ldots B_n)$}
+                                      & $f=g$               & $ A_1 = B_1 \ldots A_n = B_n$ \\ \cmidrule{2-3}
+                                      & $f \neq g$          & система несовместна \\ \midrule
+    \multirow{2}{*}[-\aboverulesep]{$x=T$, $R=S$, $x$ входит в $S$ или $R$}
+                                      & $T$ не содержит $x$ & $x=T$,
+                                        $R\left[x\coloneqq T\right]=S\left[x\coloneqq T\right]$\\ \cmidrule{2-3}
+                                      & $T$ содержит $x$    & система несовместна \\ \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{statement}
+    Последовательное применение правил либо за конечное число шагов приведёт систему в разрешённый вид, либо покажет, что она несовместна.
+\end{statement}
+
+\begin{proof}
+    Пусть $(n_1, n_2, n_3)$ "--- характеристика системы, где
+    $n_1$ "--- количество переменных не входящих систему только слева от знака равенства один раз,
+    $n_2$ "--- общее количество вхождений функциональных символов в $S$,
+    $n_3$ "--- количество выражений вида $T=x$ или $T=T$.
+    Каждое преобразование уменьшает эту тройку (если сравнивать лексикографически).
+\end{proof}
+
+\begin{theorem}
+    Задача вывода типа в $\lambda$-исчислении разрешима.
+\end{theorem}
+
+\begin{proof}
+    Опишем алгоритм. Пусть нам дан $\lambda$-терм $M$. Рекурсивно построим по нему систему уравнений $E_m$ и тип выражения $\tau_m$:
+    \begin{center}
+    \begin{tabular}{l l l} \toprule
+        Вид $M$         & $E_m$                                                 & $\tau_m$                        \\ \midrule
+        $x$             & $\varnothing$                                         & $\alpha$ "--- новая переменная. \\ \midrule
+        $PR$            & $E_p \cup E_r \cup \set{\tau_p=\tau_r\rightarrow\pi}$ & $\pi$ "--- новая переменная     \\ \midrule
+        $\lambda x . P$ & $E_p$                                                 & $\tau_x\rightarrow\tau_p$       \\ \bottomrule
+    \end{tabular}
+    \end{center}
+    Решим построенную систему уравнений.
+    Пусть унификатор $S$ "--- решение системы уравнений $E_m$. Тогда тип $M$ это $S(\tau_m)$.
+
+    Можно показать, что алгоритм корректный.
+\end{proof}
+
+\begin{example}
+    \todo %todo
+\end{example}
+
+%\subsection{\texorpdfstring{Про ложь}{About false}}
+%
+%\todo\ послушать запись. %todo

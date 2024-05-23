@@ -62,3 +62,26 @@ int solution(vector<int> &A, vector<int> &B) {
   }
   return alive;
 }
+
+//! 14/11/2023
+#include <stack>
+int solution(vector<int> &A, vector<int> &B) {
+  stack<int> downstream;
+
+  const int n = B.size();
+  int aliveCnt{0};
+  int i = 0;
+  while(i < n) {
+    if(B[i] == 1) {
+      downstream.push(A[i]);
+    } else {
+      while(!downstream.empty() && downstream.top() < A[i])
+        downstream.pop();
+      if(downstream.empty())
+        ++aliveCnt;
+    }
+    ++i;
+  }
+  aliveCnt += downstream.size();
+  return aliveCnt;
+}

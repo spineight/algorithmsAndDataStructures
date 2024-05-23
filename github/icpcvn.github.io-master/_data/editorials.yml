@@ -1,0 +1,243 @@
+- year: 2022
+  contests:
+    - type: Regional
+      contents:
+        - title: Scoreboard
+          url: 2022/regional/scoreboard.html
+        - title: Scoreboard (HSGS)
+          url: 2022/regional/hsgs-scoreboard.html
+        - title: Problems
+          url: 2022/regional/problems.pdf
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc22_regional
+    - type: National
+      contents:
+        - title: Scoreboard
+          url: 2022/national/scoreboard.html
+        - title: Problems
+          url: 2022/national/problems.pdf
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc22_national
+    - type: Northern
+      contents:
+        - title: Scoreboard
+          url: 2022/northern/scoreboard.html
+        - title: Problems
+          url: 2022/northern/problems.pdf
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc22_mb
+    - type: Central
+      contents:
+        - title: Scoreboard
+          url: 2022/central/scoreboard.html
+        - title: Problems
+          url: 2022/central/problems.zip
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc22_mt
+    - type: Southern
+      contents:
+        - title: Scoreboard
+          url: 2022/southern/scoreboard.html
+        - title: Problems
+          url: 2022/southern/problems.pdf
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc22_mn
+- year: 2021
+  contests:
+    - type: Regional
+      contents:
+        - title: Scoreboard
+          url: 2021/regional/scoreboard.html
+        - title: Problems
+          url: 2021/regional/problems.pdf
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc21_regional_m
+    - type: National
+      contents:
+        - title: Scoreboard
+          url: 2021/national/scoreboard.html
+        - title: Problems
+          url: 2021/national/problems.pdf
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc21_national
+    - type: Southern
+      contents:
+        - title: Scoreboard
+          url: 2021/southern/scoreboard.html
+        - title: Problems
+          url: 2021/southern/problems.zip
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc21_mn
+    - type: Central
+      contents:
+        - title: Scoreboard
+          url: 2021/central/scoreboard.html
+        - title: Problems
+          url: 2021/central/problems.zip
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc21_mt
+    - type: Northern
+      contents:
+        - title: Scoreboard
+          url: 2021/northern/scoreboard.html
+        - title: Problems
+          url: 2021/northern/problems.pdf
+        - title: Upsolve
+          url: https://oj.vnoi.info/contest/icpc21_mb
+- year: 2020
+  contests:
+    - type: Regional
+      contents:
+        - title: Full information
+          url: https://cantho20.kattis.com
+    - type: National
+      contents:
+        - title: Full information
+          url: https://vietnam-national20.kattis.com
+    - type: Southern
+      contents:
+        - title: Scoreboard
+          url: 2020/southern/scoreboard.html
+        - title: Problems
+          url: 2020/southern/problems.pdf
+    - type: Northern - Central
+      contents:
+        - title: Scoreboard
+          url: 2020/northern-central/scoreboard.html
+        - title: Problems
+          url: 2020/northern-central/problems.pdf
+- year: 2019
+  contests:
+    - type: Regional
+      contents:
+        - title: Full information
+          url: https://danang19.kattis.com
+        - title: Editorial
+          url: 2019/regional/Editorial.pdf
+    - type: National
+      contents:
+        - title: Full information
+          url: https://vietnam-national19.kattis.com
+        - title: Editorial
+          url: 2019/national/editorial.pdf
+    - type: Southern
+      contents:
+        - title: Scoreboard
+          url: 2019/southern/scoreboard.html
+        - title: Problems
+          url: 2019/southern/problems.pdf
+    - type: Northern
+      contents:
+        - title: Scoreboard
+          url: 2019/northern/scoreboard.html
+        - title: Problems
+          url: 2019/northern/problems.pdf
+    - type: Central
+      contents:
+        - title: Scoreboard
+          url: 2019/central/scoreboard.html
+        - title: Editorial
+          url: 2019/central/Editorial.pdf
+- year: 2018
+  contests:
+    - type: Regional
+      contents:
+        - title: Full information
+          url: https://hanoi18.kattis.com
+        - title: Editorial
+          url: 2018/regional/Editorial.pdf
+    - type: National
+      contents:
+        - title: Full information
+          url: https://vietnam-national18.kattis.com
+        - title: Editorial
+          url: 2018/national/Editorial.pdf
+    - type: Northern
+      contents:
+        - title: Scoreboard
+          url: 2018/northern/Scoreboard.html
+        - title: Problems
+          url: 2018/northern/problems.pdf
+        - title: Editorial
+          url: 2018/northern/Editorial.pdf
+    - type: Central
+      contents:
+        - title: Scoreboard
+          url: 2018/central/scoreboard.html
+        - title: Problems
+          url: 2018/central/problems.zip
+        - title: Editorial
+          url: 2018/central/Editorial.pdf
+    - type: Southern
+      contents:
+        - title: Scoreboard
+          url: 2018/southern/Scoreboard.html
+        - title: Problems
+          url: 2018/southern/problems.zip
+        - title: Editorial
+          url: 2018/southern/Editorial.pdf
+- year: 2017
+  contests:
+    - type: Regional
+      contents:
+        - title: Full information
+          url: https://hochiminh17.kattis.com
+        - title: Editorial
+          url: 2017/regional/Editorial.pdf
+    - type: National
+      contents:
+        - title: Full information
+          url: https://vietnam-national17.kattis.com
+        - title: Editorial
+          url: 2017/national/Editorial.pdf
+    - type: Northern
+      contents:
+        - title: Full information
+          url: https://vietnam-north17.kattis.com
+        - title: Editorial
+          url: 2017/northern/Editorial.pdf
+    - type: Central
+      contents:
+        - title: Scoreboard
+          url: 2017/central/scoreboard.html
+        - title: Problems
+          url: 2017/central/problems.zip
+        - title: Editorial
+          url: 2017/central/Editorial.pdf
+    - type: Southern
+      contents:
+        - title: Scoreboard
+          url: 2017/southern/scoreboard.html
+        - title: Problems
+          url: 2017/southern/problems.zip
+        - title: Editorial
+          url: 2017/southern/Editorial.pdf
+- year: 2016
+  contests:
+    - type: Regional
+      contents:
+        - title: Scoreboard
+          url: 2016/regional/scoreboard.html
+        - title: Problems
+          url: 2016/regional/problems.pdf
+        - title: Editorial
+          url: 2016/regional/solutions/ACMICPCRegionalVietnam2016-Editorial.pdf
+        - title: Solutions
+          url: https://github.com/acmicpc-vietnam/acmicpc-vietnam.github.io/tree/master/2016/regional/solutions
+        - type: National
+    - type: National
+      contents:
+        - title: Scoreboard
+          url: 2016/national/scoreboard.html
+        - title: Problems
+          url: 2016/national/problems.pdf
+- year: 2015
+  contests:
+    - type: Regional
+      contents:
+      - title: Scoreboard
+        url: 2015/regional/scoreboard.html
+      - title: Problems
+        url: 2015/regional/problems.pdf
+      - title: Final Report
+        url: 2015/regional/FinalReport.pdf

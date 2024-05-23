@@ -79,3 +79,38 @@ int solution(vector<int> &A) {
   }
   return equiCnt;
 }
+
+//! 14/11/2023
+int solution(vector<int> &A) {
+  int stackSz{0};
+  int stackTop(0);
+  for(auto v : A) {
+    if(stackSz == 0) {
+      ++stackSz;
+      stackTop = v;
+    } else {
+      if(stackTop == v) ++stackSz;
+      else --stackSz;
+    }
+  }
+  if(stackSz == 0) return 0;
+  int suffixCnt{0};
+  for(auto v : A) {
+    if(v == stackTop) ++suffixCnt;
+  }
+  int res{0};
+  int prefixCnt{0};
+  const int n = A.size();
+  for(int i = 0; i < n; ++i) {
+    if(A[i] == stackTop) {
+      ++prefixCnt;
+      --suffixCnt;
+    }
+    if((prefixCnt > (i+1) / 2) && (suffixCnt > (n-i-1) / 2)) {
+      ++res;
+      // cout <<
+    }
+
+  }
+  return res;
+}

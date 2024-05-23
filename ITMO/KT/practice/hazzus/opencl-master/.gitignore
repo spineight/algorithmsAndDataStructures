@@ -1,0 +1,5 @@
+**build**
+.idea
+**.user
+.vs**
+CMakeSettings.json

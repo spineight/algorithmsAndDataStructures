@@ -67,6 +67,13 @@ namespace BinaryHeapDetails{
       i = minIdx;
     }
   }
+
+  template<class ContainerT>
+  requires Container<ContainerT> && std::random_access_iterator<typename ContainerT::iterator>
+  void extractMax(ContainerT& container, int n) {
+    std::swap(container.front(), container[n]);
+    siftDown<ContainerT, std::greater<typename ContainerT::value_type>>(container, 1);
+  }
 }
 
 
@@ -87,20 +94,9 @@ template<class ContainerT, class Comparator = std::greater<>>
 requires Container<ContainerT> && std::random_access_iterator<typename ContainerT::iterator>
 void heap_sort(ContainerT& container) {
   make_heap<ContainerT, Comparator>(container);
-  int n = container.size() - 1; // 1-idx array
-  int i = n;
-
-
-
-  while(i >= 1) {
-    auto tmp = container[1]; // getMin
-//    void extractMax() {
-      std::swap(container[1], container[n--]);
-      BinaryHeapDetails::siftDown<ContainerT, std::less<>/*TODO this is hardcoded, should be inverse of comparator*/>
-              (container, 1);
-//    }
-    container[i] = tmp;
-    --i;
+  int n = container.size(); // 1-idx array
+  while(n > 0) {
+      BinaryHeapDetails::extractMax(container,--n);
   }
 }
 
@@ -108,7 +104,7 @@ void heap_sort(ContainerT& container) {
 //! Interface Based on https://en.cppreference.com/w/cpp/container/priority_queue
 template<typename ValT, typename ContainerT = std::vector<ValT>, typename CompareFunctor = std::less<ValT>>
 struct BinaryHeap {
-  ContainerT container;
+  ContainerT container{1};
   int n{0};
 
   void push(int val) {
@@ -148,9 +144,10 @@ int main() {
   for(int i = 10; i >= 0; --i)
     bh.push(i);
   while(!bh.empty()) {
-    cout << bh.top();
+    cout << bh.top() << " ";
     bh.pop();
   }
+  cout << '\n' << '\n';
 
   std::vector<int> a0 = {6,5,4,3,2,1};
   make_heap(a0);

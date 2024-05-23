@@ -62,3 +62,17 @@ int solution(vector<int> &A) {
     return 1;
   return 0;
 }
+
+//! 11/11/2023
+#include <unordered_set>
+
+int solution(vector<int> &A) {
+  const int n = A.size();
+  unordered_set<int> nums;
+  for(auto v : A) {
+    if(v > n) return 0;
+    auto [_, ok] = nums.insert(v);
+    if(!ok) return 0;
+  }
+  return nums.size() == n;
+}

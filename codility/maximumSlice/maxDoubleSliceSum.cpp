@@ -64,3 +64,24 @@ int solution(vector<int> &A) {
   }
   return best;
 }
+
+//! 16/11/2023
+//! I looked at my previous solution
+//! Improved it a little bit: we can calculate maxSums in one loop
+int solution(vector<int> &A) {
+  const int n = A.size();
+  vector<int> maxSumEndingHere(n, 0);
+  vector<int> maxSumStartingHere(n,0);
+  for(int i = 1; i < n; ++i) {
+    //! we could replace by 0 if place delimeters L,M close to each other
+    //! this will result in empty left part, sum of which is 0
+    maxSumEndingHere[i] = max(0, maxSumEndingHere[i-1] + A[i]);
+    maxSumStartingHere[n-1-i] = max(0, maxSumStartingHere[n-i] + A[n-1-i]);
+  }
+  int best{0};
+  //! select where to put middle delemiter, to maximize the total result
+  for(int m = 1; m + 1 < n; ++m) {
+    best = max(best, maxSumEndingHere[m-1] + maxSumStartingHere[m+1]);
+  }
+  return best;
+}

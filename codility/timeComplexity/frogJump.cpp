@@ -34,3 +34,10 @@ X ≤ Y.
 int solution(int X, int Y, int D) {
   return ceil( (Y-X) / static_cast<double>(D));
 }
+
+//! 11/11/2023
+int solution(int X, int Y, int D) {
+  if(X==Y) return 0;
+  return (Y-X-1) / 2 + 1; // solved with a pen and paper
+}
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Emergencies | eng-practices</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Emergencies" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Google’s Engineering Practices documentation" />
+<meta property="og:description" content="Google’s Engineering Practices documentation" />
+<link rel="canonical" href="emergencies.html" />
+<meta property="og:url" content="https://google.github.io/eng-practices/review/emergencies.html" />
+<meta property="og:site_name" content="eng-practices" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Emergencies" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Google’s Engineering Practices documentation","headline":"Emergencies","url":"https://google.github.io/eng-practices/review/emergencies.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="../assets/css/style.css%3Fv=f59560f820aca4d6621858b0ea7d405bf9be4514.css">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/eng-practices/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="../index.html">eng-practices</a></h1>
+      
+
+      <h1 id="emergencies">Emergencies</h1>
+
+<p>Sometimes there are emergency CLs that must pass through the entire code review
+process as quickly as
+possible.</p>
+
+<h2 id="what">What Is An Emergency?</h2>
+
+<p>An emergency CL would be a <strong>small</strong> change that: allows a major launch to
+continue instead of rolling back, fixes a bug significantly affecting users in
+production, handles a pressing legal issue, closes a major security hole, etc.</p>
+
+<p>In emergencies we really do care about the speed of the entire code review
+process, not just the <a href="reviewer/speed.html">speed of response</a>. In this case
+<em>only</em>, the reviewer should care more about the speed of the review and the
+correctness of the code (does it actually resolve the emergency?) than anything
+else. Also (perhaps obviously) such reviews should take priority over all other
+code reviews, when they come up.</p>
+
+<p>However, after the emergency is resolved you should look over the emergency CLs
+again and give them a <a href="reviewer/looking-for.html">more thorough review</a>.</p>
+
+<h2 id="not">What Is NOT An Emergency?</h2>
+
+<p>To be clear, the following cases are <em>not</em> an emergency:</p>
+
+<ul>
+  <li>Wanting to launch this week rather than next week (unless there is some
+actual <a href="emergencies.html#deadlines">hard deadline</a> for launch such as a partner agreement).</li>
+  <li>The developer has worked on a feature for a very long time and they really
+want to get the CL in.</li>
+  <li>The reviewers are all in another timezone where it is currently nighttime or
+they are away on an off-site.</li>
+  <li>It is the end of the day on a Friday and it would just be great to get this
+CL in before the developer leaves for the weekend.</li>
+  <li>A manager says that this review has to be complete and the CL checked in
+today because of a <a href="emergencies.html#deadlines">soft (not hard) deadline</a>.</li>
+  <li>Rolling back a CL that is causing test failures or build breakages.</li>
+</ul>
+
+<p>And so on.</p>
+
+<h2 id="deadlines">What Is a Hard Deadline?</h2>
+
+<p>A hard deadline is one where <strong>something disastrous would happen</strong> if you miss
+it. For example:</p>
+
+<ul>
+  <li>Submitting your CL by a certain date is necessary for a contractual
+obligation.</li>
+  <li>Your product will completely fail in the marketplace if not released by a
+certain date.</li>
+  <li>Some hardware manufacturers only ship new hardware once a year. If you miss
+the deadline to submit code to them, that could be disastrous, depending on
+what type of code you’re trying to ship.</li>
+</ul>
+
+<p>Delaying a release for a week is not disastrous. Missing an important conference
+might be disastrous, but often is not.</p>
+
+<p>Most deadlines are soft deadlines, not hard deadlines. They represent a desire
+for a feature to be done by a certain time. They are important, but you
+shouldn’t be sacrificing code health to make them.</p>
+
+<p>If you have a long release cycle (several weeks) it can be tempting to sacrifice
+code review quality to get a feature in before the next cycle. However, this
+pattern, if repeated, is a common way for projects to build up overwhelming
+technical debt. If developers are routinely submitting CLs near the end of the
+cycle that “must get in” with only superficial review, then the team should
+modify its process so that large feature changes happen early in the cycle and
+have enough time for good review.</p>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/google/eng-practices/edit/master/review/emergencies.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>

@@ -19,3 +19,5 @@ https://informatics.msk.ru/course/index.php?categoryid=79
 
 
 https://informatics.msk.ru/course/view.php?id=18
+
+https://informatics.msk.ru/course/view.php?id=18

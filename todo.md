@@ -1,3 +1,6 @@
+https://habr.com/ru/articles/713498/
+
+
 https://www.youtube.com/watch?v=NnoBrUQCV0Q
 https://compscicenter.ru/courses/algorithms-2/nsk/2018-spring/classes/3762/
 
@@ -80,3 +83,5 @@ www.spoj.com/problems/GSS3/
 LCA - https://cp-algorithms.com/graph/lca_tarjan.html
 
 Google: "Михаил Тихомиров вероятностные алгоритмы"
+
+https://github.com/joric

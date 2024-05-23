@@ -35,11 +35,14 @@ add_subdirectory(LKSH)
 
 add_subdirectory(informatics_mccme)
 
-#
-#add_subdirectory(intuit/baseAndAdvancedAlgsForPupil)
+add_subdirectory(ITMO/pashka)
 
+add_subdirectory(intuit/baseAndAdvancedAlgsForPupil)
 
-#add_subdirectory(Codeforces)
+add_subdirectory(Codeforces)
+
+add_subdirectory(SPOJ)
+
 #add_subdirectory(compscicenter)
 #add_subdirectory(Rucode)
 #add_subdirectory(Skiena_programmingChallenges_book)

@@ -32,3 +32,24 @@ int solution(vector<int> &A) {
   }
   return -1;
 }
+
+//! 11/11/2023
+int solution(vector<int> &A) {
+  auto last = remove_if(begin(A), end(A), [](int val) {
+    return val < 0;
+  });
+
+
+  sort(begin(A), last);
+
+  const int n = distance(begin(A), last);
+  if(n == 0) return 1;
+
+  if(A.front() > 1) return 1;
+
+  int i = 1;
+  for(; i < n; ++i) {
+    if(A[i]-A[i-1] > 1) return A[i-1]+1;
+  }
+  return A[i-1] + 1;
+}

@@ -20,3 +20,7 @@ https://github.com/tkhirianov
 https://blog.mitrichev.ch/
 
 https://github.com/Vinatorul
+
+https://github.com/mbuzdalov?tab=repositories
+
+https://github.com/niyaznigmatullin/itmo-study-projects

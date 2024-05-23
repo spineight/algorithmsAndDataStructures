@@ -58,3 +58,21 @@ int solution(vector<int> &A) {
   }
   return best;
 }
+
+//! 11/11/2023
+//! idea: use prefix sum
+#include <limits>
+
+int solution(vector<int> &A) {
+  int best = numeric_limits<int>::max();
+  const int n = A.size();
+  for(int i = 1; i < n; ++i) {
+    A[i] += A[i-1];
+  }
+
+  for(int i = 1; i < n; ++i) {
+    int soFar = abs(A[i-1] - (A.back() - A[i-1]));
+    best = min(best,soFar);
+  }
+  return best;
+}

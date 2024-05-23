@@ -44,3 +44,22 @@ int solution(string &S) {
   }
   return s.empty(); //! NB!!!
 }
+
+//! 14/11/2023
+#include <unordered_map>
+#include <stack>
+
+int solution(string &S) {
+  unordered_map<char,char> openToClosed = {{'(', ')'},{'{', '}'},{'[', ']'}};
+  stack<char> open;
+  for(auto ch : S) {
+    if(openToClosed.contains(ch))
+      open.push(ch);
+    else {
+      if(open.empty() || openToClosed[open.top()] != ch)
+        return 0;
+      open.pop();
+    }
+  }
+  return open.empty();
+}

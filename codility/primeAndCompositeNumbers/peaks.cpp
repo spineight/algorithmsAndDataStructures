@@ -93,3 +93,38 @@ int solution(vector<int> &A) {
   }
   return 0;
 }
+
+//! 21/11/2023
+//! Based on prefix sum (half intervals), for efficient answ if there is a peak within given range
+//! Prefix sum with half intervals is used so we don't need to check separately if the block start at the beginning
+//! if(prefixSum[i + blockSz] - prefixSum[i] == 0)
+int solution(vector<int> &A) {
+  const auto n = A.size();
+  vector<int> peaks;
+  vector<int> prefixSum(n+1,0);
+  for(size_t i = 1; i + 1 < n; ++i) {
+    if(A[i-1] < A[i] && A[i+1] < A[i]) {
+      peaks.push_back(i);
+      ++prefixSum[i+1];
+    }
+  }
+  for(size_t i = 1; i <= n; ++i) {
+    prefixSum[i] += prefixSum[i-1];
+  }
+  // for(auto p : prefixSum) cout << p << " ";
+  // cout << '\n';
+  auto isValid = [&](int blockCnt) {
+    if(A.size() % blockCnt) return false;
+    size_t blockSz = A.size() / blockCnt;
+
+    for(size_t i = 0; i < n; i += blockSz) {
+      if(prefixSum[i + blockSz] - prefixSum[i] == 0) return false;
+    }
+    return true;
+  };
+  for(size_t k = n; k >= 1; --k) {
+    if(isValid(k)) return k;
+  }
+  return 0;
+
+}

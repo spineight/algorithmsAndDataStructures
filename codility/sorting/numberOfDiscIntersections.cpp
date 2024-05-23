@@ -22,3 +22,25 @@ int solution(vector<int> &A) {
   }
   return cnt;
 }
+
+//! 14/11/2023
+int solution(vector<int> &A) {
+  vector<pair<int64_t,int/*open/closed*/>> events;
+  enum EventType{closed = 1, opened = -1}    ;
+  const int n = A.size();
+  for(int i = 0; i < n; ++i) {
+    events.emplace_back(i-(int64_t)A[i], opened);
+    events.emplace_back(i+(int64_t)A[i], closed);
+  }
+  sort(begin(events), end(events));
+  int balance{0};
+  int res{0};
+  for(const auto [x, e] : events) {
+    balance += e;
+    if(closed == e) {
+      res += abs(balance);
+      if( res > 10'000'000) return -1;
+    }
+  }
+  return res;
+}

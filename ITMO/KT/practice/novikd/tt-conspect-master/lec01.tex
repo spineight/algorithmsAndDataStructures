@@ -1,0 +1,268 @@
+\section{\texorpdfstring{$\lambda$-исчисление}{Lambda calculus}}
+
+\subsection{\texorpdfstring{Введение}{Introduction}}
+\epigraph{Смысла в этом нет.}{Д.Г.}
+
+\begin{definition}[$\lambda$-выражение]
+    $\lambda$-выражение "--- выражение, удовлетворяющее грамматике:
+    \begin{bnf}
+    \begin{alignat*}{3}
+        \Lambda ::= & \lambda{}x.\Lambda{} \qquad && (абстракция) \\
+                  | & \Lambda{}\Lambda{}          && (аппликация) \\
+                  | & x                                           \\
+                  | & \left(\Lambda\right)
+    \end{alignat*}
+    \end{bnf}
+    \begin{enumerate}[label=(\asbuk*)]
+        \item Аппликация левоассоциативна.
+        \item Абстракция распространяется как можно дальше вправо.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    $((\lambda{} z.(z (y z))) (z x) z) = (\lambda{} z.z (y z)) (z x) z$
+\end{example}
+
+Есть понятия связанного и свободного вхождения переменной (аналогично ИП).
+$\lambda{}x.A$ связывает все свободные вхождения $x$ в $A$.
+Договоримся, что:
+\begin{enumerate}[label=(\asbuk*)]
+    \item Переменные "--- $x$, $a$, $b$, $c$.
+    \item Термы (части $\lambda$-выражения) "--- $X$, $A$, $B$, $C$.
+    \item Фиксированные переменные обозначаются буквами из начала алфавита, метапеременные "--- из конца.
+\end{enumerate}
+
+На самом деле, смысл в этом есть, $\lambda$-выражение можно понимать как функцию.
+Абстракция "--- это функция с аргументом, аппликация "--- это передача аргумента.
+
+\begin{definition}[$\alpha$-эквивалентность]
+    $A$ и $B$ называются $\alpha$-эквивалентными ($A=_{\alpha}B$), если выполнено одно из следующих условий:
+    \begin{enumerate}
+        \item $A\equiv{}x$ и $B\equiv{}x$.
+        \item $A\equiv{}\lambda{}x.P$, $B\equiv{}\lambda{}y.Q$ и $P [x\coloneqq{}t] =_{\alpha}Q [y\coloneqq{}t]$, где $t$ "--- новая переменная.
+        \item $A\equiv{}PQ$, $B\equiv{}RS$ и $P=_{\alpha}R$, $Q=_{\alpha}S$.
+    \end{enumerate}
+\end{definition}
+
+То есть два выражения $\alpha$-эквивалентны, если они равны с точностью до переименования абстракций.
+В C++ между функциями \mintinline{C++}{[](int x){return f(x);}} и \mintinline{C++}{[](int y){return f(y);}} нет разницы.
+
+\begin{example}
+    $\lambda{}x.\lambda{}y.xy=_{\alpha}\lambda{}y.\lambda{}x.yx$.
+    \begin{proof} Согласно второму правилу следующие утверждения верны:
+        \begin{alignat*}{2}
+            \lambda{}y.ty=_{\alpha}\lambda{}x.tx &\implies \lambda{}x.\lambda{}y.xy=_{\alpha}\lambda{}y.\lambda{}x.yx \\
+            tz=_{\alpha}tz &\implies \lambda{}y.ty=_{\alpha}\lambda{}x.tx
+        \end{alignat*}%
+        $tz=_{\alpha}tz$ верно по третьему условию.
+    \end{proof}
+\end{example}
+
+\begin{definition}[$\beta$-редекс]
+    Терм вида $\left(\lambda{}a.A\right)B$ называется $\beta$-редексом.
+\end{definition}
+
+\begin{example}
+    В выражении
+    $
+        (
+            \lambda{}f.
+                \underset{A_2}{\underline{
+                    (\lambda{}x.\overset{A_1}{\overline{f(xx)}})
+                    \overset{B_1}{\overline{(\lambda{}x.f(xx))}}
+                }}
+        )\underset{B_2}{\underline{g}}
+    $ два $\beta$-редекса.
+\end{example}
+
+\begin{definition}
+    Множество $\lambda$-термов $\boldsymbol{\Lambda}$ назовём множеством классов эквивалентности $\Lambda$ по $(=_{\alpha})$.
+\end{definition}
+
+\begin{definition}[$\beta$-редукция]
+    $A\rightarrow_{\beta}B$ (состоят в отношении $\beta$-редукции), если выполняется одно из условий:
+    \begin{enumerate}
+        \item $A\equiv{}PQ$, $B\equiv{}RS$ и либо $P\rightarrow_{\beta}R$ и $Q=_{\alpha}S$,
+            либо $P=_{\alpha}R$ и $Q\rightarrow_{\beta}S$.
+        \item $A\equiv{}\lambda{}x.P$, $B\equiv{}\lambda x.Q$, $P\rightarrow_{\beta}Q$ ($x$ из какого-то класса из $\boldsymbol{\Lambda}$).
+        \item $A\equiv{}(\lambda{}x.P)Q$, $B\equiv{}P [x\coloneqq{}Q]$, $Q$ свободно для подстановки в $P$ вместо $x$.
+    \end{enumerate}
+\end{definition}
+
+$\beta$-редукция это вычисление функции, подстановка её аргумента.
+
+\begin{example} $(\lambda x . x y) a \rightarrow_\beta a y$
+\end{example}
+
+\subsection{\texorpdfstring{Числа Чёрча}{Church numerals}}
+\epigraph{Хотите знать, что такое истина?}{Д.Г.}
+
+\newcommand{\T}{\comb{T}}
+\newcommand{\F}{\comb{F}}
+\newcommand{\Not}{\comb{Not}}
+\begin{gather*}
+    \T   = \lambda{}x\lambda{}y.x \qquad
+    \F   = \lambda{}x\lambda{}y.y \\
+    \Not = \lambda{}a.a\F\T
+\end{gather*}
+
+Похоже на тип \mintinline{Pascal}{boolean}, не правда ли?
+\begin{example}
+    \[
+        \Not \T = (\reduction{\lambda{}a}.a\F\T)\reduction\T \rightarrow_{\beta}
+            \T\F\T = (\reduction{\lambda{}x}.\lambda{}y.x)\reduction\F\T \rightarrow_{\beta}
+            (\reduction{\lambda{}y}.\F)\reduction\T \rightarrow_{\beta}
+            \F
+    \]
+\end{example}
+Истина это функция, которая принимает два аргумента, и возвращает первый аргумент.
+Ложь принимает два аргумента и возвращает второй.
+Если в выражении $a \F \T$ терм $a$ является истиной, то результатом будет первый аргумент, $\F$. Если ложью "--- второй аргумент, $\T$.
+
+Можно продолжить:
+\[
+    \comb{And} = \lambda{}a.\lambda{}b.ab\F \qquad
+    \comb{Or}  = \lambda{}a.\lambda{}b.a\T b
+\]
+Разберём $\comb{And}$. Он принимает два аргумента.
+Если первый аргумент это истина, то тогда результат $\comb{And}$ равен второму аргументу.
+Если первый аргумент это ложь, то тогда результат $\comb{And}$ это ложь, и от второго аргумента не зависит.
+Это и записано в выражении. $\comb{Or}$ разбирается аналогично.
+
+Попробуем определить числа:
+\begin{definition}[чёрчевский нумерал]
+\[
+    \overline{n}=\lambda{}f.\lambda{}x.f^{n}x \text{,\quadгде\quad}
+    f^{n}x=
+    \begin{cases}
+        f\left(f^{n-1}x\right) &, n > 0 \\
+        x                      &, n = 0
+    \end{cases}
+\]
+\end{definition}
+
+\begin{example}
+\[
+    \overline{3} = \lambda f . \lambda x . f (f (f x))
+\]
+\end{example}
+
+Несложно определить прибавление единицы к такому нумералу:
+\[
+    (+1) = \lambda{}n.\lambda{}f.\lambda{}x.f(nfx) \\
+\]
+\begin{example}
+    \[
+        (+1) \overline{1} =
+        (\reduction{\lambda n} . \lambda f . \lambda x . f (n f x)) \reduction{(\lambda f . \lambda x . f x)} \rightarrow_{\beta}
+        \lambda f . \lambda x . f ((\reduction{\lambda f . \lambda x} . f x) \reduction{f x}) \twoheadrightarrow_{\beta}
+        \lambda f . \lambda x . f (f x) =
+        \overline{2}
+    \]
+\end{example}
+
+\begin{definition}[$\eta{}$-эквивалентность]
+    \[
+        \lambda x . f x =_{\eta} f
+    \]
+\end{definition}
+Точно так же результаты вычисления \mintinline{C++}{int f(int x)} и \mintinline{C++}{[](int x){return f(x);}} равны.
+
+Арифметические операции:
+\begin{align*}
+    \comb{IsZero} &= \lambda{}n.n\mathinner{(\lambda{}x.\F)}\T &\qquad
+    \comb{Add}    &= \lambda{}a.\lambda{}b.\lambda{}f.\lambda{}x.a \mathinner{f} (b \mathinner{f} x) &\qquad
+    \comb{Pow}    &= \lambda{}a.\lambda{}b.b \mathinner{(\comb{Mul} a)} \mathinner{\overline{1}} \\
+    \comb{IsEven} &= \lambda{}n.n \Not \T &\qquad
+    \comb{Mul}    &= \lambda{}a.\lambda{}b.a \mathinner{(\comb{Add} b)} \mathinner{\overline{0}} &\qquad
+    \comb{Pow'}   &= \lambda{}a.\lambda{}b.b a
+\end{align*}
+
+Для того, чтобы определить $(-1)$, сначала определим "пару":
+\[
+    \left<a,b\right> = \lambda f.f \mathinner{a} b \qquad
+    \comb{First} = \lambda p . p \T \qquad
+    \comb{Second} = \lambda p . p \F
+\]%
+затем $n$ раз применим функцию $f\left(\left<a,b\right>\right) = \left<b,b+1\right>$ и возьмём первый элемент пары:
+\[
+    (-1) = \lambda n . \comb{First}
+        \left(n \mathinner{(\lambda p . \left<\left(\comb{Second} p\right), \mathinner{(+1)} (\comb{Second} p)\right>)}
+        \left<\overline{0},\overline{0}\right>\right)
+\]
+
+Введём сокращение записи:
+\[
+    \lambda x y . A = \lambda x . \lambda y . A
+\]
+
+\begin{definition}[Нормальная форма] \mbox{} \\
+    Терм $A$ "--- нормальная форма (н.ф.), если в нём нет $\beta$-редексов. \\
+    Нормальной формой $A$ называется такой $B$, что $A \twoheadrightarrow_{\beta} B$, $B$ "--- н.ф. \\
+    $\twoheadrightarrow_{\beta}$ "--- транзитивно-рефлексивное замыкание $\rightarrow_{\beta}$.
+\end{definition}
+
+\begin{statement}
+    Существует $\lambda$-выражение, не имеющее н.ф.
+\end{statement}
+
+\begin{definition}[комбинатор]
+    Комбинатор "--- $\lambda$-выражение без свободных переменных.
+\end{definition}
+
+\begin{definition}
+\[
+    \combl\Omega = \combl\omega \combl\omega \qquad
+    \combl\omega = \lambda x . x x
+\]
+\end{definition}
+
+$\combl\Omega$ не имеет нормальной формы.
+
+\begin{definition}[комбинатор неподвижной точки]
+    \[
+        \comb Y = \lambda f . (\lambda x . f (x x)) (\lambda x . f (x x))
+    \]
+\end{definition}
+
+\begin{definition}[$\beta$-эквивалентность]
+    $A=_{\beta}B$, если $\exists C : C \twoheadrightarrow_{\beta} A, C \twoheadrightarrow_{\beta}B$
+\end{definition}
+
+\begin{statement}
+    \[
+        \comb Yf =_{\beta} f(\comb Yf)
+    \]
+\end{statement}
+
+Из-за этого свойста комбинатор $\comb Y$ и получил своё название.
+
+\begin{proof} Наивное $\beta$-редуцирование:
+    \begin{align*}
+        \comb Yf &=_{\beta} (\reduction{\lambda f} . (\lambda x . f (x x)) (\lambda x . f (x x))) \reduction f \\
+                 &=_{\beta} (\reduction{\lambda x} . f (x x)) \reduction{(\lambda x . f (x x))} \\
+                 &=_{\beta} f ((\lambda x . f (x x)) (\lambda x . f (x x))) \\
+                 &=_{\beta} f (\comb Y f)
+    \qedhere
+    \end{align*}
+\end{proof}
+
+Таким образом, с помощью $\comb Y$-комбинатора можно определять рекурсивные функции.
+\begin{example} Определим факториал.
+\begin{align*}
+    \comb{Fact'} &= \lambda{} f n . \comb{IsZero} n \mathinner{\overline{1}}
+                    (\comb{Mul} n \mathinner{(f \mathinner{(\mathinner{(-1)} n))}}) \\
+    \comb{Fact} &= \comb Y \comb{Fact'} \\
+    \comb{Fact} \overline 3 &=_\beta \comb Y \comb{Fact'} \overline 3 =_\beta \comb{Fact'} \mathinner{(\comb Y \comb{Fact'})} \overline 3
+                \\&=_\beta \comb{IsZero} \overline 3 \mathinner{\overline{1}}
+                    (\comb{Mul} \overline 3 \mathinner{(\comb Y \comb{Fact'} \mathinner{(\mathinner{(-1)} \overline 3)})})
+                =_\beta \comb{Mul} \overline 3 \mathinner{(\comb Y \comb{Fact'} \mathinner{(\mathinner{(-1)} \overline 3)})}
+                =_\beta \comb{Mul} \overline 3 \mathinner{(\comb Y \comb{Fact'} \overline 2)} \\&=_\beta \ldots
+                =_\beta \comb{Mul} \overline 3 \mathinner{(\comb{Mul} \overline 2 \mathinner{(\comb Y \comb{Fact'} \overline 1)})}
+                =_\beta \ldots =_\beta \comb{Mul} \overline 3 \mathinner{(\comb{Mul} \overline 2 \mathinner{(
+                    \comb{Mul} \overline 1 \mathinner{(\comb Y \comb{Fact'} \overline 0)})})} =_\beta \ldots \\
+                &=_\beta \comb{Mul} \overline 3 \mathinner{(\comb{Mul} \overline 2 \mathinner{( 
+                    \comb{Mul} \mathinner{\overline 1} \overline 1)})}
+                =_\beta \overline 6
+\end{align*}
+\end{example}
