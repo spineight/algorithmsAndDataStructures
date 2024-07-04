@@ -100,3 +100,28 @@ vector<int> solution(int N, vector<int> &A) {
   }
   return res;
 }
+
+
+//! 27/05/2024
+//! Imporved the naming of variables so the idea is clear
+vector<int> solution(int N, vector<int> &A) {
+    vector<int> counters(N,0);
+    int max_counter{0};
+    int min_counter{0};
+    for(auto v : A) {
+        if(N+1==v) {
+            min_counter = max_counter;
+        } else {
+            const auto idx = v-1;
+            if(counters[idx] < min_counter) {
+                counters[idx] = min_counter;
+            }
+            ++counters[idx];
+            max_counter = max(max_counter, counters[idx]);
+        }
+    }
+    for(auto& c : counters) {
+        c = max(c, min_counter);
+    }
+    return counters;
+}

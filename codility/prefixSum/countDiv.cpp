@@ -53,3 +53,14 @@ int solution(int A, int B, int K) {
   if(firstDiv <= B) return (B-firstDiv) / K + 1;
   return 0;
 }
+
+//! 27/05/2024
+//! Looked up the previous solution
+#include <cmath>
+int solution(int A, int B, int K) {
+    const int firstDiv = ( 0 == (A%K) ) ? A : ceil(static_cast<double>(A) / K) * K;
+    if(firstDiv <= B) {
+        return (B-firstDiv) / K + 1;
+    }
+    return 0;
+}

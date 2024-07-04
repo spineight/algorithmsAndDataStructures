@@ -69,3 +69,34 @@ int solution(vector<int> &A) {
   return max({A[0] * A[1] * A[2], A[0] * A[1] * A.back(),
               A[0] * A[n-1] * A[n-2], A[n-1] * A[n-2] * A[n-3]});
 }
+
+//! 28/05/2024
+//! Previous solutions are better (as they are shorter)
+//! Idea of previous solutions - use sort to find 3 smallest and 3 biggest
+#include <vector>
+
+int solution(vector<int> &A) {
+    std::vector<int> min_elems = {A[0], A[1], A[2]};
+    sort(begin(min_elems), end(min_elems));
+
+    std::vector<int> max_elems = {A[0], A[1], A[2]};
+    sort(begin(max_elems), end(max_elems));
+
+    const size_t n = A.size();
+    int best = A[0] * A[1] * A[2];
+
+    for(size_t i = 3; i < n; ++i) {
+        const int soFar = max( { min_elems[0] * min_elems[1] * A[i], 
+        min_elems[0] * max_elems[2] * A[i],
+        max_elems[1] * max_elems[2] * A[i] });
+        best = max(best, soFar);
+        if(A[i] < min_elems.back()) {
+            min_elems.back() = A[i];
+            sort(begin(min_elems), end(min_elems));
+        } else if(A[i] > max_elems.front()) {
+            max_elems.front() = A[i];
+            sort(begin(max_elems), end(max_elems));
+        }
+    }
+    return best;
+}

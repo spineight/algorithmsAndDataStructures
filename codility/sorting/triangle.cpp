@@ -49,3 +49,15 @@ int solution(vector<int> &A) {
   }
   return 0;
 }
+
+//! 28/05/2024
+//! Can be improved: From previous solution only one comparision is sufficient
+int solution(vector<int> &A) {
+    sort(begin(A), end(A));
+    for(size_t i = 0; i + 2 < A.size(); ++i) {
+        const bool triangleCondition = (A[i] > A[i+2] - A[i+1])
+        && (A[i] > A[i+1] - A[i+2]) && (A[i+1] > A[i] - A[i+2]);
+        if(triangleCondition) return 1;
+    }
+    return 0;
+}

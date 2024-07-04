@@ -44,3 +44,8 @@ int solution(vector<int> &A) {
   }
   return res;
 }
+
+//! 28/05/2024
+//! After 2 hours looked up the solution
+//! Failed to solve as thought about circle intersections, but it is disks intersection
+//! which is the same as segments intersection and can be solved with a sweep line algo

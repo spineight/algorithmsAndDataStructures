@@ -76,3 +76,15 @@ int solution(vector<int> &A) {
   }
   return nums.size() == n;
 }
+
+//! 23/05/2024
+#include <unordered_set>
+int solution(vector<int> &A) {
+    std::unordered_set<int> seen;
+    int maxElement = A.front();
+    for(auto v : A) {
+        seen.insert(v);
+        maxElement = max(maxElement, v);
+    }
+    return seen.size() == A.size() && maxElement == A.size();
+}

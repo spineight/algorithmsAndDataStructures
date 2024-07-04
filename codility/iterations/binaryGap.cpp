@@ -73,3 +73,34 @@ int solution(int N) {
   }
   return best;
 }
+
+//! 23/05/2024
+// you can use includes, for example:
+// #include <algorithm>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+
+#include <bitset>
+
+int solution(int N) {
+    std::bitset<32> bs(N);
+
+    size_t i{0};
+    while(i < bs.size() && 0 == bs[i]) {
+        ++i;
+    }
+
+    int best{0};
+    int soFar{0};
+    while(i < bs.size()) {
+        if(0 == bs[i]) {
+            ++soFar;
+        } else {
+            best = max(best, soFar);
+            soFar = 0;
+        }
+        ++i;
+    }
+    return best;
+}

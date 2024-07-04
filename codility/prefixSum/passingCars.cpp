@@ -77,3 +77,24 @@ int solution(vector<int> &A) {
   }
   return res;
 }
+
+//! 27/05/2024
+#include <vector>
+
+int solution(vector<int> &A) {
+    int res{0};
+    const auto n = A.size();
+    std::vector<int> prefix(n+1,0);
+    for(size_t i = 1; i <= n; ++i) {
+        prefix[i] = A[i-1] + prefix[i-1];
+    }
+    for(size_t i = 0; i < n; ++i) {
+        if(0 == A[i]) {
+            res += prefix[n] - prefix[i+1];
+        }
+        if(res > 1'000'000'000) {
+            return -1;
+        }
+    }
+    return res;
+}

@@ -76,3 +76,20 @@ int solution(vector<int> &A) {
   }
   return best;
 }
+
+//! 23/05/2024
+#include <numeric>
+#include <limits>
+#include <cmath>
+
+int solution(vector<int> &A) {
+    int rightSum = std::accumulate(begin(A), end(A),0);
+    int leftSum{0};
+    int best = std::numeric_limits<int>::max();
+    for(size_t p = 1; p < A.size(); ++p) {
+        leftSum += A[p-1];
+        rightSum -= A[p-1];
+        best = min(best, abs(leftSum-rightSum));
+    }
+    return best;
+}

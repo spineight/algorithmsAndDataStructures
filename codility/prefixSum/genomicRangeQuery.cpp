@@ -117,3 +117,41 @@ vector<int> solution(string &S, vector<int> &P, vector<int> &Q) {
   }
   return answ;
 }
+
+//! 27/05/2024
+#include <vector>
+#include <unordered_map>
+#include <string>
+
+vector<int> solution(string &S, vector<int> &P, vector<int> &Q) {
+    const size_t n = S.size();
+    std::unordered_map<char, std::vector<int>> prefix;
+    const std::string seq = "ACGT";
+    for(const auto& ch : seq) {
+        prefix[ch].resize(n+1);
+    }
+    for(size_t i = 0; i < n; ++i) {
+        ++prefix[S[i]][i+1];
+    }
+
+    for(const auto& ch : seq) {
+        for(size_t i = 1; i <= n; ++i) {
+            prefix[ch][i] += prefix[ch][i-1];
+        }
+    }
+
+    vector<int> res;
+    res.reserve(P.size());
+
+    for(size_t k = 0; k < P.size(); ++k) {
+        const size_t startIdx = P[k];
+        const size_t endIdx = Q[k];
+        for(size_t val = 1; val <= 4; ++val) {
+            if(prefix[seq[val-1]][endIdx+1] - prefix[seq[val-1]][startIdx]) {
+                res.push_back(val);
+                break;
+            }
+        }
+    }
+    return res;
+}

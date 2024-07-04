@@ -53,3 +53,21 @@ int solution(vector<int> &A) {
   }
   return A[i-1] + 1;
 }
+
+//! 27.05.2024
+#include <algorithm>
+
+int solution(vector<int> &A) {
+    std::sort(begin(A), end(A));
+    const auto e = std::remove_if(begin(A), end(A), [](auto val) {return val <= 0;});
+    
+    if(1 < *begin(A)) return 1;
+
+    auto it = begin(A);
+    for(; it + 1 < e; ++it) {
+        if(  (*(it+1) - *it ) > 1 ) {
+            return *it + 1;
+        }
+    }
+    return max(1, *it + 1);
+}

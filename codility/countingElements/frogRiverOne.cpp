@@ -75,3 +75,14 @@ int solution(int X, vector<int> &A) {
   }
   return -1;
 }
+
+// 23/05/2024
+#include <unordered_set>
+int solution(int X, vector<int> &A) {
+    std::unordered_set<int> positions;
+    for(size_t i = 0; i < A.size(); ++i) {
+        positions.insert(A[i]);
+        if(positions.size() == X) return i;
+    }
+    return -1;
+}

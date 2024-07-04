@@ -21,3 +21,13 @@ Write an efficient algorithm for the following assumptions:
 
 
  */
+
+//! 28/05/2024
+#include <unordered_set>
+int solution(vector<int> &A) {
+    std::unordered_set<int> unique;
+    for(auto v : A) {
+        unique.insert(v);
+    }
+    return unique.size();
+}

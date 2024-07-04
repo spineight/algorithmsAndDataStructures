@@ -206,3 +206,23 @@ int solution(vector<int> &A) {
   }
   return idx;
 }
+
+//! 28/05/2024
+int solution(vector<int> &A) {
+    // Idea: the slice of min avg can be of length 2 or 3
+    // (a+b) /2 > (a+b+c)/3
+    // (a+b) / 2 > c
+    // ex. 5 4 4
+    double best = (A[0] + A[1]) / 2.;
+    size_t pos{0};
+    const size_t n = A.size();
+    for(size_t i = 0; i + 1 < n; ++i) {
+        const double avg2 = (A[i] + A[i+1]) / 2.;
+        const double avgRes = (i + 2 < n) ? min( (A[i] + A[i+1] + A[i+2]) / 3., avg2) : avg2;
+        if( best > avgRes ) {
+            pos = i;
+            best = avgRes;
+        }
+    }
+    return pos;
+}
