@@ -2,6 +2,10 @@
 
 Goal: balanced coverage across the standard patterns without getting stuck early.
 
+See also:
+- [Session playbook](session-playbook.md)
+- [Knowledge base index](../10_kb/index.md)
+
 ## Modules (checklist)
 - [ ] Arrays & strings
 - [ ] Hash map / set
