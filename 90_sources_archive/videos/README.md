@@ -82,32 +82,7 @@ git annex whereis 90_sources_archive/videos/BaseAlgsForSchoolStudents/lec2_sorti
 ```
 This will show all the remotes where the file is currently stored.
 
----
-
-## Summary of Commands:
-1. Initialize `git-annex`:
-   ```bash
-   git annex init
-   ```
-2. Add a file without copying it locally:
-   ```bash
-   git annex addurl file:///path/to/file --file=relative/path/in/repo
-   ```
-3. Add external hard drives as remotes:
-   ```bash
-   git annex initremote <remote-name> type=directory directory=/path/to/drive encryption=none
-   ```
-4. Set redundancy:
-   ```bash
-   git annex numcopies 2
-   ```
-5. Copy files to remotes:
-   ```bash
-   git annex copy <file> --to=<remote-name>
-   ```
-6. Verify file locations:
-   ```bash
-   git annex whereis <file>
-   ```
-
-By following these steps, you can efficiently manage large files with `git-annex` and ensure redundancy across multiple external hard drives.
+Playing video files:
+```bash
+vlc 90_sources_archive/videos/ITMO/BaseAlgsForSchoolStudents/lec2_sorting_and_search
+```
