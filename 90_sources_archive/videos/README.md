@@ -23,7 +23,7 @@ git annex init "Video Management"
 If the file already exists on an external hard drive, you can add it to `git-annex` without copying it to your local repository. Use the `addurl` command:
 ```bash
 git annex addurl file:///run/media/oleg/Kotyamba/ITMO/BaseAlgsForSchoolStudents/lec2_sorting_and_search \
-  --file=90_sources_archive/videos/BaseAlgsForSchoolStudents/lec2_sorting_and_search
+  --file=90_sources_archive/videos/ITMO/BaseAlgsForSchoolStudents/lec2_sorting_and_search
 ```
 This creates a reference to the file in your repository without storing the file locally.
 
@@ -85,4 +85,15 @@ This will show all the remotes where the file is currently stored.
 Playing video files:
 ```bash
 vlc 90_sources_archive/videos/ITMO/BaseAlgsForSchoolStudents/lec2_sorting_and_search
+```
+
+## 7. Moving to a different directory
+```bash
+mv 90_sources_archive/videos/BaseAlgsForSchoolStudents/lec1_complexity_of_algorithms 90_sources_archive/videos/ITMO/BaseAlgsForSchoolStudents/
+
+git annex add 90_sources_archive/videos/ITMO/BaseAlgsForSchoolStudents/lec1_complexity_of_algorithms
+
+git annex sync
+
+git annex whereis 90_sources_archive/videos/ITMO/BaseAlgsForSchoolStudents/lec1_complexity_of_algorithms
 ```
