@@ -85,3 +85,9 @@ LCA - https://cp-algorithms.com/graph/lca_tarjan.html
 Google: "Михаил Тихомиров вероятностные алгоритмы"
 
 https://github.com/joric
+
+
+https://github.com/spineight/algorithms_and_data_structures
+
+
+https://github.com/kumagi/msgskip/blob/master/skiplist.h

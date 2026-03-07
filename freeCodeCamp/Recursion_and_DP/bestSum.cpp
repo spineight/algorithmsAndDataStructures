@@ -4,6 +4,9 @@ using namespace std;
 
 struct BestSum {
 
+  /*! This funtion should return an array containing the shortest combination of numbers
+      that add up exactly to the target sum
+  */
   optional<vector<int>> calculate(int num, const vector<int>& nums, auto& memo) {
     if(0 == num) return vector<int>{};
 

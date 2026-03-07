@@ -59,6 +59,7 @@ I spent a lot of time debugging this task:
 ## Simplify by avoiding code duplicate
 Use pointers to store branch results on which algorithm will be performed  
 see `leetcode: /twoPointers/intervalListIntersections.hpp`  
+[leetcode/twoPointers/intervalListIntersections](../leetcode/twoPointers/intervalListIntersections.hpp)
 
 ## Introduce methods for aux operations
 This will allow to simplify code,
@@ -184,7 +185,7 @@ example:
 ## space optimization
 Reusing initial array for storage of some information during processing  
 (in case if there are only positive values in the array):  
-[leetcode/arrays/findAllNumbersDisappearedInAnArray](leetcode/arrays/findAllNumbersDisappearedInAnArray.hpp)
+[leetcode/arrays/findAllNumbersDisappearedInAnArray](../leetcode/arrays/findAllNumbersDisappearedInAnArray.hpp)
 
 ## Sorting idxs of elements (if they are heavy) instead of elements
 We are going to sort `vector<MyType> elements`  
@@ -382,6 +383,7 @@ Based on Andrei Stankevich lecture:`/run/media/oleg/TOSHIBA EXT/ITMO/BaseAlgsFor
 * `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item2.mp4`   
 * `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item3.mp4`    
 
+
 #### Rotated sorted array (different from Andrei Stankevich, all ends are included)
 [leetcode/binary_search/searchInRotatedSortedArray](leetcode/binary_search/searchInRotatedSortedArray.hpp)     
 [leetcode/arrays/findMinimumInRotatedSortedArray](leetcode/arrays/findMinimumInRotatedSortedArray.hpp)   
@@ -422,12 +424,12 @@ Every recursion problem can be mapped to one of the following types:
 
 recursion progression problems (show different types and how to gradually transition from one type of a problem to another)
 Exit earlier once there is a suitable combination without considering others
-[reeCodeCamp/Recursion_and_DP/canSum](../freeCodeCamp/Recursion_and_DP/canSum.cpp)
+[freeCodeCamp/Recursion_and_DP/canSum](../freeCodeCamp/Recursion_and_DP/canSum.cpp)
 
-[reeCodeCamp/Recursion_and_DP/howSum](../freeCodeCamp/Recursion_and_DP/howSum.cpp)
+[freeCodeCamp/Recursion_and_DP/howSum](../freeCodeCamp/Recursion_and_DP/howSum.cpp)
 
 We need to consider all combinations to choose the best once
-[reeCodeCamp/Recursion_and_DP/bestSum](../freeCodeCamp/Recursion_and_DP/bestSum.cpp)
+[freeCodeCamp/Recursion_and_DP/bestSum](../freeCodeCamp/Recursion_and_DP/bestSum.cpp)
 
 [freeCodeCamp/Recursion_and_DP/canConstruct](../freeCodeCamp/Recursion_and_DP/canConstruct.cpp)
 [freeCodeCamp/Recursion_and_DP/countConstruct](../freeCodeCamp/Recursion_and_DP/countConstruct.cpp)
@@ -454,47 +456,143 @@ It seemed hard to me to solve, as initially was hard to define subproblem and wh
 ## greedy
 [leetcode/arrays/minimumNumberOfArrorsToBurstBaloons](../leetcode/arrays/minimumNumberOfArrorsToBurstBaloons.hpp)
 
-## DP
-### General idea
-Visualize problem as a tree structure and observe how it would be solved with recursion
-(with recursion we go depth first and once reach a base case start unwinding)
-### Stankevich
-Good explanation of base types in Andrei Stankevich lecture:`/run/media/oleg/TOSHIBA EXT/ITMO/BaseAlgsForSchoolStudents/lec3_dynamic_programming`
-For backward DP: good idea for the current state to reason from which previous states we could come here
-(on which states it depends)
-[grasshopper](../intuit/BaseAlgorithmsForPupil/lec3_dynamic_programming/include/grasshopper.hpp)  
-[turtle](../intuit/BaseAlgorithmsForPupil/lec3_dynamic_programming/include/turtle.hpp)  
-[zoo_store](../intuit/BaseAlgorithmsForPupil/lec3_dynamic_programming/include/zoo_store.hpp)  
+# Динамическое программирование (DP)
+## Стратегии
+- Хорошая стратегия - составляем состояние и смотрим из каких состояний мы могли в него прийти
+- При составлении состояния помогает следующее размышление: допустим я знаю решение для меньшей задачи,
+как из него получить решение для следующей
 
-### Stepanov
-Improvement (my idea) of Grasshoper (only 2 variables, instead of 3)
-[FPMI/Stepanov/DP/grashopper](/../FPMI/Stepanov/DP/grashopper.cpp)
-Grasshopper or Turtle with optimized memory usage (only 2 rows for DP)
-(FPMI/Stepanov/DP/grasshopper2D)[../FPMI/Stepanov/DP/grasshopper2D.cpp]
+## Схема решения и примеры классических задач
+[Stankevich DP3 lecture](../intuit/BaseAlgorithmsForPupil/lec3_dynamic_programming/README.md)
+lecture:`/run/media/oleg/TOSHIBA EXT/ITMO/BaseAlgsForSchoolStudents/lec3_dynamic_programming`
+My reflection on the lecture and practice
+For forward DP good idea for the current state to reason from which previous states we could come here
 
+**1D**
+- [grasshopper](../intuit/BaseAlgorithmsForPupil/lec3_dynamic_programming/include/grasshopper.hpp)
+- [MFTI_FPMI/Stepanov/DP/grashopper](../MFTI_FPMI/Stepanov/spring_2023_advancedAlgs/DP/grashopper.cpp)
+  Оптимизация по памяти (нам достаточно только две переменные, вместо массива)
+  Примеры задач:
+  https://leetcode.com/problems/jump-game/
+  [jump_game](../leetcode/DP/jumpGame.hpp) - can be solved with 1D DP, but exists simplier and more efficient solution
+
+### 2D
+**Простой обход**
+- [turtle](../intuit/BaseAlgorithmsForPupil/lec3_dynamic_programming/include/turtle.hpp)
+- [MFTI_FPMI/Stepanov/DP/grasshopper2D][../MFTI_FPMI/Stepanov/spring_2023_advancedAlgs/DP/grasshopper2D.cpp]
+  Оптимизация по памяти (достаточно только две строки, вместо матрицы)
+- [unique_paths](../leetcode/DP/unique-paths.hpp)
+- [unique_paths_omptimized](../leetcode/DP/unique_paths_optimized.hpp)
+- [grid paths](../cses.fi/grid_paths.cpp)
+  В некоторых клетках есть ловушки
+
+**Храним информацию и последнем элементе подпоследовательности**
+- [zoo_store](../intuit/BaseAlgorithmsForPupil/lec3_dynamic_programming/include/zoo_store.hpp)
+- [array description](../cses.fi/array_description.cpp)
+
+### Задача о рюкзаке
+- [book shoop](../cses.fi/book_shop.cpp)
+
+### Задачи о монетах
+- [coin_combinations_I](../cses.fi/coin_combinations_I.cpp)
+Посчитать число способов составить заданную сумму используя монеты заданного номинала,
+число монет не ограничено, порядок монет имеет значение.
+- [dice_combinations](../cses.fi/dice_combinations.cpp)
+В этой задаче вместо монет разных номиналов выступает кубик, также посчитать число способов,
+порядок имеет значение
+- [coin_combinations_II](../cses.fi/coin_combinations_II.cpp)
+Посчитать число способов составить заданную сумму используя монеты заданного номинала,
+число монет не ограничено, порядок монет не имеет значение.
+- [minimizing_coins](../cses.fi/minimizing_coins.cpp)
+Найти минимально необходимое число монет для составления заданной суммы
+
+TODO: Not clear to which type of dynamics these problems belong to
 Max Common Subsequence Length. My idea with memory optimization (only 2 rows for DP)
-[FPMI/Stepanov/DP/maxCommonSubsequence](../FPMI/Stepanov/DP/maxCommonSubsequence.cpp)
+[MFTI_FPMI/Stepanov/DP/maxCommonSubsequence](../MFTI_FPMI/Stepanov/spring_2023_advancedAlgs/DP/maxCommonSubsequence.cpp)
 
 Find Max Common Subsequence. My idea: we don't need aux matrix for answ restoring, as all needed info we have in DP matrix
-[FPMI/Stepanov/DP/maxCommonSubsequence](../FPMI/Stepanov/DP/maxCommonSubsequence.cpp)
+[MFTI_FPMI/Stepanov/DP/maxCommonSubsequence](../MFTI_FPMI/Stepanov/spring_2023_advancedAlgs/DP/maxCommonSubsequence.cpp)
 
 
-Good explanation of thought process how to go from recursive version -> recursive + memoization -> DP  
+
+
+TODO: practice problems
+https://cses.fi/problemset/task/2413
+https://informatics.msk.ru/course/view.php?id=9
+https://codeforces.com/blog/entry/325
+
+## Вариации одной задачи с увеличением сложности
+Показан мыслительный процесс перехода рекурсия -> рекурсия + мемо -> Динамическое программирование
+Но на практике, это не эффективный подход, так как на интервью на это уйдет слишком много времени
 video lectures: `/run/media/oleg/TOSHIBA EXT/FreeCodeCamp/DynamicProgramming_LearntoSolveAlgorithmicProblems_26CodingChallenges.mp4)`  
 Idea is to have in mind a graph of transitions when solving recursively, this helps to establish dependencies
 and order in which subproblems are solved for iterative dp.
 In the order of difficulty:  
-[gridTraveller](../freeCodeCamp/DP/gridTraveller.cpp) - according to Stankevich lecture on DP (this can be solved using combinatorics formula)  
+[gridTraveller](../freeCodeCamp/DP/gridTraveller.cpp) - according to Stankevich lecture on DP (this can be solved using combinatorics formula)
+https://leetcode.com/problems/unique-paths/description/
+
+freeCodeCamp - проблема в том, что я не на все примеры нашел задачи на платформах,
+чтобы проверить решение (нужно написать тесты + случайные тесты)
 
 [canSum](../freeCodeCamp/Recursion_and_DP/canSum.cpp)  
+[canSumTest](../freeCodeCamp/Recursion_and_DP/canSum_test.cpp)
 
 Using parent array to reconstruct the answer
 [howSum](../freeCodeCamp/Recursion_and_DP/howSum.cpp)
+[howSumTest](../freeCodeCamp/Recursion_and_DP/howSum_test.cpp)
+
+[Dice Combinations](../cses.fi/dice_combinations.cpp)
+[coin_combinations_I](../cses.fi/coin_combinations_I.cpp)
+
+[Minimizing Coins](../cses.fi/minimizing_coins.cpp)
 
 [bestSum](../freeCodeCamp/Recursion_and_DP/bestSum.cpp)  
+Can be tested with [Minimizing Coins](../cses.fi/minimizing_coins.cpp)
+
+
+
+
 [canConstruct](../freeCodeCamp/Recursion_and_DP/canConstruct.cpp)    
 [countConstruct](../freeCodeCamp/Recursion_and_DP/countConstruct.cpp)  
+
 [allConstruct](../freeCodeCamp/Recursion_and_DP/allConstruct.cpp)  
+
+## Coins
+Идея - решая разные вариации одной задачи про монеты понять основные моменты в реализации ДП:
+- порядок обхода
+- пересчет состояний
+- [coin_combinations_I](../cses.fi/coin_combinations_I.cpp)
+- [coin_combinations_II](../cses.fi/coin_combinations_II.cpp)
+- [Minimizing Coins](../cses.fi/minimizing_coins.cpp)
+- [Removing digits](../cses.fi/removing_digits.cpp)
+My greedy solution seems to work here but I am struggling to proof it,
+and don't get the [chatGPT explanation](../chatGPT/greedySolution.md)
+Мне кажется для доказательства жадного решения нужно показать, что чем меньше число - тем меньше шагов нужно
+для его обнуления.
+I solved it using DP as well.
+- [grid paths](../cses.fi/grid_paths.cpp)
+- [book shoop](../cses.fi/book_shop.cpp)
+knapsack: given the weights (prices) and values (pages) of items, maximize the profit within a capacity(amount) constraint.
+
+## Динамика по подотрезкам
+- Задача про сжатие строки
+https://acm.timus.ru/problem.aspx?space=1&num=1238
+Объяснение которой я пока не понял
+
+- задача (Дубы):
+Объяснения от yeputons
+https://habr.com/ru/articles/112386/
+По этой ссылке можно скачать текст задачи и тесты
+https://neerc.ifmo.ru/school/archive/2007-2008.html#practice
+
+
+## informatics
+https://informatics.msk.ru/course/view.php?id=9
+
+## CodeForces
+https://codeforces.com/blog/entry/67679
+https://codeforces.com/blog/entry/80064
+
 
 ### states storage
 For some problems we don't need to store all the states,  
@@ -506,9 +604,15 @@ for ex. for these problems:
 [leetcode/DP/house_robber](../leetcode/DP/house_robber.hpp)  
 for the current state estimation we need only to now a few previous states, so there is no need in an array to store all states
 
+### Динамика по подотрезкам
+28.10.2024
+Пока не понимаю как такие задачи решаются.
+Возьмусь за них после более простых
+
+
 ## Two pointers
-[pashka/algos/include/two_pointers_method](../pashka/algos/include/two_pointers_method.hpp)  
-[pashka/README](../pashka/README.md)  
+[pashka/algos/include/two_pointers_method](../ITMO/pashka/algos/include/two_pointers_method.hpp)  
+[pashka/README](../ITMO/pashka/README.md)  
 
 ### leet code
 [lengthOfLongestSubstringWithoutRepeatingCharacters](../leetcode/twoPointers/lengthOfLongestSubstringWithoutRepeatingCharacters.hpp)
@@ -683,7 +787,7 @@ An example of this approach:
 
 #### Corner cases
 This might be the case that some nodes are not reachable  
-[leetcode/DFS_BFS/rottingOranges](leetcode/DFS_BFS/rottingOranges.hpp)
+[leetcode/DFS_BFS/rottingOranges](../leetcode/DFS_BFS/rottingOranges.hpp)
 
 #### optimizations
 ##### prioritizing nodes based on distance to target, queue state representation
@@ -1107,7 +1211,7 @@ if there is only one type of brackets - simple counter (balance) is sufficient:
 [codility/stacks&Queues/stoneWall](../codility/stacks&Queues/stoneWall.cpp)
 
 #### Monotonic stack
-[data_structures/stack/dailyTemperatures](../data_structures/stack/dailyTemperatures.hpp)
+[data_structures/stack/dailyTemperatures](../leetcode/data_structures/stack/dailyTemperatures.hpp)
 
 ### Queue
 [Queue](../intuit/BaseAlgorithmsForPupil/lec1_complexity_of_algorithms/include/my_queue.hpp)
@@ -1158,7 +1262,10 @@ public:
 [leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal](../leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal.hpp)  
 [leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal](../leetcode/graphs/tree/constructBinaryTreeFromPreorderAndInorderTraversal.odt)
 
-[graphs/tree/serializeAndDeserializeBinaryTree](../graphs/tree/serializeAndDeserializeBinaryTree.hpp)  
+[graphs/tree/serializeAndDeserializeBinaryTree](../leetcode/graphs/tree/serializeAndDeserializeBinaryTree.hpp)  
+
+"It turns out that if we include # or any other character for the null node while serializing, then we can uniquely identify a tree, that too with only one traversal (either preorder or postorder)":
+https://leetcode.com/problems/subtree-of-another-tree/?envType=company&envId=ebay&favoriteSlug=ebay-thirty-days
 
 #### traversal
 [leetcode/tree/n-aryTreePreorderTraversal](../leetcode/graphs/tree/n-aryTreePreorderTraversal.hpp)  
@@ -1247,6 +1354,9 @@ public:
 [Using queue or using stack](../leetcode/graphs/tree/binaryTreeZigZagLevelOrderTraversal.odt)  
 [Different implementations](../leetcode/graphs/tree/binaryTreeRightSideView.odt)
 
+#### tree hashing
+https://leetcode.com/problems/subtree-of-another-tree/?envType=company&envId=ebay&favoriteSlug=ebay-thirty-days
+
 #### BST
 https://cse.taylor.edu/~jdenning/classes/cos265/slides/09_BinarySearchTrees.html  
 
@@ -1289,7 +1399,7 @@ https://cp-algorithms.com/data_structures/segment_tree.html
 
 #### Baseic types that can be used as a core for problem solving
 [Codeforces/edu/segmentTree/segmentTreeMin](../Codeforces/edu/segmentTree/segmentTreeMin.cpp)   
-[Codeforces/edu/segmentTree/segmentTreeSum](..Codeforces/edu/segmentTree/segmentTreeSum.cpp)  
+[Codeforces/edu/segmentTree/segmentTreeSum](../Codeforces/edu/segmentTree/segmentTreeSum.cpp)  
 [Codeforces/edu/segmentTree/segmentTreeMinCount](../Codeforces/edu/segmentTree/segmentTreeMinCount.cpp)  
 [Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum](../Codeforces/edu/segmentTree/segmentTreeMaxSegmentSum.cpp)  
 [Codeforces/edu/segmentTree/segmentTreeKthOne](../Codeforces/edu/segmentTree/segmentTreeKthOne.cpp)  
@@ -1482,6 +1592,22 @@ https://codeforces.com/blog/entry/78931
 Solved via rooted by rooting at centroid/ center
 
 #### LCA
+
+**Linked lists intersection approach when parent info is available**
+https://leetcode.com/problems/intersection-of-two-linked-lists/editorial/
+[lowest-common-ancestor-of-a-binary-tree-iii](../leetcode/graphs/tree/lowest-common-ancestor-of-a-binary-tree-iii.cpp)
+
+**On Binary Search Tree**
+The idea is if nodes are in different subtrees of the root - root is LCA.
+Otherwise they are in the same subtree, determine whether to go to the left or right subtree,
+this is done by examining the value of leftmost node from p,q.
+The LCA is found when p,q are in different subtrees.
+[lowestCommonAncestorOfBinarySearchTree](../leetcode/graphs/tree/lowestCommonAncestorOfBinarySearchTree.hpp)
+
+**On Binary Tree**
+TODO: (failed to implement and looked up the solution)
+https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/submissions/1437516464/
+
 ##### Решение через бинарные подъемы (предпроцессинг O(n*logn), ответ на запрос O(n))
 Идея:
 Запустить DFS из корня дерева:
@@ -1513,6 +1639,24 @@ https://kuvaev.me/%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8/lca/
 Применение LCA
 https://algocode.ru/files/course_bp2021/contest-25749-ru.pdf
 
+## Probobalistic data structures
+### skip list (Слоёные списки)
+https://github.com/spineight/Skiplist-CPP
+[skip_list](../leetcode/data_structures/skip_list/README.md)
+http://algolist.ru/ds/s_skl.php
+http://algolist.ru/ds/skiplist.c
+https://github.com/wangshusen/AdvancedAlgorithms
+https://youtu.be/4ux-jzg9lkE?si=wJCG-V5gNk_1JJHg
+
+@TODO search for "Skip list language:C++" on github a lot of interesting repos
+https://github.com/DKU-StarLab/SkipList-Research
+https://github.com/youngyangyang04/Skiplist-CPP/blob/master/skiplist.h
+https://github.com/Naplesoul/LSM-KV
+https://github.com/LongyuYang/Concurrent-Lock-free-Skip-List
+
+
+## Cache
+https://en.wikipedia.org/wiki/Cache_replacement_policies#LRU
 
 # Implementation techniques
 ## using array of offsets for a matrix exploration
