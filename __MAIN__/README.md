@@ -203,32 +203,6 @@ https://github.com/Peltorator/peltorator-cp-book
 https://github.com/spineight/cp-algorithms  
 ## Complexity analysis
 ### types of measurements
-ITMO. Pashka semester 1 АиСД S01E01. Алгоритмы. Оценка времени. Сортировка слиянием.
-[ITMO/pashka/algos_2019_semester1](../ITMO/pashka/algos_2019_semester1/README.md)
-RAM model
-Asymptotic measure
-`O(n) - worst, Omega(n) - best,Theta(n) -avg`
-Good example of algo for analysis - insertion sort
-[ITMO/pashka/lectures/Semestr1/src/insertionSort](../ITMO/pashka/lectures/Semestr1/src/insertionSort.cpp)
-Insertion sort:
-    `1 2 3 4 5 6 7` - best, `Omega(n)`
-    ` 7 6 5 4 3 2 1` - worst, `O(n^2)`
-### some examples
-```c++
-//!! O(n^2)
- for(int i = 0; i < n; ++i)
-   for(int j = 0; j < n; ++j)
-     
- //! O(n^2)
- for(int i = 0; i < n; ++i)
-   for(int j = i+1; j < n; ++j)
-     
- //! O(sqrt(n))
-while(i*i < n)
-  
-//! O(logn)
-for(int i = 0; i < n; i*=2)
-```
 
 ### Analysis of recursive algos
 on example of merge sort
