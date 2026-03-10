@@ -221,17 +221,10 @@ I recall it was on Stepik on Olympiad programming
 ### counting sort
 
 
-Based on Сергей Копелиович lecture: `/run/media/oleg/TOSHIBA EXT/ITMO/BaseAndAdvancedAlgsForSchoolStudents/Lecture2_Sorting_Lists_ShortestPathsInGraphs.mp4`    
-Important idea that if data elements associated with keys are expensive to copy we instead od copying them  
-can return permutation, where `permutation[i] - idx of element in initial array at i-th position in the resulting array`  
-Using permutation we can access elements data in sorted order without need for copy   
 
-[Сортировка подсчетом] `/run/media/oleg/TOSHIBA EXT/ITMO/LKSH_2008_b_prime/day1_item9.mp4`
 
 ### radix sort
-[radixSort](../intuit/baseAndAdvancedAlgsForPupil/lec2/radixSort.cpp)  
-Based on Сергей Копелиович lecture: `/run/media/oleg/TOSHIBA EXT/ITMO/BaseAndAdvancedAlgsForSchoolStudents/Lecture2_Sorting_Lists_ShortestPathsInGraphs.mp4`  
-uses [countingSort](../intuit/baseAndAdvancedAlgsForPupil/lec2/countingSort.cpp)   
+
 
 ### Quick sort
 [quick_sort](../intuit/BaseAlgorithmsForPupil/lec2_sorting_and_search/include/quick_sort.hpp)  
