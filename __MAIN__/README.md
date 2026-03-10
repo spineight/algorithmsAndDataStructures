@@ -217,23 +217,9 @@ TODO: refresh/review properties of logarithms
 I recall it was on Stepik on Olympiad programming
 
 ## sorting & search
-### Нижняя оценка для сортировок основанных только на сравнениях
-`Omega(nlogn)`
-Хорошее доказательство:
-[Введение в программирование 3. Сортировки. MergeSort, недетерминированный QuickSort](/run/media/oleg/Kotyamba2/FPMI/first_course_autmn2021/intro_to_programming_StepanovDI_1course_autum2021/Введение в программирование 3. Сортировки. MergeSort, недетерминированный QuickSort.mp4)
-
-### stable sort
-Stable sort guarantee that order of equal elements wrt to the comparison function stays the same
-[MFTI_FPMI/Stepanov/autumn_2021/stableCountingSort](../MFTI_FPMI/Stepanov/autumn_2021/stableCountingSort.cpp)
-Stable sorts are used as a helper routines for several algos: convexHull,
-[intuit/baseAndAdvancedAlgsForPupil/lec2/radixSort](../intuit/baseAndAdvancedAlgsForPupil/lec2/radixSort.cpp)
-uses [MFTI_FPMI/Stepanov/autumn_2021/stableCountingSort](../MFTI_FPMI/Stepanov/autumn_2021/stableCountingSort.cpp)
-
-### bubble sort
-[bubble sort](../intuit/BaseAlgorithmsForPupil/lec1_complexity_of_algorithms/include/bubble_sort.hpp)
 
 ### counting sort
-[countingSort](../intuit/baseAndAdvancedAlgsForPupil/lec2/countingSort.cpp)
+
 
 Based on Сергей Копелиович lecture: `/run/media/oleg/TOSHIBA EXT/ITMO/BaseAndAdvancedAlgsForSchoolStudents/Lecture2_Sorting_Lists_ShortestPathsInGraphs.mp4`    
 Important idea that if data elements associated with keys are expensive to copy we instead od copying them  
