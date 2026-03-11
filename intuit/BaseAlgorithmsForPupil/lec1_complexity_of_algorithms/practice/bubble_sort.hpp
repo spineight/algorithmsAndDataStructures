@@ -10,9 +10,14 @@ namespace lec1::practice {
 *
 */
   void bubble_sort(vector<int> &a) {
-    for(size_t i = 0; i < size(a); ++i) {
-      for(size_t j = 0; j < size(a) - 1; ++j) {
-        if(a[j] >a[j+1]) swap(a[j],a[j+1]);
+    // we do n - 1 iterations
+    // after each iteration largest element from unsorted subarray will be on it's place
+    for (size_t i = 0; i + 1 < std::size(a); ++i) {
+      // iterate over elements of unsorted subarray
+      for(size_t j = 0; i + 1 + j  < std::size(a); ++j) {
+        if(a[j] > a[j+1]) {
+          std::swap(a[j], a[j+1]);
+        }
       }
     }
   }
@@ -23,15 +28,16 @@ namespace lec1::practice {
 *  @see bubble_sort
 */
   void bubble_sort_ver2(vector<int> &a) {
-    for(size_t i = 0; i < size(a); ++i) {
-      bool isSorted{true};
-      for(size_t j = 0; j < size(a) - 1; ++j) {
-        if(a[j] >a[j+1]) {
-          swap(a[j],a[j+1]);
-          isSorted = false;
+   bool is_sorted = false;
+   for (size_t i = 0; i + 1 < std::size(a) && !is_sorted; ++i) {
+      is_sorted = true;
+      // optimization: subarray - early exit when subarray already sorted
+      for(size_t j = 0; i + 1 + j  < std::size(a); ++j) {
+        if(a[j] > a[j+1]) {
+          std::swap(a[j], a[j+1]);
+          is_sorted = false;
         }
       }
-      if(isSorted) break;
     }
   }
 }

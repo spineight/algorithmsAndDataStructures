@@ -29,6 +29,15 @@ This creates a reference to the file in your repository without storing the file
 
 ---
 
+### Adding a File that is already in the repository to `git-annex`:
+```bash
+cd /home/oleg/dev/algorithmsAndDataStructures/shujkova/lectures
+git annex add lec4.pdf
+# Add all .pdf files to git-annex:
+git annex add *.pdf
+git annex copy *.pdf --to=<remote-name>
+```
+
 ## 3. Add External Hard Drives as Remotes
 
 To store files on external hard drives, you need to add them as remotes. Use the `initremote` command:

@@ -3,15 +3,23 @@ project(INTUIT_baseAlgorithmsForPupils)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/release-1.12.1.tar.gz
+)
+FetchContent_MakeAvailable(googletest)
+enable_testing()
+
 add_subdirectory(lec1_complexity_of_algorithms)
-add_subdirectory(lec2_sorting_and_search)
-add_subdirectory(lec3_dynamic_programming)
-add_subdirectory(lec4_graph_theory)
-add_subdirectory(lec5_graph_theory)
-add_subdirectory(lec6_graph_theory)
-add_subdirectory(lec7_geometry)
-add_subdirectory(lec8_geometry)
-add_subdirectory(lec9_long_arithmetic)
+# add_subdirectory(lec2_sorting_and_search)
+# add_subdirectory(lec3_dynamic_programming)
+# add_subdirectory(lec4_graph_theory)
+# add_subdirectory(lec5_graph_theory)
+# add_subdirectory(lec6_graph_theory)
+# add_subdirectory(lec7_geometry)
+# add_subdirectory(lec8_geometry)
+# add_subdirectory(lec9_long_arithmetic)
 #add_subdirectory(lec10_combinatorics)
 
 
